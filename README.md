@@ -17,19 +17,19 @@ Note: If you want to use the solution without building from source, navigate to 
 
 <a name="solution-overview"></a>
 # Solution Overview
-[//]: # Solution for AWS Network Firewall Deployment Automations for AWS Transit Gateway.
+Solution for AWS Network Firewall Deployment Automations for AWS Transit Gateway.
 
 <a name="architecture-diagram"></a>
 # Architecture Diagram
-[//]: # ![Architecture Diagram](./source/architecture.png)
+![Architecture Diagram](./source/architecture.png)
 
 <a name="prerequisites-for-customization"></a>
 ## Prerequisites for Customization
-[//]: # Node.js>12
+* Node.js>12
 
 <a name="build"></a>
 ## Build
-[//]: # Build the CDK code
+Build the CDK code
 ```
 cd source/
 npm run build
@@ -51,7 +51,7 @@ chmod +x ./build-s3-dist.sh
 
 <a name="unit-test"></a>
 ## Unit Test
-[//]: # Run the unit tests 
+Run the unit tests 
 
 ```
 cd source/
@@ -60,7 +60,7 @@ chmod +x ./run-all-tests.sh
 
 <a name="deploy"></a>
 ## Deploy
-[//]: Follow the steps for deploying your custom version of the solution.
+Follow the steps for deploying your custom version of the solution.
 * Create an S3 bucket with the bucket appended with the region in which the deployment is to be made. example, if the deployment is to be made in us-east-1 create a bucket name as [BUCKET_NAME]-us-east-1.
 * Create the distribution files using the script provided in the build section above.
 * Create the S3 Key in the bucket network-firewall-automation/[VERSION_ID]/
@@ -79,7 +79,7 @@ aws-network-firewall-deployment-automations-for-aws-transit-gateway consists of:
 - CDK constructs to generate necessary resources
 - Microservices used in the solution
 
-[//]: # File Structure
+File Structure
 
 <pre>
 |-deployment/
