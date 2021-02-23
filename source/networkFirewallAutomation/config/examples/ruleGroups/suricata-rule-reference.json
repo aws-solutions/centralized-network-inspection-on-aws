@@ -1,0 +1,8 @@
+
+{
+    "RuleGroupName": "suricata-drop-rules",
+    "Rules": "./ruleGroups/drop.rules",
+    "Type": "STATEFUL",
+    "Description": "Suricata rule group",
+    "Capacity": 100
+  }

@@ -1,0 +1,31 @@
+{
+  "RuleGroupName": "StatefulRulesExample1",
+  "RuleGroup": {
+    "RuleVariables": {
+      "IPSets": {
+        "HOME_NET": {
+          "Definition": [
+            "10.0.0.0/8",
+            "172.16.0.0/16"
+          ]
+        }
+      }
+    },
+    "RulesSource": {
+      "RulesSourceList": {
+        "TargetTypes": [
+          "HTTP_HOST",
+          "TLS_SNI"
+        ],
+        "Targets": [
+          "test.example.com",
+          "test2.example.com"
+        ],
+        "GeneratedRulesType": "DENYLIST"
+      }
+    }
+  },
+  "Type": "STATEFUL",
+  "Description": "Stateful Rule",
+  "Capacity": 100
+}

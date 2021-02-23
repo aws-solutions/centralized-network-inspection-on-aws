@@ -1,0 +1,12 @@
+{
+  "FirewallPolicyName": "Firewall-Policy-1",
+  "Description": "Firewall Policy 1",
+  "FirewallPolicy": {
+    "StatelessDefaultActions": [
+      "aws:forward_to_sfe"
+    ],
+    "StatelessFragmentDefaultActions": [
+      "aws:pass"
+    ]
+  }
+}

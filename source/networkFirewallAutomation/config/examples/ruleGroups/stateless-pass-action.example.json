@@ -1,0 +1,68 @@
+{
+  "RuleGroupName": "StatelessExample1",
+  "RuleGroup": {
+    "RulesSource": {
+      "StatelessRulesAndCustomActions": {
+        "StatelessRules": [
+          {
+            "RuleDefinition": {
+              "MatchAttributes": {
+                "Sources": [
+                  {
+                    "AddressDefinition": "192.0.2.0/8"
+                  }
+                ],
+                "Destinations": [
+                  {
+                    "AddressDefinition": "198.51.100.0/16"
+                  }
+                ],
+                "SourcePorts": [
+                  {
+                    "FromPort": 53,
+                    "ToPort": 53
+                  },
+                  {
+                    "FromPort": 1001,
+                    "ToPort": 1053
+                  }
+                ],
+                "DestinationPorts": [
+                  {
+                    "FromPort": 53,
+                    "ToPort": 53
+                  },
+                  {
+                    "FromPort": 1001,
+                    "ToPort": 1053
+                  }
+                ],
+                "Protocols": [
+                  6
+                ],
+                "TCPFlags": [
+                  {
+                    "Flags": [
+                      "SYN"
+                    ],
+                    "Masks": [
+                      "SYN",
+                      "ACK"
+                    ]
+                  }
+                ]
+              },
+              "Actions": [
+                "aws:pass"
+              ]
+            },
+            "Priority": 19
+          }
+        ]
+      }
+    }
+  },
+  "Type": "STATELESS",
+  "Description": "Stateless Rule with pass action",
+  "Capacity": 199
+}

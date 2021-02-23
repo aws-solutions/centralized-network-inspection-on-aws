@@ -1,0 +1,47 @@
+{
+  "name": "network-firewall-automation-solution",
+  "version": "1.0.0",
+  "description": "Network Firewall Automation solution.",
+  "bin": {
+    "network-firewall-auto-solution": "bin/network-firewall-auto-solution.js"
+  },
+  "scripts": {
+    "cleanup": "tsc --build ./ --clean && rm -rf node_modules && rm -f package-lock.json",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "build": "tsc"
+  },
+  "author": {
+    "name": "Amazon Web Services",
+    "url": "https://aws.amazon.com",
+    "organization": true
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@aws-cdk/assert": "1.77.0",
+    "@types/jest": "^25.2.1",
+    "@types/node": "10.17.5",
+    "@types/source-map-support": "^0.5.3",
+    "aws-cdk": "^1.77.0",
+    "jest": "^25.0.0",
+    "ts-jest": "^25.3.1",
+    "ts-node": "^8.1.0",
+    "typescript": "~3.7.2"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-codebuild": "1.77.0",
+    "@aws-cdk/aws-codecommit": "1.77.0",
+    "@aws-cdk/aws-codedeploy": "1.77.0",
+    "@aws-cdk/aws-codepipeline": "1.77.0",
+    "@aws-cdk/aws-codepipeline-actions": "1.77.0",
+    "@aws-cdk/aws-ec2": "1.77.0",
+    "@aws-cdk/aws-events-targets": "1.77.0",
+    "@aws-cdk/aws-kms": "1.77.0",
+    "@aws-cdk/aws-lambda": "1.77.0",
+    "@aws-cdk/aws-s3": "1.77.0",
+    "@aws-cdk/aws-ssm": "1.77.0",
+    "@aws-cdk/core": "1.77.0",
+    "source-map-support": "^0.5.16"
+  }
+}

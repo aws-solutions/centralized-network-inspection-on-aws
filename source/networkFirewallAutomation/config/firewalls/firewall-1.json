@@ -1,0 +1,8 @@
+{
+  "FirewallName": "Firewall-1",
+  "FirewallPolicyArn": "./firewallPolicies/firewall-policy-1.json",
+  "Description": "Network Firewall 1",
+  "DeleteProtection": true,
+  "FirewallPolicyChangeProtection": true,
+  "SubnetChangeProtection": true
+}

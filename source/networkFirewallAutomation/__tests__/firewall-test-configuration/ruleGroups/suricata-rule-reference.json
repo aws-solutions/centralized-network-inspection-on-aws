@@ -1,0 +1,8 @@
+
+{
+    "RuleGroupName": "suricata-icmp-rules2",
+    "Rules": "__tests__/firewall-test-configuration/ruleGroups/drop.rules",
+    "Type": "STATEFUL",
+    "Description": "Suricata rule group",
+    "Capacity": 100
+  }

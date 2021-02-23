@@ -1,0 +1,39 @@
+{
+  "name": "network-firewall",
+  "version": "1.0.0",
+  "description": "Network Firewall Manager",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "author": "@aws-solutions",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "aws-sdk": "^2.804.0",
+    "axios": "^0.21.1",
+    "moment": "^2.27.0",
+    "uuid": "^8.3.2"
+  },
+  "scripts": {
+    "cleanup": "tsc --build ./ --clean && rm -rf node_modules && rm -f package-lock.json",
+    "watch": "tsc -w",
+    "test": "jest --coverage",
+    "cdk": "cdk",
+    "build:tsc": "tsc",
+    "build-init": "rm -rf dist && rm -f archive.zip && rm -rf coverage && mkdir -p dist/lib/service && mkdir -p dist/lib/common/configReader",
+    "build:copy": "for file in `find . -name '*.js' | egrep -v '__tests__|node_modules'`;do echo \"Copying $file\"; cp $file dist/$file; done",
+    "build:install": "cp package.json dist/ && cd dist && ls -ltRr && npm install --production",
+    "build": "tsc && npm run build-init && npm run build:copy && npm run build:install",
+    "zip": "cd dist && zip -rq network-firewall-automation.zip ."
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.0",
+    "@types/moment": "^2.13.0",
+    "@types/node": "^14.14.10",
+    "@types/uuid": "^8.3.0",
+    "aws-sdk-mock": "^5.1.0",
+    "jest": "^25.0.0",
+    "jest-sonar-reporter": "^2.0.0",
+    "ts-jest": "^25.3.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^3.4.0"
+  }
+}

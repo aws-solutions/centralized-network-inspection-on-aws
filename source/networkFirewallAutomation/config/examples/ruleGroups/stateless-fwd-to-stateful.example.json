@@ -1,0 +1,41 @@
+{
+  "RuleGroupName": "StatelessExample2",
+  "RuleGroup": {
+    "RulesSource": {
+      "StatelessRulesAndCustomActions": {
+        "StatelessRules": [
+          {
+            "RuleDefinition": {
+              "MatchAttributes": {
+                "Sources": [
+                  {
+                    "AddressDefinition": "192.0.2.0/8"
+                  }
+                ],
+                "Destinations": [
+                  {
+                    "AddressDefinition": "198.51.100.0/16"
+                  },
+                  {
+                    "AddressDefinition": "198.52.100.0/16"
+                  }
+                ],
+                "Protocols": [
+                  6,
+                  17
+                ]
+              },
+              "Actions": [
+                "aws:forward_to_sfe"
+              ]
+            },
+            "Priority": 100
+          }
+        ]
+      }
+    }
+  },
+  "Type": "STATELESS",
+  "Description": "Stateless Rule with Forward to Stateful",
+  "Capacity": 220
+}
