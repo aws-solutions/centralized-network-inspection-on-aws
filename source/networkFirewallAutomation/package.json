@@ -14,8 +14,11 @@
   },
   "scripts": {
     "cleanup": "tsc --build ./ --clean && rm -rf node_modules && rm -f package-lock.json",
+    "cleanup:tsc": "tsc --build ./ --clean",
+    "cleanup:dist": "rm -rf dist",
     "watch": "tsc -w",
-    "test": "jest --coverage",
+    "test": "jest --coverage --silent",
+    "test-debug": "jest --coverage",
     "cdk": "cdk",
     "build:tsc": "tsc",
     "build-init": "rm -rf dist && rm -f archive.zip && rm -rf coverage && mkdir -p dist/lib/service && mkdir -p dist/lib/common/configReader",

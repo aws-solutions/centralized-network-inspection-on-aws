@@ -1664,7 +1664,7 @@ Object {
                   "Version": "1",
                 },
                 "Configuration": Object {
-                  "BranchName": "master",
+                  "BranchName": "main",
                   "PollForSourceChanges": false,
                   "RepositoryName": Object {
                     "Fn::GetAtt": Array [
@@ -2416,7 +2416,7 @@ Object {
       "Type": "AWS::CodeCommit::Repository",
       "UpdateReplacePolicy": "Retain",
     },
-    "NetworkFirewallCodeRepositoryMyTestStackNetworkFirewallCodePipelineD8BFDC90EventRule5C587E07": Object {
+    "NetworkFirewallCodeRepositoryMyTestStackNetworkFirewallCodePipelineD8BFDC90mainEventRule334BD2D0": Object {
       "Properties": Object {
         "EventPattern": Object {
           "detail": Object {
@@ -2425,7 +2425,7 @@ Object {
               "referenceUpdated",
             ],
             "referenceName": Array [
-              "master",
+              "main",
             ],
           },
           "detail-type": Array [

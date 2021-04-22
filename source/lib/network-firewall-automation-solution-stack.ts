@@ -981,6 +981,7 @@ export class NetworkFirewallAutomationStack extends cdk.Stack {
             new codepipeline_action.CodeCommitSourceAction({
               actionName: 'Source',
               repository: codeCommitRepo,
+              branch: 'main',
               output: sourceOutputArtifact,
             })
           ]

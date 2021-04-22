@@ -22,9 +22,6 @@ if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
     exit 1
 fi
 
-[ "$DEBUG" == 'true' ] && set -x
-set -e
-
 # Environment variables 
 export DIST_VERSION=$3
 export DIST_OUTPUT_BUCKET=$1
@@ -39,6 +36,9 @@ staging_dist_dir="$template_dir/staging"
 template_dist_dir="$template_dir/global-s3-assets"
 build_dist_dir="$template_dir/regional-s3-assets"
 source_dir="$template_dir/../source"
+
+[ "$DEBUG" == 'true' ] && set -x
+set -e
 
 echo "------------------------------------------------------------------------------"
 echo "[Init] Remove any old dist files from previous runs"
@@ -66,13 +66,15 @@ echo "--------------------------------------------------------------------------
 # Install the global aws-cdk package
 echo "cd $source_dir"
 cd $source_dir
-echo "npm install -g aws-cdk@$cdk_version"
-npm install -g aws-cdk@$cdk_version
+echo "npm install"
+npm install
+echo "npm install aws-cdk@$cdk_version"
+npm install aws-cdk@$cdk_version
 
 # Run 'cdk synth' to generate raw solution outputs
 cd "$source_dir"
-echo "cdk synth --output=$staging_dist_dir"
-npm run build && cdk synth --output=$staging_dist_dir
+echo "node_modules/aws-cdk/bin/cdk synth --output=$staging_dist_dir"
+npm run build && node_modules/aws-cdk/bin/cdk synth --output=$staging_dist_dir
 
 # Remove unnecessary output files
 echo "cd $staging_dist_dir"
@@ -133,6 +135,14 @@ zip -Xr "$build_dist_dir"/network-firewall-configuration.zip ./firewalls ./ruleG
 echo "------------------------------------------------------------------------------"
 echo "[Cleanup] Remove temporary files"
 echo "------------------------------------------------------------------------------"
+
+# cleanup generated files
+cd $source_dir/networkFirewallAutomation/
+npm run cleanup:tsc
+npm run cleanup:dist
+
+cd $source_dir/
+npm run cleanup:tsc
 
 # Delete the temporary /staging folder
 echo "rm -rf $staging_dist_dir"

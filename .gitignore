@@ -40,6 +40,9 @@ nosetests.xml
 coverage.xml
 *,cover
 .hypothesis/
+**/coverage-reports/
+**/coverage/
+*.lcov
 
 # Translations
 *.mo
@@ -97,6 +100,8 @@ ENV/
 *.zip
 deployment/open-source
 deployment/examples
+deployment/firewallPolicies/
+deployment/firewalls/
 deployment/dist
 source/deploy
 deployment/vpc_rules
@@ -106,3 +111,7 @@ deployment/vpc_rules
 .idea
 .vscode
 source/scratch/
+tmp/
+
+# linting, scanning configurations, sonarqube
+.scannerwork/
