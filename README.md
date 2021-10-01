@@ -160,6 +160,12 @@ File Structure
 </pre>
 
 <a name="license"></a>
+
+
+## Collection of operational metrics
+This solution collects anonymous operational metrics to help AWS improve the quality and features of the solution. For more information, including how to disable this capability, please see the [implementation guide](https://docs.aws.amazon.com/solutions/latest/network-firewall-deployment-automations-for-aws-transit-gateway/collection-of-operational-metrics.html).
+
+
 ***
 
 Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
