@@ -1,4 +1,4 @@
-**[AWS Network Firewall Deployment Automations for AWS Transit Gateway](https://aws.amazon.com/solutions/implementations/aws-network-firewall-deployment-automations-for-aws-transit-gateway)** | **[🚧 Feature request](https://github.com/awslabs/aws-network-firewall-deployment-automations-for-aws-transit-gateway/issues/new?assignees=&labels=feature-request%2C+enhancement&template=feature_request.md&title=)** | **[🐛 Bug Report](https://github.com/awslabs/aws-network-firewall-deployment-automations-for-aws-transit-gateway/issues/new?assignees=&labels=bug%2C+triage&template=bug_report.md&title=)**
+**[Firewall Automation for Network Traffic on AWS](https://aws.amazon.com/solutions/implementations/firewall-automation-for-network-traffic-on-aws)** | **[🚧 Feature request](https://github.com/aws-solutions/firewall-automation-for-network-traffic-on-aws/issues/new?assignees=&labels=feature-request%2C+enhancement&template=feature_request.md&title=)** | **[🐛 Bug Report](https://github.com/aws-solutions/firewall-automation-for-network-traffic-on-aws/issues/new?assignees=&labels=bug%2C+triage&template=bug_report.md&title=)**
 
 Note: If you want to use the solution without building from source, navigate to Solution Landing Page
 
@@ -17,7 +17,7 @@ Note: If you want to use the solution without building from source, navigate to 
 
 <a name="solution-overview"></a>
 # Solution Overview
-Solution for AWS Network Firewall Deployment Automations for AWS Transit Gateway.
+Solution for Firewall Automation for Network Traffic on AWS.
 
 <a name="architecture-diagram"></a>
 # Architecture Diagram
@@ -25,7 +25,7 @@ Solution for AWS Network Firewall Deployment Automations for AWS Transit Gateway
 
 <a name="prerequisites-for-customization"></a>
 ## Prerequisites for Customization
-* Node.js>12
+* Node.js>16
 
 <a name="build"></a>
 ## Build
@@ -68,13 +68,13 @@ Follow the steps for deploying your custom version of the solution.
 * Copy the file ./deployment/regional-s3-assets/network-firewall-automation.zip to the location s3://[BUCKET_NAME]-[REGION]/network-firewall-automation/[VERSION_ID]/
 * Copy the file ./deployment/regional-s3-assets/network-firewall-configuration.zip to the location s3://[BUCKET_NAME]-[REGION]/network-firewall-automation/latest/
 
-Once the above steps are completed, use the file ./deployment/global-s3-assets/aws-network-firewall-deployment-automations-for-aws-transit-gateway.template to create a stack in CloudFormation.
+Once the above steps are completed, use the file ./deployment/global-s3-assets/firewall-automation-for-network-traffic-on-aws.template to create a stack in CloudFormation.
 
 
 <a name="file-structure"></a>
 # File structure
 
-aws-network-firewall-deployment-automations-for-aws-transit-gateway consists of:
+firewall-automation-for-network-traffic-on-aws consists of:
 
 - CDK constructs to generate necessary resources
 - Microservices used in the solution
@@ -160,24 +160,14 @@ File Structure
 </pre>
 
 <a name="license"></a>
-
-
-## Collection of operational metrics
-This solution collects anonymous operational metrics to help AWS improve the quality and features of the solution. For more information, including how to disable this capability, please see the [implementation guide](https://docs.aws.amazon.com/solutions/latest/network-firewall-deployment-automations-for-aws-transit-gateway/collection-of-operational-metrics.html).
-
-
 ***
 
-Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+SPDX-License-Identifier: Apache-2.0
 
-Licensed under the Apache License Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
+See [LICENSE](https://github.com/aws-solutions/firewall-automation-for-network-traffic-on-aws/blob/master/LICENSE.txt) 
 
-    http://www.apache.org/licenses/
+## Collection of operational metrics
 
-or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied. See the License for the specific language governing permissions and limitations under the License.
-
-See [LICENSE](https://github.com/awslabs/aws-network-firewall-solution-for-aws-transit-gateway/blob/master/LICENSE.txt) 
-
-
-
+This solution collects anonymous operational metrics to help AWS improve the quality and features of the solution. For more information, including how to disable this capability, please see the [implementation guide](https://docs.aws.amazon.com/solutions/latest/network-firewall-deployment-automations-for-aws-transit-gateway/collection-of-operational-metrics.html).
 

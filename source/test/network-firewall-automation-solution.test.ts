@@ -1,38 +1,36 @@
-/**
- *  Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance
- *  with the License. A copy of the License is located at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  or in the 'license' file accompanying this file. This file is distributed on an 'AS IS' BASIS, WITHOUT WARRANTIES
- *  OR CONDITIONS OF ANY KIND, express or implied. See the License for the specific language governing permissions
- *  and limitations under the License.
- */
-
-import * as cdk from '@aws-cdk/core';
-import { SynthUtils } from '@aws-cdk/assert';
-import * as NetworkFirewallAutomationStack from "../lib/network-firewall-automation-solution-stack"
-import '@aws-cdk/assert/jest';
-
-
-function getTestStack(): cdk.Stack {
-    const app = new cdk.App();
-    const props: NetworkFirewallAutomationStack.NetworkFirewallAutomationStackProps = {
-        env: { account: '1234', region: 'eu-west-1' },
-        solutionBucket: 'solutions',
-        solutionId: 'SO0108',
-        solutionName: 'network-firewall-automation',
-        solutionProvider: 'AWS Solutions Builders',
-        solutionTradeMarkName: 'network-firewall-automation',
-        solutionVersion: 'v1.0.0'
-    };
-    return new NetworkFirewallAutomationStack.NetworkFirewallAutomationStack(app, 'MyTestStack', props)
-}
 /*
- * Snapshot test
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
  */
-test('NetworkFirewallAutomationStack Snapshot test', () => {
-    expect(SynthUtils.toCloudFormation(getTestStack())).toMatchSnapshot();
+
+import { App, Stack } from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
+import {
+  NetworkFirewallAutomationStack,
+  NetworkFirewallAutomationStackProps,
+} from '../lib/network-firewall-automation-solution-stack';
+
+function getTestStack(): Stack {
+  const app = new App();
+  const props: NetworkFirewallAutomationStackProps = {
+    env: { account: '1234', region: 'eu-west-1' },
+    solutionBucket: 'solutions',
+    solutionId: 'SO0108',
+    solutionName: 'network-firewall-automation',
+    solutionProvider: 'AWS Solutions Builders',
+    solutionTradeMarkName: 'network-firewall-automation',
+    solutionVersion: 'v1.0.2',
+  };
+  return new NetworkFirewallAutomationStack(app, 'MyTestStack', props);
+}
+
+describe('Firewall Automation for Network Traffic on AWS', () => {
+  const stack = getTestStack();
+  const template = Template.fromStack(stack);
+  /*
+   * Snapshot test
+   */
+  test('NetworkFirewallAutomationStack Snapshot test', () => {
+    expect(template.toJSON()).toMatchSnapshot();
+  });
 });

@@ -1,0 +1,18 @@
+{
+  "FirewallPolicyName": "Firewall-Policy-1",
+  "FirewallPolicy": {
+    "StatelessDefaultActions": ["aws:drop"],
+    "StatelessFragmentDefaultActions": ["aws:drop"],
+    "StatelessRuleGroupReferences": [
+      {
+        "Priority": 30,
+        "ResourceArn": "__tests__/firewall-test-configuration/ruleGroups/missing.json"
+      }
+    ],
+    "StatefulRuleGroupReferences": [
+      {
+        "ResourceArn": "__tests__/firewall-test-configuration/ruleGroups/missing.example.json"
+      }
+    ]
+  }
+}

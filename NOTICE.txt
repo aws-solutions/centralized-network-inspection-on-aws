@@ -1,10 +1,6 @@
-AWS Network Firewall Automation
-Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-Licensed under the Apache License Version 2.0 (the "License"). You may not use this file except
-in compliance with the License. A copy of the License is located at http://www.apache.org/licenses/
-or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied. See the License for the
-specific language governing permissions and limitations under the License.
+Firewall Automation for Network Traffic on AWS
+Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+SPDX-License-Identifier: Apache-2.0
 
 **********************
 THIRD PARTY COMPONENTS
@@ -16,5 +12,13 @@ moment under the MIT License
 uuid under the MIT License.
 AWS SDK under the Apache License Version 2.0
 aws-cdk under Apache License 2.0
-
-AWS SDK under the Apache License Version 2.0
+aws-cdk-lib under Apache License 2.0
+@types/jest under the Massachusetts Institute of Technology (MIT) license
+@types/node under the Massachusetts Institute of Technology (MIT) license
+aws-sdk-client-mock under the Massachusetts Institute of Technology (MIT) license
+constructs under Apache License 2.0
+ts-jest under the Massachusetts Institute of Technology (MIT) license
+ts-node under the Massachusetts Institute of Technology (MIT) license
+typescript under Apache License 2.0
+@types/moment under the Massachusetts Institute of Technology (MIT) license
+@types/uuid under the Massachusetts Institute of Technology (MIT) license

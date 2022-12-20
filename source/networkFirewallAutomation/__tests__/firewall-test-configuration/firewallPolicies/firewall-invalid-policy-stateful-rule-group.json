@@ -1,12 +1,12 @@
 {
-  "FirewallPolicyName": "Firewall-Policy-2",
+  "FirewallPolicyName": "Firewall-Policy-1",
   "FirewallPolicy": {
     "StatelessDefaultActions": ["aws:drop"],
     "StatelessFragmentDefaultActions": ["aws:drop"],
     "StatelessRuleGroupReferences": [
       {
         "Priority": 30,
-        "ResourceArn": "__tests__/firewall-test-configuration/ruleGroups/stateless-fwd-to-stateful.invalid.json"
+        "ResourceArn": "__tests__/firewall-test-configuration/ruleGroups/stateless-fwd-to-stateful.example.json"
       },
       {
         "Priority": 20,
@@ -15,7 +15,10 @@
     ],
     "StatefulRuleGroupReferences": [
       {
-        "ResourceArn": "__tests__/firewall-test-configuration/ruleGroups/stateful-domainblock.example.json"
+        "ResourceArn": "__tests__/firewall-test-configuration/ruleGroups/invalid-rulegroup.example.json"
+      },
+      {
+        "ResourceArn": "__tests__/firewall-test-configuration/ruleGroups/suricata-rule-reference.json"
       }
     ]
   }

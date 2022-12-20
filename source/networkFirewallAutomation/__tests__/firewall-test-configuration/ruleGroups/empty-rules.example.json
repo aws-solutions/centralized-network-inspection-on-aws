@@ -1,0 +1,7 @@
+{
+  "RuleGroupName": "empty-icmp-rules2",
+  "Rules": "__tests__/firewall-test-configuration/ruleGroups/empty.rules",
+  "Type": "STATEFUL",
+  "Description": "Empty rule group",
+  "Capacity": 100
+}
