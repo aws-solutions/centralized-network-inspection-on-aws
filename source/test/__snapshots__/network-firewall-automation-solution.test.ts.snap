@@ -974,68 +974,6 @@ Object {
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
     },
-    "CodePipelineArtifactS3BucketPolicy6FFF9EE9": Object {
-      "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "Bucket": Object {
-          "Ref": "NetworkFirewallCodePipelineArtifactsBucketF2569455",
-        },
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "s3:DeleteBucket",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "cloudformation.amazonaws.com",
-              },
-              "Resource": Object {
-                "Fn::GetAtt": Array [
-                  "NetworkFirewallCodePipelineArtifactsBucketF2569455",
-                  "Arn",
-                ],
-              },
-            },
-            Object {
-              "Action": "s3:GetObject",
-              "Condition": Object {
-                "Bool": Object {
-                  "aws:SecureTransport": false,
-                },
-              },
-              "Effect": "Deny",
-              "Principal": Object {
-                "AWS": "*",
-              },
-              "Resource": Array [
-                Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
-                          "NetworkFirewallCodePipelineArtifactsBucketF2569455",
-                          "Arn",
-                        ],
-                      },
-                      "/*",
-                    ],
-                  ],
-                },
-                Object {
-                  "Fn::GetAtt": Array [
-                    "NetworkFirewallCodePipelineArtifactsBucketF2569455",
-                    "Arn",
-                  ],
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-      },
-      "Type": "AWS::S3::BucketPolicy",
-      "UpdateReplacePolicy": "Retain",
-    },
     "DefaultRouteSpokeVPCTGWRouteTable": Object {
       "Condition": "CreateDefaultRouteFirewallRT",
       "DeletionPolicy": "Retain",

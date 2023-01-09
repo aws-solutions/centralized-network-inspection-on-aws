@@ -1029,32 +1029,6 @@ export class NetworkFirewallAutomationStack extends Stack {
       },
     };
 
-    //S3 Bucket policy for the pipeline artifacts bucket
-    const bucketPolicy = new BucketPolicy(this, 'CodePipelineArtifactS3BucketPolicy', {
-      bucket: codePipeline.artifactBucket,
-      removalPolicy: RemovalPolicy.RETAIN,
-    });
-
-    bucketPolicy.document.addStatements(
-      new PolicyStatement({
-        effect: Effect.ALLOW,
-        actions: ['s3:DeleteBucket'],
-        principals: [new ServicePrincipal('cloudformation.amazonaws.com')],
-        resources: [codePipeline.artifactBucket.bucketArn],
-      }),
-      new PolicyStatement({
-        effect: Effect.DENY,
-        actions: ['s3:GetObject'],
-        principals: [new AnyPrincipal()],
-        resources: [`${codePipeline.artifactBucket.bucketArn}/*`, `${codePipeline.artifactBucket.bucketArn}`],
-        conditions: {
-          Bool: {
-            'aws:SecureTransport': false,
-          },
-        },
-      })
-    );
-
     const bucketPolicyForlogsBucket = new BucketPolicy(this, 'CloudWatchLogsForNetworkFirewallBucketPolicy', {
       bucket: logsBucket,
       removalPolicy: RemovalPolicy.RETAIN,
