@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomationStack Snapshot test 1`] = `
-{
+Object {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Conditions": {
-    "CreateDefaultRouteFirewallRT": {
-      "Fn::And": [
-        {
-          "Fn::Not": [
-            {
-              "Fn::Equals": [
-                {
+  "Conditions": Object {
+    "CreateDefaultRouteFirewallRT": Object {
+      "Fn::And": Array [
+        Object {
+          "Fn::Not": Array [
+            Object {
+              "Fn::Equals": Array [
+                Object {
                   "Ref": "TransitGatewayRTIdForDefaultRoute",
                 },
                 "",
@@ -18,16 +18,16 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           ],
         },
-        {
+        Object {
           "Condition": "CreateTransitGatewayAttachment",
         },
       ],
     },
-    "CreateTransitGatewayAttachment": {
-      "Fn::Not": [
-        {
-          "Fn::Equals": [
-            {
+    "CreateTransitGatewayAttachment": Object {
+      "Fn::Not": Array [
+        Object {
+          "Fn::Equals": Array [
+            Object {
               "Ref": "ExistingTransitGateway",
             },
             "",
@@ -35,13 +35,13 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
         },
       ],
     },
-    "CreateTransitGatewayRTAssociation": {
-      "Fn::And": [
-        {
-          "Fn::Not": [
-            {
-              "Fn::Equals": [
-                {
+    "CreateTransitGatewayRTAssociation": Object {
+      "Fn::And": Array [
+        Object {
+          "Fn::Not": Array [
+            Object {
+              "Fn::Equals": Array [
+                Object {
                   "Ref": "TransitGatewayRouteTableIdForAssociation",
                 },
                 "",
@@ -49,32 +49,32 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           ],
         },
-        {
+        Object {
           "Condition": "CreateTransitGatewayAttachment",
         },
       ],
     },
-    "LoggingInCloudWatch": {
-      "Fn::Equals": [
-        {
+    "LoggingInCloudWatch": Object {
+      "Fn::Equals": Array [
+        Object {
           "Ref": "logDestinationType",
         },
         "CloudWatchLogs",
       ],
     },
-    "LoggingInS3": {
-      "Fn::Equals": [
-        {
+    "LoggingInS3": Object {
+      "Fn::Equals": Array [
+        Object {
           "Ref": "logDestinationType",
         },
         "S3",
       ],
     },
-    "NotLoggingConfigureManually": {
-      "Fn::Not": [
-        {
-          "Fn::Equals": [
-            {
+    "NotLoggingConfigureManually": Object {
+      "Fn::Not": Array [
+        Object {
+          "Fn::Equals": Array [
+            Object {
               "Ref": "logDestinationType",
             },
             "ConfigureManually",
@@ -83,196 +83,196 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       ],
     },
   },
-  "Mappings": {
-    "Send": {
-      "AnonymousUsage": {
+  "Mappings": Object {
+    "Send": Object {
+      "AnonymousUsage": Object {
         "Data": "Yes",
       },
-      "ParameterKey": {
+      "ParameterKey": Object {
         "UniqueId": "Solutions/network-firewall-automation/UUID",
       },
     },
-    "SolutionMapping": {
-      "CodeCommitRepo": {
+    "SolutionMapping": Object {
+      "CodeCommitRepo": Object {
         "Name": "network-firewall-config-repo-",
       },
-      "Log": {
+      "Log": Object {
         "Level": "info",
       },
-      "Metrics": {
+      "Metrics": Object {
         "URL": "https://metrics.awssolutionsbuilder.com/generic",
       },
-      "Route": {
+      "Route": Object {
         "QuadZero": "0.0.0.0/0",
       },
-      "Solution": {
+      "Solution": Object {
         "Identifier": "SO0108",
         "Version": "v1.0.2",
       },
-      "TransitGatewayAttachment": {
+      "TransitGatewayAttachment": Object {
         "ApplianceMode": "enable",
       },
-      "Version": {
+      "Version": Object {
         "Latest": "latest",
       },
     },
   },
-  "Metadata": {
-    "AWS::CloudFormation::Interface": {
-      "ParameterGroups": [
-        {
-          "Label": {
+  "Metadata": Object {
+    "AWS::CloudFormation::Interface": Object {
+      "ParameterGroups": Array [
+        Object {
+          "Label": Object {
             "default": "VPC Configuration",
           },
-          "Parameters": [
+          "Parameters": Array [
             "cidrBlock",
           ],
         },
-        {
-          "Label": {
+        Object {
+          "Label": Object {
             "default": "Transit Gateway Configuration",
           },
-          "Parameters": [
+          "Parameters": Array [
             "ExistingTransitGateway",
             "TransitGatewayRouteTableIdForAssociation",
             "TransitGatewayRTIdForDefaultRoute",
           ],
         },
-        {
-          "Label": {
+        Object {
+          "Label": Object {
             "default": "Firewall Logging Configuration",
           },
-          "Parameters": [
+          "Parameters": Array [
             "logDestinationType",
             "logType",
             "LogRetentionPeriod",
           ],
         },
       ],
-      "ParameterLabels": {
-        "ExistingTransitGateway": {
+      "ParameterLabels": Object {
+        "ExistingTransitGateway": Object {
           "default": "Provide the existing AWS Transit Gateway ID you wish to attach to the Inspection VPC",
         },
-        "LogRetentionPeriod": {
+        "LogRetentionPeriod": Object {
           "default": "Select the log retention period for Network Firewall Logs.",
         },
-        "TransitGatewayRTIdForDefaultRoute": {
+        "TransitGatewayRTIdForDefaultRoute": Object {
           "default": "Provide the AWS Transit Gateway Route Table to receive 0.0.0.0/0 route to the Inspection VPC TGW Attachment.",
         },
-        "TransitGatewayRouteTableIdForAssociation": {
+        "TransitGatewayRouteTableIdForAssociation": Object {
           "default": "Provide AWS Transit Gateway Route Table to be associated with the Inspection VPC TGW Attachment.",
         },
-        "cidrBlock": {
+        "cidrBlock": Object {
           "default": "Provide the CIDR block for the Inspection VPC",
         },
-        "logDestinationType": {
+        "logDestinationType": Object {
           "default": "Select the type of log destination for the Network Firewall",
         },
-        "logType": {
+        "logType": Object {
           "default": "Select the type of log to send to the defined log destination.",
         },
       },
     },
   },
-  "Outputs": {
-    "ArtifactBucketforCodePipeline": {
+  "Outputs": Object {
+    "ArtifactBucketforCodePipeline": Object {
       "Description": "Artifact bucket name configured for the CodePipeline.",
-      "Value": {
+      "Value": Object {
         "Ref": "NetworkFirewallCodePipelineArtifactsBucketF2569455",
       },
     },
-    "CloudWatchLogGroupforFirewallLogs": {
+    "CloudWatchLogGroupforFirewallLogs": Object {
       "Description": "CloudWatch Log Group used as the log destination for Firewall Logs.",
-      "Value": {
-        "Fn::If": [
+      "Value": Object {
+        "Fn::If": Array [
           "LoggingInCloudWatch",
-          {
+          Object {
             "Ref": "CloudWatchLogGroup",
           },
           "NotConfigured",
         ],
       },
     },
-    "CodeBuildsourcecodebucket": {
+    "CodeBuildsourcecodebucket": Object {
       "Description": "Code Build source code bucket",
-      "Value": {
+      "Value": Object {
         "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
       },
     },
-    "FirewallSubnet1ID": {
+    "FirewallSubnet1ID": Object {
       "Description": "Subnet 1 associated with Network Firewall.",
-      "Value": {
+      "Value": Object {
         "Ref": "NetworkFirewallSubnet1",
       },
     },
-    "FirewallSubnet2ID": {
+    "FirewallSubnet2ID": Object {
       "Description": "Subnet 2 associated with Network Firewall.",
-      "Value": {
+      "Value": Object {
         "Ref": "NetworkFirewallSubnet2",
       },
     },
-    "InspectionVPCID": {
+    "InspectionVPCID": Object {
       "Description": "Inspection VPC ID to create Network Firewall.",
-      "Value": {
+      "Value": Object {
         "Ref": "VPC",
       },
     },
-    "NetworkFirewallAvailabilityZone1": {
+    "NetworkFirewallAvailabilityZone1": Object {
       "Description": "Availability Zone configured for Network Firewall subnet 1",
-      "Value": {
-        "Fn::GetAtt": [
+      "Value": Object {
+        "Fn::GetAtt": Array [
           "NetworkFirewallSubnet1",
           "AvailabilityZone",
         ],
       },
     },
-    "NetworkFirewallAvailabilityZone2": {
+    "NetworkFirewallAvailabilityZone2": Object {
       "Description": "Availability Zone configured for Network Firewall subnet 2",
-      "Value": {
-        "Fn::GetAtt": [
+      "Value": Object {
+        "Fn::GetAtt": Array [
           "NetworkFirewallSubnet2",
           "AvailabilityZone",
         ],
       },
     },
-    "S3BucketforFirewallLogs": {
+    "S3BucketforFirewallLogs": Object {
       "Description": "S3 Bucket used as the log destination for Firewall Logs.",
-      "Value": {
-        "Fn::If": [
+      "Value": Object {
+        "Fn::If": Array [
           "LoggingInS3",
-          {
+          Object {
             "Ref": "Logs6819BB44",
           },
           "NotConfigured",
         ],
       },
     },
-    "TransitGatewaySubnet1ID": {
+    "TransitGatewaySubnet1ID": Object {
       "Description": "Subnet 1 associated with Transit Gateway.",
-      "Value": {
+      "Value": Object {
         "Ref": "VPCTGWSubnet1",
       },
     },
-    "TransitGatewaySubnet2ID": {
+    "TransitGatewaySubnet2ID": Object {
       "Description": "Subnet 1 associated with Transit Gateway.",
-      "Value": {
+      "Value": Object {
         "Ref": "VPCTGWSubnet2",
       },
     },
   },
-  "Parameters": {
-    "BootstrapVersion": {
+  "Parameters": Object {
+    "BootstrapVersion": Object {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "ExistingTransitGateway": {
+    "ExistingTransitGateway": Object {
       "Default": "",
       "Description": "Existing AWS Transit Gateway id.",
       "Type": "String",
     },
-    "LogRetentionPeriod": {
-      "AllowedValues": [
+    "LogRetentionPeriod": Object {
+      "AllowedValues": Array [
         "1",
         "3",
         "5",
@@ -295,24 +295,24 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Description": "Log retention period in days.",
       "Type": "Number",
     },
-    "TransitGatewayRTIdForDefaultRoute": {
+    "TransitGatewayRTIdForDefaultRoute": Object {
       "Default": "",
       "Description": "Existing AWS Transit Gateway route table id. Example: Spoke VPC Route Table. Format: tgw-rtb-4e5f6g7h",
       "Type": "String",
     },
-    "TransitGatewayRouteTableIdForAssociation": {
+    "TransitGatewayRouteTableIdForAssociation": Object {
       "Default": "",
       "Description": "Existing AWS Transit Gateway route table id. Example: Firewall Route Table. Format: tgw-rtb-0a1b2c3d",
       "Type": "String",
     },
-    "cidrBlock": {
+    "cidrBlock": Object {
       "AllowedPattern": "^(?:[0-9]{1,3}.){3}[0-9]{1,3}[/]([0-9]?[0-6]?|[1][7-9])$",
       "Default": "192.168.1.0/26",
       "Description": "CIDR Block for VPC. Must be /26 or larger CIDR block.",
       "Type": "String",
     },
-    "logDestinationType": {
-      "AllowedValues": [
+    "logDestinationType": Object {
+      "AllowedValues": Array [
         "S3",
         "CloudWatchLogs",
         "ConfigureManually",
@@ -321,8 +321,8 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Description": "The type of storage destination to send these logs to. You can send logs to an Amazon S3 bucket or a CloudWatch log group.",
       "Type": "String",
     },
-    "logType": {
-      "AllowedValues": [
+    "logType": Object {
+      "AllowedValues": Array [
         "ALERT",
         "FLOW",
         "EnableBoth",
@@ -332,156 +332,156 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Type": "String",
     },
   },
-  "Resources": {
-    "BuildProject097C5DB7": {
-      "Properties": {
-        "Artifacts": {
+  "Resources": Object {
+    "BuildProject097C5DB7": Object {
+      "Properties": Object {
+        "Artifacts": Object {
           "Type": "CODEPIPELINE",
         },
-        "Cache": {
+        "Cache": Object {
           "Type": "NO_CACHE",
         },
-        "EncryptionKey": {
-          "Fn::GetAtt": [
+        "EncryptionKey": Object {
+          "Fn::GetAtt": Array [
             "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
             "Arn",
           ],
         },
-        "Environment": {
+        "Environment": Object {
           "ComputeType": "BUILD_GENERAL1_SMALL",
-          "EnvironmentVariables": [
-            {
+          "EnvironmentVariables": Array [
+            Object {
               "Name": "LOG_LEVEL",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::FindInMap": [
+              "Value": Object {
+                "Fn::FindInMap": Array [
                   "SolutionMapping",
                   "Log",
                   "Level",
                 ],
               },
             },
-            {
+            Object {
               "Name": "VPC_ID",
               "Type": "PLAINTEXT",
-              "Value": {
+              "Value": Object {
                 "Ref": "VPC",
               },
             },
-            {
+            Object {
               "Name": "SUBNET_IDS",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::Join": [
+              "Value": Object {
+                "Fn::Join": Array [
                   "",
-                  [
-                    {
+                  Array [
+                    Object {
                       "Ref": "NetworkFirewallSubnet1",
                     },
                     ",",
-                    {
+                    Object {
                       "Ref": "NetworkFirewallSubnet2",
                     },
                   ],
                 ],
               },
             },
-            {
+            Object {
               "Name": "LOG_TYPE",
               "Type": "PLAINTEXT",
-              "Value": {
+              "Value": Object {
                 "Ref": "logType",
               },
             },
-            {
+            Object {
               "Name": "LOG_DESTINATION_TYPE",
               "Type": "PLAINTEXT",
-              "Value": {
+              "Value": Object {
                 "Ref": "logDestinationType",
               },
             },
-            {
+            Object {
               "Name": "S3_LOG_BUCKET_NAME",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::If": [
+              "Value": Object {
+                "Fn::If": Array [
                   "LoggingInS3",
-                  {
+                  Object {
                     "Ref": "Logs6819BB44",
                   },
                   "NotConfigured",
                 ],
               },
             },
-            {
+            Object {
               "Name": "CLOUDWATCH_LOG_GROUP_NAME",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::If": [
+              "Value": Object {
+                "Fn::If": Array [
                   "LoggingInCloudWatch",
-                  {
+                  Object {
                     "Ref": "CloudWatchLogGroup",
                   },
                   "NotConfigured",
                 ],
               },
             },
-            {
+            Object {
               "Name": "VPC_TGW_ATTACHMENT_AZ_1",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::GetAtt": [
+              "Value": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallSubnet1",
                   "AvailabilityZone",
                 ],
               },
             },
-            {
+            Object {
               "Name": "VPC_TGW_ATTACHMENT_AZ_2",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::GetAtt": [
+              "Value": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallSubnet2",
                   "AvailabilityZone",
                 ],
               },
             },
-            {
+            Object {
               "Name": "VPC_TGW_ATTACHMENT_ROUTE_TABLE_ID_1",
               "Type": "PLAINTEXT",
-              "Value": {
+              "Value": Object {
                 "Ref": "VPCTGWRouteTable1",
               },
             },
-            {
+            Object {
               "Name": "VPC_TGW_ATTACHMENT_ROUTE_TABLE_ID_2",
               "Type": "PLAINTEXT",
-              "Value": {
+              "Value": Object {
                 "Ref": "VPCTGWRouteTable2",
               },
             },
-            {
+            Object {
               "Name": "CODE_BUILD_SOURCE_CODE_S3_KEY",
               "Type": "PLAINTEXT",
               "Value": "network-firewall-automation/v1.0.2",
             },
-            {
+            Object {
               "Name": "STACK_ID",
               "Type": "PLAINTEXT",
-              "Value": {
+              "Value": Object {
                 "Ref": "AWS::StackId",
               },
             },
-            {
+            Object {
               "Name": "SSM_PARAM_FOR_UUID",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::Join": [
+              "Value": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "/",
-                    {
-                      "Fn::FindInMap": [
+                    Object {
+                      "Fn::FindInMap": Array [
                         "Send",
                         "ParameterKey",
                         "UniqueId",
@@ -491,81 +491,81 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 ],
               },
             },
-            {
+            Object {
               "Name": "SEND_ANONYMOUS_METRICS",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::FindInMap": [
+              "Value": Object {
+                "Fn::FindInMap": Array [
                   "Send",
                   "AnonymousUsage",
                   "Data",
                 ],
               },
             },
-            {
+            Object {
               "Name": "SOLUTION_ID",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::FindInMap": [
+              "Value": Object {
+                "Fn::FindInMap": Array [
                   "SolutionMapping",
                   "Solution",
                   "Identifier",
                 ],
               },
             },
-            {
+            Object {
               "Name": "METRICS_URL",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::FindInMap": [
+              "Value": Object {
+                "Fn::FindInMap": Array [
                   "SolutionMapping",
                   "Metrics",
                   "URL",
                 ],
               },
             },
-            {
+            Object {
               "Name": "TRANSIT_GATEWAY_ATTACHMENT_ID",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::If": [
+              "Value": Object {
+                "Fn::If": Array [
                   "CreateTransitGatewayAttachment",
-                  {
+                  Object {
                     "Ref": "VPCTGWATTACHMENT",
                   },
                   "",
                 ],
               },
             },
-            {
+            Object {
               "Name": "TRANSIT_GATEWAY_ATTACHMENT_APPLIANCE_MODE",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::FindInMap": [
+              "Value": Object {
+                "Fn::FindInMap": Array [
                   "SolutionMapping",
                   "TransitGatewayAttachment",
                   "ApplianceMode",
                 ],
               },
             },
-            {
+            Object {
               "Name": "CUSTOM_SDK_USER_AGENT",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::Join": [
+              "Value": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "AwsSolution/",
-                    {
-                      "Fn::FindInMap": [
+                    Object {
+                      "Fn::FindInMap": Array [
                         "SolutionMapping",
                         "Solution",
                         "Identifier",
                       ],
                     },
                     "/",
-                    {
-                      "Fn::FindInMap": [
+                    Object {
+                      "Fn::FindInMap": Array [
                         "SolutionMapping",
                         "Solution",
                         "Version",
@@ -581,65 +581,65 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "PrivilegedMode": false,
           "Type": "LINUX_CONTAINER",
         },
-        "ServiceRole": {
-          "Fn::GetAtt": [
+        "ServiceRole": Object {
+          "Fn::GetAtt": Array [
             "BuildProjectRoleAA92C755",
             "Arn",
           ],
         },
-        "Source": {
-          "BuildSpec": {
-            "Fn::Join": [
+        "Source": Object {
+          "BuildSpec": Object {
+            "Fn::Join": Array [
               "",
-              [
+              Array [
                 "{
-  "version": "0.2",
-  "phases": {
-    "install": {
-      "runtime-versions": {
-        "nodejs": "16"
+  \\"version\\": \\"0.2\\",
+  \\"phases\\": {
+    \\"install\\": {
+      \\"runtime-versions\\": {
+        \\"nodejs\\": \\"16\\"
       },
-      "commands": [
-        "export current=$(pwd)",
-        "export sourceCodeKey=$CODE_BUILD_SOURCE_CODE_S3_KEY"
+      \\"commands\\": [
+        \\"export current=$(pwd)\\",
+        \\"export sourceCodeKey=$CODE_BUILD_SOURCE_CODE_S3_KEY\\"
       ]
     },
-    "pre_build": {
-      "commands": [
-        "cd $current",
-        "pwd; ls -ltr",
-        "echo 'Download Network Firewall Solution Package'",
-        "aws s3 cp s3://",
-                {
+    \\"pre_build\\": {
+      \\"commands\\": [
+        \\"cd $current\\",
+        \\"pwd; ls -ltr\\",
+        \\"echo 'Download Network Firewall Solution Package'\\",
+        \\"aws s3 cp s3://",
+                Object {
                   "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                 },
-                "/$sourceCodeKey/network-firewall-automation.zip $current || true",
-        "if [ -f $current/network-firewall-automation.zip ];then exit 0;else echo \\"Copy file to s3 bucket\\"; aws s3 cp s3://solutions-",
-                {
+                "/$sourceCodeKey/network-firewall-automation.zip $current || true\\",
+        \\"if [ -f $current/network-firewall-automation.zip ];then exit 0;else echo \\\\\\"Copy file to s3 bucket\\\\\\"; aws s3 cp s3://solutions-",
+                Object {
                   "Ref": "AWS::Region",
                 },
                 "/$sourceCodeKey/network-firewall-automation.zip s3://",
-                {
+                Object {
                   "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                 },
                 "/$sourceCodeKey/network-firewall-automation.zip --copy-props none; aws s3 cp s3://",
-                {
+                Object {
                   "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                 },
-                "/$sourceCodeKey/network-firewall-automation.zip $current; fi;",
-        "unzip -o $current/network-firewall-automation.zip -d $current",
-        "pwd; ls -ltr"
+                "/$sourceCodeKey/network-firewall-automation.zip $current; fi;\\",
+        \\"unzip -o $current/network-firewall-automation.zip -d $current\\",
+        \\"pwd; ls -ltr\\"
       ]
     },
-    "build": {
-      "commands": [
-        "echo \\"Validating the firewall config\\"",
-        "node build.js"
+    \\"build\\": {
+      \\"commands\\": [
+        \\"echo \\\\\\"Validating the firewall config\\\\\\"\\",
+        \\"node build.js\\"
       ]
     }
   },
-  "artifacts": {
-    "files": "**/*"
+  \\"artifacts\\": {
+    \\"files\\": \\"**/*\\"
   }
 }",
               ],
@@ -650,14 +650,14 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::CodeBuild::Project",
     },
-    "BuildProjectRoleAA92C755": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
+    "BuildProjectRoleAA92C755": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": {
+              "Principal": Object {
                 "Service": "codebuild.amazonaws.com",
               },
             },
@@ -667,43 +667,43 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::IAM::Role",
     },
-    "BuildProjectRoleDefaultPolicy3E9F248C": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+    "BuildProjectRoleDefaultPolicy3E9F248C": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "logs:CreateLogGroup",
                 "logs:CreateLogStream",
                 "logs:PutLogEvents",
               ],
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::Join": [
+              "Resource": Array [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "arn:",
-                      {
+                      Object {
                         "Ref": "AWS::Partition",
                       },
                       ":logs:eu-west-1:1234:log-group:/aws/codebuild/",
-                      {
+                      Object {
                         "Ref": "BuildProject097C5DB7",
                       },
                     ],
                   ],
                 },
-                {
-                  "Fn::Join": [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "arn:",
-                      {
+                      Object {
                         "Ref": "AWS::Partition",
                       },
                       ":logs:eu-west-1:1234:log-group:/aws/codebuild/",
-                      {
+                      Object {
                         "Ref": "BuildProject097C5DB7",
                       },
                       ":*",
@@ -712,8 +712,8 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 },
               ],
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "codebuild:CreateReportGroup",
                 "codebuild:CreateReport",
                 "codebuild:UpdateReport",
@@ -721,16 +721,16 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 "codebuild:BatchPutCodeCoverages",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
+              "Resource": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "arn:",
-                    {
+                    Object {
                       "Ref": "AWS::Partition",
                     },
                     ":codebuild:eu-west-1:1234:report-group/",
-                    {
+                    Object {
                       "Ref": "BuildProject097C5DB7",
                     },
                     "-*",
@@ -738,8 +738,8 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 ],
               },
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "s3:GetObject*",
                 "s3:GetBucket*",
                 "s3:List*",
@@ -752,19 +752,19 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 "s3:Abort*",
               ],
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::GetAtt": [
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
                     "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                     "Arn",
                   ],
                 },
-                {
-                  "Fn::Join": [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
-                      {
-                        "Fn::GetAtt": [
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
                           "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                           "Arn",
                         ],
@@ -775,8 +775,8 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 },
               ],
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "kms:Decrypt",
                 "kms:DescribeKey",
                 "kms:Encrypt",
@@ -784,23 +784,23 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 "kms:GenerateDataKey*",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                   "Arn",
                 ],
               },
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "kms:Decrypt",
                 "kms:Encrypt",
                 "kms:ReEncrypt*",
                 "kms:GenerateDataKey*",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                   "Arn",
                 ],
@@ -810,56 +810,56 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "BuildProjectRoleDefaultPolicy3E9F248C",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "BuildProjectRoleAA92C755",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "CloudWatchLogGroup": {
+    "CloudWatchLogGroup": Object {
       "Condition": "LoggingInCloudWatch",
-      "Properties": {
-        "KmsKeyId": {
-          "Fn::GetAtt": [
+      "Properties": Object {
+        "KmsKeyId": Object {
+          "Fn::GetAtt": Array [
             "KMSKeyForNetworkFirewallBuckets73A57817",
             "Arn",
           ],
         },
-        "RetentionInDays": {
+        "RetentionInDays": Object {
           "Ref": "LogRetentionPeriod",
         },
       },
       "Type": "AWS::Logs::LogGroup",
     },
-    "CloudWatchLogsForNetworkFirewallBucketPolicy611AC31C": {
+    "CloudWatchLogsForNetworkFirewallBucketPolicy611AC31C": Object {
       "Condition": "LoggingInS3",
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "Bucket": {
+      "Properties": Object {
+        "Bucket": Object {
           "Ref": "Logs6819BB44",
         },
-        "PolicyDocument": {
-          "Statement": [
-            {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "s3:GetObject",
-              "Condition": {
-                "Bool": {
+              "Condition": Object {
+                "Bool": Object {
                   "aws:SecureTransport": false,
                 },
               },
               "Effect": "Deny",
-              "Principal": {
+              "Principal": Object {
                 "AWS": "*",
               },
-              "Resource": [
-                {
-                  "Fn::Join": [
+              "Resource": Array [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
-                      {
-                        "Fn::GetAtt": [
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
                           "Logs6819BB44",
                           "Arn",
                         ],
@@ -868,8 +868,8 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                     ],
                   ],
                 },
-                {
-                  "Fn::GetAtt": [
+                Object {
+                  "Fn::GetAtt": Array [
                     "Logs6819BB44",
                     "Arn",
                   ],
@@ -883,38 +883,38 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Type": "AWS::S3::BucketPolicy",
       "UpdateReplacePolicy": "Retain",
     },
-    "CodeBuildStageSourceCodeBucketPolicyF19BA2A0": {
+    "CodeBuildStageSourceCodeBucketPolicyF19BA2A0": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "Bucket": {
+      "Properties": Object {
+        "Bucket": Object {
           "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
         },
-        "PolicyDocument": {
-          "Statement": [
-            {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "s3:GetObject",
-              "Condition": {
-                "Bool": {
+              "Condition": Object {
+                "Bool": Object {
                   "aws:SecureTransport": false,
                 },
               },
               "Effect": "Deny",
-              "Principal": {
+              "Principal": Object {
                 "AWS": "*",
               },
-              "Resource": [
-                {
-                  "Fn::GetAtt": [
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
                     "CodeBuildStagesSourceCodeBucketFA98E7C7",
                     "Arn",
                   ],
                 },
-                {
-                  "Fn::Join": [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
-                      {
-                        "Fn::GetAtt": [
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
                           "CodeBuildStagesSourceCodeBucketFA98E7C7",
                           "Arn",
                         ],
@@ -932,29 +932,29 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Type": "AWS::S3::BucketPolicy",
       "UpdateReplacePolicy": "Retain",
     },
-    "CodeBuildStagesSourceCodeBucketFA98E7C7": {
+    "CodeBuildStagesSourceCodeBucketFA98E7C7": Object {
       "DeletionPolicy": "Retain",
-      "Metadata": {
-        "cfn_nag": {
-          "rules_to_suppress": [
-            {
+      "Metadata": Object {
+        "cfn_nag": Object {
+          "rules_to_suppress": Array [
+            Object {
               "id": "W35",
               "reason": "Source Code bucket bucket does not require logging configuration",
             },
-            {
+            Object {
               "id": "W51",
               "reason": "Source Code bucket is private and does not require a bucket policy",
             },
           ],
         },
       },
-      "Properties": {
-        "BucketEncryption": {
-          "ServerSideEncryptionConfiguration": [
-            {
-              "ServerSideEncryptionByDefault": {
-                "KMSMasterKeyID": {
-                  "Fn::GetAtt": [
+      "Properties": Object {
+        "BucketEncryption": Object {
+          "ServerSideEncryptionConfiguration": Array [
+            Object {
+              "ServerSideEncryptionByDefault": Object {
+                "KMSMasterKeyID": Object {
+                  "Fn::GetAtt": Array [
                     "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                     "Arn",
                   ],
@@ -964,7 +964,7 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           ],
         },
-        "PublicAccessBlockConfiguration": {
+        "PublicAccessBlockConfiguration": Object {
           "BlockPublicAcls": true,
           "BlockPublicPolicy": true,
           "IgnorePublicAcls": true,
@@ -974,175 +974,175 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
     },
-    "DefaultRouteSpokeVPCTGWRouteTable": {
+    "DefaultRouteSpokeVPCTGWRouteTable": Object {
       "Condition": "CreateDefaultRouteFirewallRT",
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "DestinationCidrBlock": {
-          "Fn::FindInMap": [
+      "Properties": Object {
+        "DestinationCidrBlock": Object {
+          "Fn::FindInMap": Array [
             "SolutionMapping",
             "Route",
             "QuadZero",
           ],
         },
-        "TransitGatewayAttachmentId": {
+        "TransitGatewayAttachmentId": Object {
           "Ref": "VPCTGWATTACHMENT",
         },
-        "TransitGatewayRouteTableId": {
+        "TransitGatewayRouteTableId": Object {
           "Ref": "TransitGatewayRTIdForDefaultRoute",
         },
       },
       "Type": "AWS::EC2::TransitGatewayRoute",
     },
-    "DeployProject1CF7CB79": {
-      "Properties": {
-        "Artifacts": {
+    "DeployProject1CF7CB79": Object {
+      "Properties": Object {
+        "Artifacts": Object {
           "Type": "CODEPIPELINE",
         },
-        "Cache": {
+        "Cache": Object {
           "Type": "NO_CACHE",
         },
-        "EncryptionKey": {
-          "Fn::GetAtt": [
+        "EncryptionKey": Object {
+          "Fn::GetAtt": Array [
             "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
             "Arn",
           ],
         },
-        "Environment": {
+        "Environment": Object {
           "ComputeType": "BUILD_GENERAL1_SMALL",
-          "EnvironmentVariables": [
-            {
+          "EnvironmentVariables": Array [
+            Object {
               "Name": "LOG_LEVEL",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::FindInMap": [
+              "Value": Object {
+                "Fn::FindInMap": Array [
                   "SolutionMapping",
                   "Log",
                   "Level",
                 ],
               },
             },
-            {
+            Object {
               "Name": "VPC_ID",
               "Type": "PLAINTEXT",
-              "Value": {
+              "Value": Object {
                 "Ref": "VPC",
               },
             },
-            {
+            Object {
               "Name": "SUBNET_IDS",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::Join": [
+              "Value": Object {
+                "Fn::Join": Array [
                   "",
-                  [
-                    {
+                  Array [
+                    Object {
                       "Ref": "NetworkFirewallSubnet1",
                     },
                     ",",
-                    {
+                    Object {
                       "Ref": "NetworkFirewallSubnet2",
                     },
                   ],
                 ],
               },
             },
-            {
+            Object {
               "Name": "LOG_TYPE",
               "Type": "PLAINTEXT",
-              "Value": {
+              "Value": Object {
                 "Ref": "logType",
               },
             },
-            {
+            Object {
               "Name": "LOG_DESTINATION_TYPE",
               "Type": "PLAINTEXT",
-              "Value": {
+              "Value": Object {
                 "Ref": "logDestinationType",
               },
             },
-            {
+            Object {
               "Name": "S3_LOG_BUCKET_NAME",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::If": [
+              "Value": Object {
+                "Fn::If": Array [
                   "LoggingInS3",
-                  {
+                  Object {
                     "Ref": "Logs6819BB44",
                   },
                   "NotConfigured",
                 ],
               },
             },
-            {
+            Object {
               "Name": "CLOUDWATCH_LOG_GROUP_NAME",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::If": [
+              "Value": Object {
+                "Fn::If": Array [
                   "LoggingInCloudWatch",
-                  {
+                  Object {
                     "Ref": "CloudWatchLogGroup",
                   },
                   "NotConfigured",
                 ],
               },
             },
-            {
+            Object {
               "Name": "VPC_TGW_ATTACHMENT_AZ_1",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::GetAtt": [
+              "Value": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallSubnet1",
                   "AvailabilityZone",
                 ],
               },
             },
-            {
+            Object {
               "Name": "VPC_TGW_ATTACHMENT_AZ_2",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::GetAtt": [
+              "Value": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallSubnet2",
                   "AvailabilityZone",
                 ],
               },
             },
-            {
+            Object {
               "Name": "VPC_TGW_ATTACHMENT_ROUTE_TABLE_ID_1",
               "Type": "PLAINTEXT",
-              "Value": {
+              "Value": Object {
                 "Ref": "VPCTGWRouteTable1",
               },
             },
-            {
+            Object {
               "Name": "VPC_TGW_ATTACHMENT_ROUTE_TABLE_ID_2",
               "Type": "PLAINTEXT",
-              "Value": {
+              "Value": Object {
                 "Ref": "VPCTGWRouteTable2",
               },
             },
-            {
+            Object {
               "Name": "CODE_BUILD_SOURCE_CODE_S3_KEY",
               "Type": "PLAINTEXT",
               "Value": "network-firewall-automation/v1.0.2",
             },
-            {
+            Object {
               "Name": "STACK_ID",
               "Type": "PLAINTEXT",
-              "Value": {
+              "Value": Object {
                 "Ref": "AWS::StackId",
               },
             },
-            {
+            Object {
               "Name": "SSM_PARAM_FOR_UUID",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::Join": [
+              "Value": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "/",
-                    {
-                      "Fn::FindInMap": [
+                    Object {
+                      "Fn::FindInMap": Array [
                         "Send",
                         "ParameterKey",
                         "UniqueId",
@@ -1152,81 +1152,81 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 ],
               },
             },
-            {
+            Object {
               "Name": "SEND_ANONYMOUS_METRICS",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::FindInMap": [
+              "Value": Object {
+                "Fn::FindInMap": Array [
                   "Send",
                   "AnonymousUsage",
                   "Data",
                 ],
               },
             },
-            {
+            Object {
               "Name": "SOLUTION_ID",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::FindInMap": [
+              "Value": Object {
+                "Fn::FindInMap": Array [
                   "SolutionMapping",
                   "Solution",
                   "Identifier",
                 ],
               },
             },
-            {
+            Object {
               "Name": "METRICS_URL",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::FindInMap": [
+              "Value": Object {
+                "Fn::FindInMap": Array [
                   "SolutionMapping",
                   "Metrics",
                   "URL",
                 ],
               },
             },
-            {
+            Object {
               "Name": "TRANSIT_GATEWAY_ATTACHMENT_ID",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::If": [
+              "Value": Object {
+                "Fn::If": Array [
                   "CreateTransitGatewayAttachment",
-                  {
+                  Object {
                     "Ref": "VPCTGWATTACHMENT",
                   },
                   "",
                 ],
               },
             },
-            {
+            Object {
               "Name": "TRANSIT_GATEWAY_ATTACHMENT_APPLIANCE_MODE",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::FindInMap": [
+              "Value": Object {
+                "Fn::FindInMap": Array [
                   "SolutionMapping",
                   "TransitGatewayAttachment",
                   "ApplianceMode",
                 ],
               },
             },
-            {
+            Object {
               "Name": "CUSTOM_SDK_USER_AGENT",
               "Type": "PLAINTEXT",
-              "Value": {
-                "Fn::Join": [
+              "Value": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "AwsSolution/",
-                    {
-                      "Fn::FindInMap": [
+                    Object {
+                      "Fn::FindInMap": Array [
                         "SolutionMapping",
                         "Solution",
                         "Identifier",
                       ],
                     },
                     "/",
-                    {
-                      "Fn::FindInMap": [
+                    Object {
+                      "Fn::FindInMap": Array [
                         "SolutionMapping",
                         "Solution",
                         "Version",
@@ -1242,55 +1242,55 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "PrivilegedMode": false,
           "Type": "LINUX_CONTAINER",
         },
-        "ServiceRole": {
-          "Fn::GetAtt": [
+        "ServiceRole": Object {
+          "Fn::GetAtt": Array [
             "DeployProjectRole588C8C1D",
             "Arn",
           ],
         },
-        "Source": {
-          "BuildSpec": {
-            "Fn::Join": [
+        "Source": Object {
+          "BuildSpec": Object {
+            "Fn::Join": Array [
               "",
-              [
+              Array [
                 "{
-  "version": "0.2",
-  "phases": {
-    "install": {
-      "runtime-versions": {
-        "nodejs": "16"
+  \\"version\\": \\"0.2\\",
+  \\"phases\\": {
+    \\"install\\": {
+      \\"runtime-versions\\": {
+        \\"nodejs\\": \\"16\\"
       },
-      "commands": [
-        "export current=$(pwd)",
-        "export sourceCodeKey=$CODE_BUILD_SOURCE_CODE_S3_KEY"
+      \\"commands\\": [
+        \\"export current=$(pwd)\\",
+        \\"export sourceCodeKey=$CODE_BUILD_SOURCE_CODE_S3_KEY\\"
       ]
     },
-    "pre_build": {
-      "commands": [
-        "cd $current",
-        "pwd; ls -ltr",
-        "echo 'Download Network Firewall Solution Package'",
-        "aws s3 cp s3://",
-                {
+    \\"pre_build\\": {
+      \\"commands\\": [
+        \\"cd $current\\",
+        \\"pwd; ls -ltr\\",
+        \\"echo 'Download Network Firewall Solution Package'\\",
+        \\"aws s3 cp s3://",
+                Object {
                   "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                 },
-                "/$sourceCodeKey/network-firewall-automation.zip $current",
-        "unzip -o $current/network-firewall-automation.zip -d $current",
-        "pwd; ls -ltr"
+                "/$sourceCodeKey/network-firewall-automation.zip $current\\",
+        \\"unzip -o $current/network-firewall-automation.zip -d $current\\",
+        \\"pwd; ls -ltr\\"
       ]
     },
-    "build": {
-      "commands": [
-        "echo \\"Initiating Network Firewall Automation\\"",
-        "node index.js"
+    \\"build\\": {
+      \\"commands\\": [
+        \\"echo \\\\\\"Initiating Network Firewall Automation\\\\\\"\\",
+        \\"node index.js\\"
       ]
     },
-    "post_build": {
-      "commands": []
+    \\"post_build\\": {
+      \\"commands\\": []
     }
   },
-  "artifacts": {
-    "files": "**/*"
+  \\"artifacts\\": {
+    \\"files\\": \\"**/*\\"
   }
 }",
               ],
@@ -1301,14 +1301,14 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::CodeBuild::Project",
     },
-    "DeployProjectRole588C8C1D": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
+    "DeployProjectRole588C8C1D": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": {
+              "Principal": Object {
                 "Service": "codebuild.amazonaws.com",
               },
             },
@@ -1318,43 +1318,43 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::IAM::Role",
     },
-    "DeployProjectRoleDefaultPolicy52AEA98B": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+    "DeployProjectRoleDefaultPolicy52AEA98B": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "logs:CreateLogGroup",
                 "logs:CreateLogStream",
                 "logs:PutLogEvents",
               ],
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::Join": [
+              "Resource": Array [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "arn:",
-                      {
+                      Object {
                         "Ref": "AWS::Partition",
                       },
                       ":logs:eu-west-1:1234:log-group:/aws/codebuild/",
-                      {
+                      Object {
                         "Ref": "DeployProject1CF7CB79",
                       },
                     ],
                   ],
                 },
-                {
-                  "Fn::Join": [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "arn:",
-                      {
+                      Object {
                         "Ref": "AWS::Partition",
                       },
                       ":logs:eu-west-1:1234:log-group:/aws/codebuild/",
-                      {
+                      Object {
                         "Ref": "DeployProject1CF7CB79",
                       },
                       ":*",
@@ -1363,8 +1363,8 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 },
               ],
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "codebuild:CreateReportGroup",
                 "codebuild:CreateReport",
                 "codebuild:UpdateReport",
@@ -1372,16 +1372,16 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 "codebuild:BatchPutCodeCoverages",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
+              "Resource": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "arn:",
-                    {
+                    Object {
                       "Ref": "AWS::Partition",
                     },
                     ":codebuild:eu-west-1:1234:report-group/",
-                    {
+                    Object {
                       "Ref": "DeployProject1CF7CB79",
                     },
                     "-*",
@@ -1389,26 +1389,26 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 ],
               },
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "s3:GetObject*",
                 "s3:GetBucket*",
                 "s3:List*",
               ],
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::GetAtt": [
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
                     "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                     "Arn",
                   ],
                 },
-                {
-                  "Fn::Join": [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
-                      {
-                        "Fn::GetAtt": [
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
                           "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                           "Arn",
                         ],
@@ -1419,29 +1419,29 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 },
               ],
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "kms:Decrypt",
                 "kms:DescribeKey",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                   "Arn",
                 ],
               },
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "kms:Decrypt",
                 "kms:Encrypt",
                 "kms:ReEncrypt*",
                 "kms:GenerateDataKey*",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                   "Arn",
                 ],
@@ -1451,25 +1451,25 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "DeployProjectRoleDefaultPolicy52AEA98B",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "DeployProjectRole588C8C1D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "FirewallSubnetRouteTable": {
+    "FirewallSubnetRouteTable": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "Tags": [
-          {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
             "Key": "Name",
-            "Value": {
-              "Fn::Join": [
+            "Value": Object {
+              "Fn::Join": Array [
                 "",
-                [
-                  {
+                Array [
+                  Object {
                     "Ref": "AWS::StackName",
                   },
                   "-FirewallSubnetRouteTable",
@@ -1478,25 +1478,25 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::RouteTable",
       "UpdateReplacePolicy": "Retain",
     },
-    "FlowLog": {
-      "Properties": {
-        "DeliverLogsPermissionArn": {
-          "Fn::GetAtt": [
+    "FlowLog": Object {
+      "Properties": Object {
+        "DeliverLogsPermissionArn": Object {
+          "Fn::GetAtt": Array [
             "RoleFlowLogsCA794118",
             "Arn",
           ],
         },
-        "LogGroupName": {
+        "LogGroupName": Object {
           "Ref": "AWS::StackName",
         },
-        "ResourceId": {
+        "ResourceId": Object {
           "Ref": "VPC",
         },
         "ResourceType": "VPC",
@@ -1504,23 +1504,23 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::EC2::FlowLog",
     },
-    "KMSKeyForNetworkFirewallBuckets73A57817": {
+    "KMSKeyForNetworkFirewallBuckets73A57817": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
+      "Properties": Object {
         "Description": "This key will be used for encrypting the vpc flow logs and firewall logs.",
         "EnableKeyRotation": true,
-        "KeyPolicy": {
-          "Statement": [
-            {
+        "KeyPolicy": Object {
+          "Statement": Array [
+            Object {
               "Action": "kms:*",
               "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Join": [
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "arn:",
-                      {
+                      Object {
                         "Ref": "AWS::Partition",
                       },
                       ":iam::1234:root",
@@ -1530,16 +1530,16 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
               },
               "Resource": "*",
             },
-            {
+            Object {
               "Action": "kms:GenerateDataKey*",
               "Effect": "Allow",
-              "Principal": {
+              "Principal": Object {
                 "Service": "delivery.logs.amazonaws.com",
               },
               "Resource": "*",
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "kms:Encrypt*",
                 "kms:Decrypt*",
                 "kms:ReEncrypt*",
@@ -1547,13 +1547,13 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 "kms:Describe*",
               ],
               "Effect": "Allow",
-              "Principal": {
-                "Service": {
-                  "Fn::Join": [
+              "Principal": Object {
+                "Service": Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "logs.",
-                      {
+                      Object {
                         "Ref": "AWS::Region",
                       },
                       ".amazonaws.com",
@@ -1570,47 +1570,47 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Type": "AWS::KMS::Key",
       "UpdateReplacePolicy": "Retain",
     },
-    "LogGroupFlowLogs": {
-      "Properties": {
-        "KmsKeyId": {
-          "Fn::GetAtt": [
+    "LogGroupFlowLogs": Object {
+      "Properties": Object {
+        "KmsKeyId": Object {
+          "Fn::GetAtt": Array [
             "KMSKeyForNetworkFirewallBuckets73A57817",
             "Arn",
           ],
         },
-        "LogGroupName": {
+        "LogGroupName": Object {
           "Ref": "AWS::StackName",
         },
-        "RetentionInDays": {
+        "RetentionInDays": Object {
           "Ref": "LogRetentionPeriod",
         },
       },
       "Type": "AWS::Logs::LogGroup",
     },
-    "Logs6819BB44": {
+    "Logs6819BB44": Object {
       "Condition": "LoggingInS3",
       "DeletionPolicy": "Retain",
-      "Metadata": {
-        "cfn_nag": {
-          "rules_to_suppress": [
-            {
+      "Metadata": Object {
+        "cfn_nag": Object {
+          "rules_to_suppress": Array [
+            Object {
               "id": "W35",
               "reason": "Logs bucket does not require logging configuration",
             },
-            {
+            Object {
               "id": "W51",
               "reason": "Logs bucket is private and does not require a bucket policy",
             },
           ],
         },
       },
-      "Properties": {
-        "BucketEncryption": {
-          "ServerSideEncryptionConfiguration": [
-            {
-              "ServerSideEncryptionByDefault": {
-                "KMSMasterKeyID": {
-                  "Fn::GetAtt": [
+      "Properties": Object {
+        "BucketEncryption": Object {
+          "ServerSideEncryptionConfiguration": Array [
+            Object {
+              "ServerSideEncryptionByDefault": Object {
+                "KMSMasterKeyID": Object {
+                  "Fn::GetAtt": Array [
                     "KMSKeyForNetworkFirewallBuckets73A57817",
                     "Arn",
                   ],
@@ -1620,17 +1620,17 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           ],
         },
-        "LifecycleConfiguration": {
-          "Rules": [
-            {
-              "ExpirationInDays": {
+        "LifecycleConfiguration": Object {
+          "Rules": Array [
+            Object {
+              "ExpirationInDays": Object {
                 "Ref": "LogRetentionPeriod",
               },
               "Status": "Enabled",
             },
           ],
         },
-        "PublicAccessBlockConfiguration": {
+        "PublicAccessBlockConfiguration": Object {
           "BlockPublicAcls": true,
           "BlockPublicPolicy": true,
           "IgnorePublicAcls": true,
@@ -1640,61 +1640,61 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
     },
-    "NetworkFirewallCodePipelineA72E3ADD": {
-      "DependsOn": [
+    "NetworkFirewallCodePipelineA72E3ADD": Object {
+      "DependsOn": Array [
         "NetworkFirewallCodePipelineRoleDefaultPolicyF0142ABD",
         "NetworkFirewallCodePipelineRoleDDD28B15",
       ],
-      "Properties": {
-        "ArtifactStore": {
-          "EncryptionKey": {
-            "Id": {
-              "Fn::GetAtt": [
+      "Properties": Object {
+        "ArtifactStore": Object {
+          "EncryptionKey": Object {
+            "Id": Object {
+              "Fn::GetAtt": Array [
                 "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                 "Arn",
               ],
             },
             "Type": "KMS",
           },
-          "Location": {
+          "Location": Object {
             "Ref": "NetworkFirewallCodePipelineArtifactsBucketF2569455",
           },
           "Type": "S3",
         },
-        "RoleArn": {
-          "Fn::GetAtt": [
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
             "NetworkFirewallCodePipelineRoleDDD28B15",
             "Arn",
           ],
         },
-        "Stages": [
-          {
-            "Actions": [
-              {
-                "ActionTypeId": {
+        "Stages": Array [
+          Object {
+            "Actions": Array [
+              Object {
+                "ActionTypeId": Object {
                   "Category": "Source",
                   "Owner": "AWS",
                   "Provider": "CodeCommit",
                   "Version": "1",
                 },
-                "Configuration": {
+                "Configuration": Object {
                   "BranchName": "main",
                   "PollForSourceChanges": false,
-                  "RepositoryName": {
-                    "Fn::GetAtt": [
+                  "RepositoryName": Object {
+                    "Fn::GetAtt": Array [
                       "NetworkFirewallCodeRepositoryF7BA0495",
                       "Name",
                     ],
                   },
                 },
                 "Name": "Source",
-                "OutputArtifacts": [
-                  {
+                "OutputArtifacts": Array [
+                  Object {
                     "Name": "SourceArtifact",
                   },
                 ],
-                "RoleArn": {
-                  "Fn::GetAtt": [
+                "RoleArn": Object {
+                  "Fn::GetAtt": Array [
                     "NetworkFirewallCodePipelineSourceCodePipelineActionRole67C89750",
                     "Arn",
                   ],
@@ -1704,33 +1704,33 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             ],
             "Name": "Source",
           },
-          {
-            "Actions": [
-              {
-                "ActionTypeId": {
+          Object {
+            "Actions": Array [
+              Object {
+                "ActionTypeId": Object {
                   "Category": "Build",
                   "Owner": "AWS",
                   "Provider": "CodeBuild",
                   "Version": "1",
                 },
-                "Configuration": {
-                  "ProjectName": {
+                "Configuration": Object {
+                  "ProjectName": Object {
                     "Ref": "BuildProject097C5DB7",
                   },
                 },
-                "InputArtifacts": [
-                  {
+                "InputArtifacts": Array [
+                  Object {
                     "Name": "SourceArtifact",
                   },
                 ],
                 "Name": "CodeBuild",
-                "OutputArtifacts": [
-                  {
+                "OutputArtifacts": Array [
+                  Object {
                     "Name": "BuildArtifact",
                   },
                 ],
-                "RoleArn": {
-                  "Fn::GetAtt": [
+                "RoleArn": Object {
+                  "Fn::GetAtt": Array [
                     "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRole2A3E8726",
                     "Arn",
                   ],
@@ -1740,28 +1740,28 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             ],
             "Name": "Validation",
           },
-          {
-            "Actions": [
-              {
-                "ActionTypeId": {
+          Object {
+            "Actions": Array [
+              Object {
+                "ActionTypeId": Object {
                   "Category": "Build",
                   "Owner": "AWS",
                   "Provider": "CodeBuild",
                   "Version": "1",
                 },
-                "Configuration": {
-                  "ProjectName": {
+                "Configuration": Object {
+                  "ProjectName": Object {
                     "Ref": "DeployProject1CF7CB79",
                   },
                 },
-                "InputArtifacts": [
-                  {
+                "InputArtifacts": Array [
+                  Object {
                     "Name": "BuildArtifact",
                   },
                 ],
                 "Name": "CodeDeploy",
-                "RoleArn": {
-                  "Fn::GetAtt": [
+                "RoleArn": Object {
+                  "Fn::GetAtt": Array [
                     "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRole6EA7639D",
                     "Arn",
                   ],
@@ -1775,22 +1775,22 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::CodePipeline::Pipeline",
     },
-    "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060": {
+    "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060": Object {
       "DeletionPolicy": "Delete",
-      "Properties": {
+      "Properties": Object {
         "EnableKeyRotation": true,
-        "KeyPolicy": {
-          "Statement": [
-            {
+        "KeyPolicy": Object {
+          "Statement": Array [
+            Object {
               "Action": "kms:*",
               "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Join": [
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "arn:",
-                      {
+                      Object {
                         "Ref": "AWS::Partition",
                       },
                       ":iam::1234:root",
@@ -1807,23 +1807,23 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Type": "AWS::KMS::Key",
       "UpdateReplacePolicy": "Delete",
     },
-    "NetworkFirewallCodePipelineArtifactsBucketEncryptionKeyAlias1704A536": {
+    "NetworkFirewallCodePipelineArtifactsBucketEncryptionKeyAlias1704A536": Object {
       "DeletionPolicy": "Delete",
-      "Properties": {
-        "AliasName": {
-          "Fn::Join": [
+      "Properties": Object {
+        "AliasName": Object {
+          "Fn::Join": Array [
             "",
-            [
+            Array [
               "alias/",
-              {
+              Object {
                 "Ref": "AWS::StackName",
               },
               "-artifactBucket-EncryptionKeyAlias",
             ],
           ],
         },
-        "TargetKeyId": {
-          "Fn::GetAtt": [
+        "TargetKeyId": Object {
+          "Fn::GetAtt": Array [
             "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
             "Arn",
           ],
@@ -1832,25 +1832,25 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Type": "AWS::KMS::Alias",
       "UpdateReplacePolicy": "Delete",
     },
-    "NetworkFirewallCodePipelineArtifactsBucketF2569455": {
+    "NetworkFirewallCodePipelineArtifactsBucketF2569455": Object {
       "DeletionPolicy": "Retain",
-      "Metadata": {
-        "cfn_nag": {
-          "rules_to_suppress": [
-            {
+      "Metadata": Object {
+        "cfn_nag": Object {
+          "rules_to_suppress": Array [
+            Object {
               "id": "W35",
               "reason": "This S3 bucket is used as the destination for 'NetworkFirewallCodePipelineArtifactsBucket'",
             },
           ],
         },
       },
-      "Properties": {
-        "BucketEncryption": {
-          "ServerSideEncryptionConfiguration": [
-            {
-              "ServerSideEncryptionByDefault": {
-                "KMSMasterKeyID": {
-                  "Fn::GetAtt": [
+      "Properties": Object {
+        "BucketEncryption": Object {
+          "ServerSideEncryptionConfiguration": Array [
+            Object {
+              "ServerSideEncryptionByDefault": Object {
+                "KMSMasterKeyID": Object {
+                  "Fn::GetAtt": Array [
                     "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                     "Arn",
                   ],
@@ -1860,7 +1860,7 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           ],
         },
-        "PublicAccessBlockConfiguration": {
+        "PublicAccessBlockConfiguration": Object {
           "BlockPublicAcls": true,
           "BlockPublicPolicy": true,
           "IgnorePublicAcls": true,
@@ -1870,37 +1870,37 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
     },
-    "NetworkFirewallCodePipelineArtifactsBucketPolicyA1DE12F9": {
-      "Properties": {
-        "Bucket": {
+    "NetworkFirewallCodePipelineArtifactsBucketPolicyA1DE12F9": Object {
+      "Properties": Object {
+        "Bucket": Object {
           "Ref": "NetworkFirewallCodePipelineArtifactsBucketF2569455",
         },
-        "PolicyDocument": {
-          "Statement": [
-            {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "s3:*",
-              "Condition": {
-                "Bool": {
+              "Condition": Object {
+                "Bool": Object {
                   "aws:SecureTransport": "false",
                 },
               },
               "Effect": "Deny",
-              "Principal": {
+              "Principal": Object {
                 "AWS": "*",
               },
-              "Resource": [
-                {
-                  "Fn::GetAtt": [
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
                     "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                     "Arn",
                   ],
                 },
-                {
-                  "Fn::Join": [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
-                      {
-                        "Fn::GetAtt": [
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
                           "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                           "Arn",
                         ],
@@ -1917,20 +1917,20 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::S3::BucketPolicy",
     },
-    "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRole6EA7639D": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
+    "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRole6EA7639D": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Join": [
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "arn:",
-                      {
+                      Object {
                         "Ref": "AWS::Partition",
                       },
                       ":iam::1234:root",
@@ -1945,19 +1945,19 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::IAM::Role",
     },
-    "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRoleDefaultPolicyAB6FC4F9": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+    "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRoleDefaultPolicyAB6FC4F9": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "codebuild:BatchGetBuilds",
                 "codebuild:StartBuild",
                 "codebuild:StopBuild",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "DeployProject1CF7CB79",
                   "Arn",
                 ],
@@ -1967,22 +1967,22 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRoleDefaultPolicyAB6FC4F9",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRole6EA7639D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "NetworkFirewallCodePipelineEventsRole94323A48": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
+    "NetworkFirewallCodePipelineEventsRole94323A48": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": {
+              "Principal": Object {
                 "Service": "events.amazonaws.com",
               },
             },
@@ -1992,23 +1992,23 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::IAM::Role",
     },
-    "NetworkFirewallCodePipelineEventsRoleDefaultPolicy5835E037": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
+    "NetworkFirewallCodePipelineEventsRoleDefaultPolicy5835E037": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "codepipeline:StartPipelineExecution",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
+              "Resource": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "arn:",
-                    {
+                    Object {
                       "Ref": "AWS::Partition",
                     },
                     ":codepipeline:eu-west-1:1234:",
-                    {
+                    Object {
                       "Ref": "NetworkFirewallCodePipelineA72E3ADD",
                     },
                   ],
@@ -2019,22 +2019,22 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "NetworkFirewallCodePipelineEventsRoleDefaultPolicy5835E037",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "NetworkFirewallCodePipelineEventsRole94323A48",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "NetworkFirewallCodePipelineRoleDDD28B15": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
+    "NetworkFirewallCodePipelineRoleDDD28B15": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": {
+              "Principal": Object {
                 "Service": "codepipeline.amazonaws.com",
               },
             },
@@ -2044,12 +2044,12 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::IAM::Role",
     },
-    "NetworkFirewallCodePipelineRoleDefaultPolicyF0142ABD": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+    "NetworkFirewallCodePipelineRoleDefaultPolicyF0142ABD": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "s3:GetObject*",
                 "s3:GetBucket*",
                 "s3:List*",
@@ -2062,19 +2062,19 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 "s3:Abort*",
               ],
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::GetAtt": [
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
                     "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                     "Arn",
                   ],
                 },
-                {
-                  "Fn::Join": [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
-                      {
-                        "Fn::GetAtt": [
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
                           "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                           "Arn",
                         ],
@@ -2085,8 +2085,8 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 },
               ],
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "kms:Decrypt",
                 "kms:DescribeKey",
                 "kms:Encrypt",
@@ -2094,38 +2094,38 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 "kms:GenerateDataKey*",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                   "Arn",
                 ],
               },
             },
-            {
+            Object {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallCodePipelineSourceCodePipelineActionRole67C89750",
                   "Arn",
                 ],
               },
             },
-            {
+            Object {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRole2A3E8726",
                   "Arn",
                 ],
               },
             },
-            {
+            Object {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRole6EA7639D",
                   "Arn",
                 ],
@@ -2135,28 +2135,28 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "NetworkFirewallCodePipelineRoleDefaultPolicyF0142ABD",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "NetworkFirewallCodePipelineRoleDDD28B15",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "NetworkFirewallCodePipelineSourceCodePipelineActionRole67C89750": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
+    "NetworkFirewallCodePipelineSourceCodePipelineActionRole67C89750": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Join": [
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "arn:",
-                      {
+                      Object {
                         "Ref": "AWS::Partition",
                       },
                       ":iam::1234:root",
@@ -2171,12 +2171,12 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::IAM::Role",
     },
-    "NetworkFirewallCodePipelineSourceCodePipelineActionRoleDefaultPolicyB01603D9": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+    "NetworkFirewallCodePipelineSourceCodePipelineActionRoleDefaultPolicyB01603D9": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "s3:GetObject*",
                 "s3:GetBucket*",
                 "s3:List*",
@@ -2189,19 +2189,19 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 "s3:Abort*",
               ],
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::GetAtt": [
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
                     "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                     "Arn",
                   ],
                 },
-                {
-                  "Fn::Join": [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
-                      {
-                        "Fn::GetAtt": [
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
                           "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                           "Arn",
                         ],
@@ -2212,8 +2212,8 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 },
               ],
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "kms:Decrypt",
                 "kms:DescribeKey",
                 "kms:Encrypt",
@@ -2221,15 +2221,15 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 "kms:GenerateDataKey*",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                   "Arn",
                 ],
               },
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "codecommit:GetBranch",
                 "codecommit:GetCommit",
                 "codecommit:UploadArchive",
@@ -2237,8 +2237,8 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 "codecommit:CancelUploadArchive",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "NetworkFirewallCodeRepositoryF7BA0495",
                   "Arn",
                 ],
@@ -2248,28 +2248,28 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "NetworkFirewallCodePipelineSourceCodePipelineActionRoleDefaultPolicyB01603D9",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "NetworkFirewallCodePipelineSourceCodePipelineActionRole67C89750",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRole2A3E8726": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
+    "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRole2A3E8726": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Join": [
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "arn:",
-                      {
+                      Object {
                         "Ref": "AWS::Partition",
                       },
                       ":iam::1234:root",
@@ -2284,19 +2284,19 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::IAM::Role",
     },
-    "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRoleDefaultPolicyA4A71A44": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+    "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRoleDefaultPolicyA4A71A44": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "codebuild:BatchGetBuilds",
                 "codebuild:StartBuild",
                 "codebuild:StopBuild",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "BuildProject097C5DB7",
                   "Arn",
                 ],
@@ -2306,27 +2306,27 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRoleDefaultPolicyA4A71A44",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRole2A3E8726",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "NetworkFirewallCodeRepositoryF7BA0495": {
+    "NetworkFirewallCodeRepositoryF7BA0495": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "Code": {
-          "S3": {
+      "Properties": Object {
+        "Code": Object {
+          "S3": Object {
             "Bucket": "solutions-eu-west-1",
-            "Key": {
-              "Fn::Join": [
+            "Key": Object {
+              "Fn::Join": Array [
                 "",
-                [
+                Array [
                   "network-firewall-automation/",
-                  {
-                    "Fn::FindInMap": [
+                  Object {
+                    "Fn::FindInMap": Array [
                       "SolutionMapping",
                       "Version",
                       "Latest",
@@ -2339,18 +2339,18 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           },
         },
         "RepositoryDescription": "This repository is created by the AWS Network Firewall solution for AWS Transit Gateway, to store and trigger changes to the network firewall rules and configurations.",
-        "RepositoryName": {
-          "Fn::Join": [
+        "RepositoryName": Object {
+          "Fn::Join": Array [
             "",
-            [
-              {
-                "Fn::FindInMap": [
+            Array [
+              Object {
+                "Fn::FindInMap": Array [
                   "SolutionMapping",
                   "CodeCommitRepo",
                   "Name",
                 ],
               },
-              {
+              Object {
                 "Ref": "AWS::StackName",
               },
             ],
@@ -2360,54 +2360,54 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Type": "AWS::CodeCommit::Repository",
       "UpdateReplacePolicy": "Retain",
     },
-    "NetworkFirewallCodeRepositoryMyTestStackNetworkFirewallCodePipelineD8BFDC90mainEventRule334BD2D0": {
-      "Properties": {
-        "EventPattern": {
-          "detail": {
-            "event": [
+    "NetworkFirewallCodeRepositoryMyTestStackNetworkFirewallCodePipelineD8BFDC90mainEventRule334BD2D0": Object {
+      "Properties": Object {
+        "EventPattern": Object {
+          "detail": Object {
+            "event": Array [
               "referenceCreated",
               "referenceUpdated",
             ],
-            "referenceName": [
+            "referenceName": Array [
               "main",
             ],
           },
-          "detail-type": [
+          "detail-type": Array [
             "CodeCommit Repository State Change",
           ],
-          "resources": [
-            {
-              "Fn::GetAtt": [
+          "resources": Array [
+            Object {
+              "Fn::GetAtt": Array [
                 "NetworkFirewallCodeRepositoryF7BA0495",
                 "Arn",
               ],
             },
           ],
-          "source": [
+          "source": Array [
             "aws.codecommit",
           ],
         },
         "State": "ENABLED",
-        "Targets": [
-          {
-            "Arn": {
-              "Fn::Join": [
+        "Targets": Array [
+          Object {
+            "Arn": Object {
+              "Fn::Join": Array [
                 "",
-                [
+                Array [
                   "arn:",
-                  {
+                  Object {
                     "Ref": "AWS::Partition",
                   },
                   ":codepipeline:eu-west-1:1234:",
-                  {
+                  Object {
                     "Ref": "NetworkFirewallCodePipelineA72E3ADD",
                   },
                 ],
               ],
             },
             "Id": "Target0",
-            "RoleArn": {
-              "Fn::GetAtt": [
+            "RoleArn": Object {
+              "Fn::GetAtt": Array [
                 "NetworkFirewallCodePipelineEventsRole94323A48",
                 "Arn",
               ],
@@ -2417,24 +2417,24 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::Events::Rule",
     },
-    "NetworkFirewallSubnet1": {
+    "NetworkFirewallSubnet1": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "AvailabilityZone": {
-          "Fn::Select": [
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
             "0",
-            {
+            Object {
               "Fn::GetAZs": "",
             },
           ],
         },
-        "CidrBlock": {
-          "Fn::Select": [
+        "CidrBlock": Object {
+          "Fn::Select": Array [
             0,
-            {
-              "Fn::Cidr": [
-                {
-                  "Fn::GetAtt": [
+            Object {
+              "Fn::Cidr": Array [
+                Object {
+                  "Fn::GetAtt": Array [
                     "VPC",
                     "CidrBlock",
                   ],
@@ -2445,14 +2445,14 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           ],
         },
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "Name",
-            "Value": {
-              "Fn::Join": [
+            "Value": Object {
+              "Fn::Join": Array [
                 "",
-                [
-                  {
+                Array [
+                  Object {
                     "Ref": "AWS::StackName",
                   },
                   "-FirewallSubnet1",
@@ -2461,44 +2461,44 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::Subnet",
       "UpdateReplacePolicy": "Retain",
     },
-    "NetworkFirewallSubnet1RouteTableAssociation": {
+    "NetworkFirewallSubnet1RouteTableAssociation": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "RouteTableId": {
+      "Properties": Object {
+        "RouteTableId": Object {
           "Ref": "FirewallSubnetRouteTable",
         },
-        "SubnetId": {
+        "SubnetId": Object {
           "Ref": "NetworkFirewallSubnet1",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
       "UpdateReplacePolicy": "Retain",
     },
-    "NetworkFirewallSubnet2": {
+    "NetworkFirewallSubnet2": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "AvailabilityZone": {
-          "Fn::Select": [
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
             "1",
-            {
+            Object {
               "Fn::GetAZs": "",
             },
           ],
         },
-        "CidrBlock": {
-          "Fn::Select": [
+        "CidrBlock": Object {
+          "Fn::Select": Array [
             1,
-            {
-              "Fn::Cidr": [
-                {
-                  "Fn::GetAtt": [
+            Object {
+              "Fn::Cidr": Array [
+                Object {
+                  "Fn::GetAtt": Array [
                     "VPC",
                     "CidrBlock",
                   ],
@@ -2509,14 +2509,14 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           ],
         },
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "Name",
-            "Value": {
-              "Fn::Join": [
+            "Value": Object {
+              "Fn::Join": Array [
                 "",
-                [
-                  {
+                Array [
+                  Object {
                     "Ref": "AWS::StackName",
                   },
                   "-FirewallSubnet2",
@@ -2525,34 +2525,34 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::Subnet",
       "UpdateReplacePolicy": "Retain",
     },
-    "NetworkFirewallSubnet2RouteTableAssociation": {
+    "NetworkFirewallSubnet2RouteTableAssociation": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "RouteTableId": {
+      "Properties": Object {
+        "RouteTableId": Object {
           "Ref": "FirewallSubnetRouteTable",
         },
-        "SubnetId": {
+        "SubnetId": Object {
           "Ref": "NetworkFirewallSubnet2",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
       "UpdateReplacePolicy": "Retain",
     },
-    "RoleFlowLogsCA794118": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
+    "RoleFlowLogsCA794118": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": {
+              "Principal": Object {
                 "Service": "vpc-flow-logs.amazonaws.com",
               },
             },
@@ -2562,12 +2562,12 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Type": "AWS::IAM::Role",
     },
-    "RoleFlowLogsDefaultPolicyD1F03EF4": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+    "RoleFlowLogsDefaultPolicyD1F03EF4": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "logs:CreateLogStream",
                 "logs:DescribeLogStreams",
                 "logs:PutLogEvents",
@@ -2575,8 +2575,8 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 "logs:DescribeLogGroups",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "LogGroupFlowLogs",
                   "Arn",
                 ],
@@ -2586,54 +2586,54 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "RoleFlowLogsDefaultPolicyD1F03EF4",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "RoleFlowLogsCA794118",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "TGWRoute": {
+    "TGWRoute": Object {
       "Condition": "CreateTransitGatewayAttachment",
-      "DependsOn": [
+      "DependsOn": Array [
         "VPCTGWATTACHMENT",
       ],
-      "Properties": {
-        "DestinationCidrBlock": {
-          "Fn::FindInMap": [
+      "Properties": Object {
+        "DestinationCidrBlock": Object {
+          "Fn::FindInMap": Array [
             "SolutionMapping",
             "Route",
             "QuadZero",
           ],
         },
-        "RouteTableId": {
+        "RouteTableId": Object {
           "Ref": "FirewallSubnetRouteTable",
         },
-        "TransitGatewayId": {
+        "TransitGatewayId": Object {
           "Ref": "ExistingTransitGateway",
         },
       },
       "Type": "AWS::EC2::Route",
     },
-    "VPC": {
+    "VPC": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "CidrBlock": {
+      "Properties": Object {
+        "CidrBlock": Object {
           "Ref": "cidrBlock",
         },
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "created-by",
             "Value": "network-firewall-automation",
           },
-          {
+          Object {
             "Key": "Name",
-            "Value": {
-              "Fn::Join": [
+            "Value": Object {
+              "Fn::Join": Array [
                 "",
-                [
-                  {
+                Array [
+                  Object {
                     "Ref": "AWS::StackName",
                   },
                   "-Inspection-VPC",
@@ -2646,26 +2646,26 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Type": "AWS::EC2::VPC",
       "UpdateReplacePolicy": "Retain",
     },
-    "VPCTGWATTACHMENT": {
+    "VPCTGWATTACHMENT": Object {
       "Condition": "CreateTransitGatewayAttachment",
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "SubnetIds": [
-          {
+      "Properties": Object {
+        "SubnetIds": Array [
+          Object {
             "Ref": "VPCTGWSubnet1",
           },
-          {
+          Object {
             "Ref": "VPCTGWSubnet2",
           },
         ],
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "Name",
-            "Value": {
-              "Fn::Join": [
+            "Value": Object {
+              "Fn::Join": Array [
                 "",
-                [
-                  {
+                Array [
+                  Object {
                     "Ref": "AWS::StackName",
                   },
                   "-Inspection-VPC-Attachment",
@@ -2674,26 +2674,26 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           },
         ],
-        "TransitGatewayId": {
+        "TransitGatewayId": Object {
           "Ref": "ExistingTransitGateway",
         },
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::TransitGatewayAttachment",
     },
-    "VPCTGWRouteTable1": {
+    "VPCTGWRouteTable1": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "Tags": [
-          {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
             "Key": "Name",
-            "Value": {
-              "Fn::Join": [
+            "Value": Object {
+              "Fn::Join": Array [
                 "",
-                [
-                  {
+                Array [
+                  Object {
                     "Ref": "AWS::StackName",
                   },
                   "-TGWSubnetRouteTable1",
@@ -2702,24 +2702,24 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::RouteTable",
       "UpdateReplacePolicy": "Retain",
     },
-    "VPCTGWRouteTable2": {
+    "VPCTGWRouteTable2": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "Tags": [
-          {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
             "Key": "Name",
-            "Value": {
-              "Fn::Join": [
+            "Value": Object {
+              "Fn::Join": Array [
                 "",
-                [
-                  {
+                Array [
+                  Object {
                     "Ref": "AWS::StackName",
                   },
                   "-TGWSubnetRouteTable2",
@@ -2728,44 +2728,44 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::RouteTable",
       "UpdateReplacePolicy": "Retain",
     },
-    "VPCTGWRouteTableAssociation": {
+    "VPCTGWRouteTableAssociation": Object {
       "Condition": "CreateTransitGatewayRTAssociation",
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "TransitGatewayAttachmentId": {
+      "Properties": Object {
+        "TransitGatewayAttachmentId": Object {
           "Ref": "VPCTGWATTACHMENT",
         },
-        "TransitGatewayRouteTableId": {
+        "TransitGatewayRouteTableId": Object {
           "Ref": "TransitGatewayRouteTableIdForAssociation",
         },
       },
       "Type": "AWS::EC2::TransitGatewayRouteTableAssociation",
     },
-    "VPCTGWSubnet1": {
+    "VPCTGWSubnet1": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "AvailabilityZone": {
-          "Fn::Select": [
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
             "0",
-            {
+            Object {
               "Fn::GetAZs": "",
             },
           ],
         },
-        "CidrBlock": {
-          "Fn::Select": [
+        "CidrBlock": Object {
+          "Fn::Select": Array [
             2,
-            {
-              "Fn::Cidr": [
-                {
-                  "Fn::GetAtt": [
+            Object {
+              "Fn::Cidr": Array [
+                Object {
+                  "Fn::GetAtt": Array [
                     "VPC",
                     "CidrBlock",
                   ],
@@ -2776,14 +2776,14 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           ],
         },
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "Name",
-            "Value": {
-              "Fn::Join": [
+            "Value": Object {
+              "Fn::Join": Array [
                 "",
-                [
-                  {
+                Array [
+                  Object {
                     "Ref": "AWS::StackName",
                   },
                   "-VPCTGWSubnet1",
@@ -2792,44 +2792,44 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::Subnet",
       "UpdateReplacePolicy": "Retain",
     },
-    "VPCTGWSubnet1RouteTableAssociation": {
+    "VPCTGWSubnet1RouteTableAssociation": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "RouteTableId": {
+      "Properties": Object {
+        "RouteTableId": Object {
           "Ref": "VPCTGWRouteTable1",
         },
-        "SubnetId": {
+        "SubnetId": Object {
           "Ref": "VPCTGWSubnet1",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
       "UpdateReplacePolicy": "Retain",
     },
-    "VPCTGWSubnet2": {
+    "VPCTGWSubnet2": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "AvailabilityZone": {
-          "Fn::Select": [
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
             "1",
-            {
+            Object {
               "Fn::GetAZs": "",
             },
           ],
         },
-        "CidrBlock": {
-          "Fn::Select": [
+        "CidrBlock": Object {
+          "Fn::Select": Array [
             3,
-            {
-              "Fn::Cidr": [
-                {
-                  "Fn::GetAtt": [
+            Object {
+              "Fn::Cidr": Array [
+                Object {
+                  "Fn::GetAtt": Array [
                     "VPC",
                     "CidrBlock",
                   ],
@@ -2840,14 +2840,14 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           ],
         },
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "Name",
-            "Value": {
-              "Fn::Join": [
+            "Value": Object {
+              "Fn::Join": Array [
                 "",
-                [
-                  {
+                Array [
+                  Object {
                     "Ref": "AWS::StackName",
                   },
                   "-VPCTGWSubnet2",
@@ -2856,71 +2856,71 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             },
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::Subnet",
       "UpdateReplacePolicy": "Retain",
     },
-    "VPCTGWSubnet2RouteTableAssociation": {
+    "VPCTGWSubnet2RouteTableAssociation": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
-        "RouteTableId": {
+      "Properties": Object {
+        "RouteTableId": Object {
           "Ref": "VPCTGWRouteTable2",
         },
-        "SubnetId": {
+        "SubnetId": Object {
           "Ref": "VPCTGWSubnet2",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
       "UpdateReplacePolicy": "Retain",
     },
-    "buildStageIAMPolicyB31D4B98": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+    "buildStageIAMPolicyB31D4B98": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "network-firewall:CreateFirewallPolicy",
                 "network-firewall:CreateRuleGroup",
               ],
               "Effect": "Allow",
-              "Resource": [
-                {
+              "Resource": Array [
+                Object {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:stateful-rulegroup/*",
                 },
-                {
+                Object {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:firewall-policy/*",
                 },
-                {
+                Object {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:stateless-rulegroup/*",
                 },
               ],
             },
-            {
+            Object {
               "Action": "s3:GetObject",
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::Sub": [
+              "Resource": Array [
+                Object {
+                  "Fn::Sub": Array [
                     "arn:\${AWS::Partition}:s3:::\${CodeBucketName}/\${KeyName}/*",
-                    {
+                    Object {
                       "CodeBucketName": "solutions-eu-west-1",
                       "KeyName": "network-firewall-automation",
                     },
                   ],
                 },
-                {
-                  "Fn::Join": [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "arn:",
-                      {
+                      Object {
                         "Ref": "AWS::Partition",
                       },
                       ":s3:::",
-                      {
+                      Object {
                         "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                       },
                       "/*",
@@ -2929,19 +2929,19 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 },
               ],
             },
-            {
+            Object {
               "Action": "s3:PutObject",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
+              "Resource": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "arn:",
-                    {
+                    Object {
                       "Ref": "AWS::Partition",
                     },
                     ":s3:::",
-                    {
+                    Object {
                       "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                     },
                     "/*",
@@ -2949,18 +2949,18 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 ],
               },
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "ssm:PutParameter",
                 "ssm:GetParameter",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Sub": [
+              "Resource": Object {
+                "Fn::Sub": Array [
                   "arn:\${AWS::Partition}:ssm:\${AWS::Region}:\${AWS::AccountId}:parameter/\${ParameterKey}-*",
-                  {
-                    "ParameterKey": {
-                      "Fn::FindInMap": [
+                  Object {
+                    "ParameterKey": Object {
+                      "Fn::FindInMap": Array [
                         "Send",
                         "ParameterKey",
                         "UniqueId",
@@ -2974,41 +2974,41 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "buildStageIAMPolicyB31D4B98",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "BuildProjectRoleAA92C755",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "deployStageFirewallLoggingCWPolicyD4098456": {
+    "deployStageFirewallLoggingCWPolicyD4098456": Object {
       "Condition": "LoggingInCloudWatch",
-      "Metadata": {
-        "cfn_nag": {
-          "rules_to_suppress": [
-            {
+      "Metadata": Object {
+        "cfn_nag": Object {
+          "rules_to_suppress": Array [
+            Object {
               "id": "W12",
               "reason": "Resource * is required for describe APIs",
             },
           ],
         },
       },
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "logs:PutResourcePolicy",
                 "logs:DescribeResourcePolicies",
               ],
               "Effect": "Allow",
               "Resource": "*",
             },
-            {
+            Object {
               "Action": "logs:DescribeLogGroups",
               "Effect": "Allow",
-              "Resource": {
+              "Resource": Object {
                 "Fn::Sub": "arn:\${AWS::Partition}:logs:*:\${AWS::AccountId}:log-group:*",
               },
             },
@@ -3016,31 +3016,31 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "deployStageFirewallLoggingCWPolicyD4098456",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "DeployProjectRole588C8C1D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "deployStageFirewallLoggingPolicy15AD5CD5": {
+    "deployStageFirewallLoggingPolicy15AD5CD5": Object {
       "Condition": "NotLoggingConfigureManually",
-      "Metadata": {
-        "cfn_nag": {
-          "rules_to_suppress": [
-            {
+      "Metadata": Object {
+        "cfn_nag": Object {
+          "rules_to_suppress": Array [
+            Object {
               "id": "W12",
               "reason": "Resource * is required for these actions.",
             },
           ],
         },
       },
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "logs:CreateLogDelivery",
                 "logs:GetLogDelivery",
                 "logs:UpdateLogDelivery",
@@ -3054,27 +3054,27 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "deployStageFirewallLoggingPolicy15AD5CD5",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "DeployProjectRole588C8C1D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "deployStageFirewallLoggingS3Policy8F79BDD2": {
+    "deployStageFirewallLoggingS3Policy8F79BDD2": Object {
       "Condition": "LoggingInS3",
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "s3:PutBucketPolicy",
                 "s3:GetBucketPolicy",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "Logs6819BB44",
                   "Arn",
                 ],
@@ -3084,30 +3084,30 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "deployStageFirewallLoggingS3Policy8F79BDD2",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "DeployProjectRole588C8C1D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "deployStageFirewallPolicy72BE60BE": {
-      "Metadata": {
-        "cfn_nag": {
-          "rules_to_suppress": [
-            {
+    "deployStageFirewallPolicy72BE60BE": Object {
+      "Metadata": Object {
+        "cfn_nag": Object {
+          "rules_to_suppress": Array [
+            Object {
               "id": "W12",
               "reason": "Resource * is required for describe APIs",
             },
           ],
         },
       },
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "network-firewall:CreateFirewall",
                 "network-firewall:UpdateFirewallDeleteProtection",
                 "network-firewall:DeleteRuleGroup",
@@ -3130,44 +3130,44 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 "network-firewall:TagResource",
               ],
               "Effect": "Allow",
-              "Resource": [
-                {
+              "Resource": Array [
+                Object {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:stateful-rulegroup/*",
                 },
-                {
+                Object {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:firewall-policy/*",
                 },
-                {
+                Object {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:firewall/*",
                 },
-                {
+                Object {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:stateless-rulegroup/*",
                 },
               ],
             },
-            {
+            Object {
               "Action": "s3:GetObject",
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::Sub": [
+              "Resource": Array [
+                Object {
+                  "Fn::Sub": Array [
                     "arn:\${AWS::Partition}:s3:::\${CodeBucketName}/\${KeyName}/*",
-                    {
+                    Object {
                       "CodeBucketName": "solutions-eu-west-1",
                       "KeyName": "network-firewall-automation",
                     },
                   ],
                 },
-                {
-                  "Fn::Join": [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "arn:",
-                      {
+                      Object {
                         "Ref": "AWS::Partition",
                       },
                       ":s3:::",
-                      {
+                      Object {
                         "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                       },
                       "/*",
@@ -3176,8 +3176,8 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 },
               ],
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "ec2:DescribeVpcs",
                 "ec2:DescribeSubnets",
                 "ec2:DescribeRouteTables",
@@ -3185,54 +3185,54 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
               "Effect": "Allow",
               "Resource": "*",
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "ec2:CreateRoute",
                 "ec2:DeleteRoute",
               ],
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::Join": [
+              "Resource": Array [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "arn:",
-                      {
+                      Object {
                         "Ref": "AWS::Partition",
                       },
                       ":ec2:",
-                      {
+                      Object {
                         "Ref": "AWS::Region",
                       },
                       ":",
-                      {
+                      Object {
                         "Ref": "AWS::AccountId",
                       },
                       ":route-table/",
-                      {
+                      Object {
                         "Ref": "VPCTGWRouteTable1",
                       },
                     ],
                   ],
                 },
-                {
-                  "Fn::Join": [
+                Object {
+                  "Fn::Join": Array [
                     "",
-                    [
+                    Array [
                       "arn:",
-                      {
+                      Object {
                         "Ref": "AWS::Partition",
                       },
                       ":ec2:",
-                      {
+                      Object {
                         "Ref": "AWS::Region",
                       },
                       ":",
-                      {
+                      Object {
                         "Ref": "AWS::AccountId",
                       },
                       ":route-table/",
-                      {
+                      Object {
                         "Ref": "VPCTGWRouteTable2",
                       },
                     ],
@@ -3240,10 +3240,10 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
                 },
               ],
             },
-            {
+            Object {
               "Action": "iam:CreateServiceLinkedRole",
               "Effect": "Allow",
-              "Resource": {
+              "Resource": Object {
                 "Fn::Sub": "arn:aws:iam::\${AWS::AccountId}:role/aws-service-role/network-firewall.amazonaws.com/AWSServiceRoleForNetworkFirewall",
               },
             },
@@ -3251,40 +3251,40 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "deployStageFirewallPolicy72BE60BE",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "DeployProjectRole588C8C1D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "deployStageModifyTransitGatewayAttachmentPolicy993566C2": {
+    "deployStageModifyTransitGatewayAttachmentPolicy993566C2": Object {
       "Condition": "CreateTransitGatewayAttachment",
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "ec2:ModifyTransitGatewayVpcAttachment",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
+              "Resource": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "arn:",
-                    {
+                    Object {
                       "Ref": "AWS::Partition",
                     },
                     ":ec2:",
-                    {
+                    Object {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    {
+                    Object {
                       "Ref": "AWS::AccountId",
                     },
                     ":transit-gateway-attachment/",
-                    {
+                    Object {
                       "Ref": "VPCTGWATTACHMENT",
                     },
                   ],
@@ -3295,8 +3295,8 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
           "Version": "2012-10-17",
         },
         "PolicyName": "deployStageModifyTransitGatewayAttachmentPolicy993566C2",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "DeployProjectRole588C8C1D",
           },
         ],
@@ -3304,22 +3304,22 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       "Type": "AWS::IAM::Policy",
     },
   },
-  "Rules": {
-    "CheckBootstrapVersion": {
-      "Assertions": [
-        {
-          "Assert": {
-            "Fn::Not": [
-              {
-                "Fn::Contains": [
-                  [
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  {
+                  Object {
                     "Ref": "BootstrapVersion",
                   },
                 ],
