@@ -1,19 +1,8 @@
 #!/bin/bash
-#
-#  Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-#  Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance
-#  with the License. A copy of the License is located at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-#  or in the 'license' file accompanying this file. This file is distributed on an 'AS IS' BASIS, WITHOUT WARRANTIES
-#  OR CONDITIONS OF ANY KIND, express or implied. See the License for the specific language governing permissions
-#  and limitations under the License.
-#
-
-# Important: CDK global version number
-cdk_version=1.77.0
+ #
+ # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ # SPDX-License-Identifier: Apache-2.0
+ #
 
 # Check to see if the required parameters have been provided:
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
@@ -66,15 +55,14 @@ echo "--------------------------------------------------------------------------
 # Install the global aws-cdk package
 echo "cd $source_dir"
 cd $source_dir
-echo "npm install"
-npm install
-echo "npm install aws-cdk@$cdk_version"
-npm install aws-cdk@$cdk_version
+echo "npm ci"
+npm ci
 
 # Run 'cdk synth' to generate raw solution outputs
 cd "$source_dir"
-echo "node_modules/aws-cdk/bin/cdk synth --output=$staging_dist_dir"
-npm run build && node_modules/aws-cdk/bin/cdk synth --output=$staging_dist_dir
+echo "npm run cdk -- synth --output=$staging_dist_dir"
+npm run build
+npm run cdk -- synth --output=$staging_dist_dir
 
 # Remove unnecessary output files
 echo "cd $staging_dist_dir"
@@ -110,7 +98,7 @@ echo "find $staging_dist_dir -iname "package-lock.json" -type f -exec rm -f "{}"
 find $staging_dist_dir -iname "package-lock.json" -type f -exec rm -f "{}" \; 2> /dev/null
 
 echo "------------------------------------------------------------------------------" 
-echo "Package Network Firewall Automation node project for Code Build/Deploy stage " 
+echo "Package Firewall Automation for Network Traffic on AWS node project for Code Build/Deploy stage " 
 echo "------------------------------------------------------------------------------" 
 cd $source_dir/networkFirewallAutomation/
 npm install

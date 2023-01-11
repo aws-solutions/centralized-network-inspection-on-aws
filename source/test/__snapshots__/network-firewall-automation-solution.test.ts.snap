@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NetworkFirewallAutomationStack Snapshot test 1`] = `
-Object {
+exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomationStack Snapshot test 1`] = `
+{
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Conditions": Object {
-    "CreateDefaultRouteFirewallRT": Object {
-      "Fn::And": Array [
-        Object {
-          "Fn::Not": Array [
-            Object {
-              "Fn::Equals": Array [
-                Object {
+  "Conditions": {
+    "CreateDefaultRouteFirewallRT": {
+      "Fn::And": [
+        {
+          "Fn::Not": [
+            {
+              "Fn::Equals": [
+                {
                   "Ref": "TransitGatewayRTIdForDefaultRoute",
                 },
                 "",
@@ -18,16 +18,16 @@ Object {
             },
           ],
         },
-        Object {
+        {
           "Condition": "CreateTransitGatewayAttachment",
         },
       ],
     },
-    "CreateTransitGatewayAttachment": Object {
-      "Fn::Not": Array [
-        Object {
-          "Fn::Equals": Array [
-            Object {
+    "CreateTransitGatewayAttachment": {
+      "Fn::Not": [
+        {
+          "Fn::Equals": [
+            {
               "Ref": "ExistingTransitGateway",
             },
             "",
@@ -35,13 +35,13 @@ Object {
         },
       ],
     },
-    "CreateTransitGatewayRTAssociation": Object {
-      "Fn::And": Array [
-        Object {
-          "Fn::Not": Array [
-            Object {
-              "Fn::Equals": Array [
-                Object {
+    "CreateTransitGatewayRTAssociation": {
+      "Fn::And": [
+        {
+          "Fn::Not": [
+            {
+              "Fn::Equals": [
+                {
                   "Ref": "TransitGatewayRouteTableIdForAssociation",
                 },
                 "",
@@ -49,32 +49,32 @@ Object {
             },
           ],
         },
-        Object {
+        {
           "Condition": "CreateTransitGatewayAttachment",
         },
       ],
     },
-    "LoggingInCloudWatch": Object {
-      "Fn::Equals": Array [
-        Object {
+    "LoggingInCloudWatch": {
+      "Fn::Equals": [
+        {
           "Ref": "logDestinationType",
         },
         "CloudWatchLogs",
       ],
     },
-    "LoggingInS3": Object {
-      "Fn::Equals": Array [
-        Object {
+    "LoggingInS3": {
+      "Fn::Equals": [
+        {
           "Ref": "logDestinationType",
         },
         "S3",
       ],
     },
-    "NotLoggingConfigureManually": Object {
-      "Fn::Not": Array [
-        Object {
-          "Fn::Equals": Array [
-            Object {
+    "NotLoggingConfigureManually": {
+      "Fn::Not": [
+        {
+          "Fn::Equals": [
+            {
               "Ref": "logDestinationType",
             },
             "ConfigureManually",
@@ -83,190 +83,196 @@ Object {
       ],
     },
   },
-  "Mappings": Object {
-    "Send": Object {
-      "AnonymousUsage": Object {
+  "Mappings": {
+    "Send": {
+      "AnonymousUsage": {
         "Data": "Yes",
       },
-      "ParameterKey": Object {
-        "UniqueId": "/Solutions/network-firewall-automation/UUID",
+      "ParameterKey": {
+        "UniqueId": "Solutions/network-firewall-automation/UUID",
       },
     },
-    "SolutionMapping": Object {
-      "CodeCommitRepo": Object {
+    "SolutionMapping": {
+      "CodeCommitRepo": {
         "Name": "network-firewall-config-repo-",
       },
-      "Log": Object {
+      "Log": {
         "Level": "info",
       },
-      "Metrics": Object {
+      "Metrics": {
         "URL": "https://metrics.awssolutionsbuilder.com/generic",
       },
-      "Route": Object {
+      "Route": {
         "QuadZero": "0.0.0.0/0",
       },
-      "Solution": Object {
+      "Solution": {
         "Identifier": "SO0108",
+        "Version": "v1.0.2",
       },
-      "TransitGatewayAttachment": Object {
+      "TransitGatewayAttachment": {
         "ApplianceMode": "enable",
       },
-      "Version": Object {
+      "Version": {
         "Latest": "latest",
       },
     },
   },
-  "Metadata": Object {
-    "AWS::CloudFormation::Interface": Object {
-      "ParameterGroups": Array [
-        Object {
-          "Label": Object {
+  "Metadata": {
+    "AWS::CloudFormation::Interface": {
+      "ParameterGroups": [
+        {
+          "Label": {
             "default": "VPC Configuration",
           },
-          "Parameters": Array [
+          "Parameters": [
             "cidrBlock",
           ],
         },
-        Object {
-          "Label": Object {
+        {
+          "Label": {
             "default": "Transit Gateway Configuration",
           },
-          "Parameters": Array [
+          "Parameters": [
             "ExistingTransitGateway",
             "TransitGatewayRouteTableIdForAssociation",
             "TransitGatewayRTIdForDefaultRoute",
           ],
         },
-        Object {
-          "Label": Object {
+        {
+          "Label": {
             "default": "Firewall Logging Configuration",
           },
-          "Parameters": Array [
+          "Parameters": [
             "logDestinationType",
             "logType",
             "LogRetentionPeriod",
           ],
         },
       ],
-      "ParameterLabels": Object {
-        "ExistingTransitGateway": Object {
+      "ParameterLabels": {
+        "ExistingTransitGateway": {
           "default": "Provide the existing AWS Transit Gateway ID you wish to attach to the Inspection VPC",
         },
-        "LogRetentionPeriod": Object {
+        "LogRetentionPeriod": {
           "default": "Select the log retention period for Network Firewall Logs.",
         },
-        "TransitGatewayRTIdForDefaultRoute": Object {
+        "TransitGatewayRTIdForDefaultRoute": {
           "default": "Provide the AWS Transit Gateway Route Table to receive 0.0.0.0/0 route to the Inspection VPC TGW Attachment.",
         },
-        "TransitGatewayRouteTableIdForAssociation": Object {
+        "TransitGatewayRouteTableIdForAssociation": {
           "default": "Provide AWS Transit Gateway Route Table to be associated with the Inspection VPC TGW Attachment.",
         },
-        "cidrBlock": Object {
+        "cidrBlock": {
           "default": "Provide the CIDR block for the Inspection VPC",
         },
-        "logDestinationType": Object {
+        "logDestinationType": {
           "default": "Select the type of log destination for the Network Firewall",
         },
-        "logType": Object {
+        "logType": {
           "default": "Select the type of log to send to the defined log destination.",
         },
       },
     },
   },
-  "Outputs": Object {
-    "ArtifactBucketforCodePipeline": Object {
+  "Outputs": {
+    "ArtifactBucketforCodePipeline": {
       "Description": "Artifact bucket name configured for the CodePipeline.",
-      "Value": Object {
+      "Value": {
         "Ref": "NetworkFirewallCodePipelineArtifactsBucketF2569455",
       },
     },
-    "CloudWatchLogGroupforFirewallLogs": Object {
+    "CloudWatchLogGroupforFirewallLogs": {
       "Description": "CloudWatch Log Group used as the log destination for Firewall Logs.",
-      "Value": Object {
-        "Fn::If": Array [
+      "Value": {
+        "Fn::If": [
           "LoggingInCloudWatch",
-          Object {
+          {
             "Ref": "CloudWatchLogGroup",
           },
           "NotConfigured",
         ],
       },
     },
-    "CodeBuildsourcecodebucket": Object {
+    "CodeBuildsourcecodebucket": {
       "Description": "Code Build source code bucket",
-      "Value": Object {
+      "Value": {
         "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
       },
     },
-    "FirewallSubnet1ID": Object {
+    "FirewallSubnet1ID": {
       "Description": "Subnet 1 associated with Network Firewall.",
-      "Value": Object {
+      "Value": {
         "Ref": "NetworkFirewallSubnet1",
       },
     },
-    "FirewallSubnet2ID": Object {
+    "FirewallSubnet2ID": {
       "Description": "Subnet 2 associated with Network Firewall.",
-      "Value": Object {
+      "Value": {
         "Ref": "NetworkFirewallSubnet2",
       },
     },
-    "InspectionVPCID": Object {
+    "InspectionVPCID": {
       "Description": "Inspection VPC ID to create Network Firewall.",
-      "Value": Object {
+      "Value": {
         "Ref": "VPC",
       },
     },
-    "NetworkFirewallAvailabilityZone1": Object {
+    "NetworkFirewallAvailabilityZone1": {
       "Description": "Availability Zone configured for Network Firewall subnet 1",
-      "Value": Object {
-        "Fn::GetAtt": Array [
+      "Value": {
+        "Fn::GetAtt": [
           "NetworkFirewallSubnet1",
           "AvailabilityZone",
         ],
       },
     },
-    "NetworkFirewallAvailabilityZone2": Object {
+    "NetworkFirewallAvailabilityZone2": {
       "Description": "Availability Zone configured for Network Firewall subnet 2",
-      "Value": Object {
-        "Fn::GetAtt": Array [
+      "Value": {
+        "Fn::GetAtt": [
           "NetworkFirewallSubnet2",
           "AvailabilityZone",
         ],
       },
     },
-    "S3BucketforFirewallLogs": Object {
+    "S3BucketforFirewallLogs": {
       "Description": "S3 Bucket used as the log destination for Firewall Logs.",
-      "Value": Object {
-        "Fn::If": Array [
+      "Value": {
+        "Fn::If": [
           "LoggingInS3",
-          Object {
+          {
             "Ref": "Logs6819BB44",
           },
           "NotConfigured",
         ],
       },
     },
-    "TransitGatewaySubnet1ID": Object {
+    "TransitGatewaySubnet1ID": {
       "Description": "Subnet 1 associated with Transit Gateway.",
-      "Value": Object {
+      "Value": {
         "Ref": "VPCTGWSubnet1",
       },
     },
-    "TransitGatewaySubnet2ID": Object {
+    "TransitGatewaySubnet2ID": {
       "Description": "Subnet 1 associated with Transit Gateway.",
-      "Value": Object {
+      "Value": {
         "Ref": "VPCTGWSubnet2",
       },
     },
   },
-  "Parameters": Object {
-    "ExistingTransitGateway": Object {
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "ExistingTransitGateway": {
       "Default": "",
       "Description": "Existing AWS Transit Gateway id.",
       "Type": "String",
     },
-    "LogRetentionPeriod": Object {
-      "AllowedValues": Array [
+    "LogRetentionPeriod": {
+      "AllowedValues": [
         "1",
         "3",
         "5",
@@ -289,24 +295,24 @@ Object {
       "Description": "Log retention period in days.",
       "Type": "Number",
     },
-    "TransitGatewayRTIdForDefaultRoute": Object {
+    "TransitGatewayRTIdForDefaultRoute": {
       "Default": "",
       "Description": "Existing AWS Transit Gateway route table id. Example: Spoke VPC Route Table. Format: tgw-rtb-4e5f6g7h",
       "Type": "String",
     },
-    "TransitGatewayRouteTableIdForAssociation": Object {
+    "TransitGatewayRouteTableIdForAssociation": {
       "Default": "",
       "Description": "Existing AWS Transit Gateway route table id. Example: Firewall Route Table. Format: tgw-rtb-0a1b2c3d",
       "Type": "String",
     },
-    "cidrBlock": Object {
+    "cidrBlock": {
       "AllowedPattern": "^(?:[0-9]{1,3}.){3}[0-9]{1,3}[/]([0-9]?[0-6]?|[1][7-9])$",
       "Default": "192.168.1.0/26",
       "Description": "CIDR Block for VPC. Must be /26 or larger CIDR block.",
       "Type": "String",
     },
-    "logDestinationType": Object {
-      "AllowedValues": Array [
+    "logDestinationType": {
+      "AllowedValues": [
         "S3",
         "CloudWatchLogs",
         "ConfigureManually",
@@ -315,8 +321,8 @@ Object {
       "Description": "The type of storage destination to send these logs to. You can send logs to an Amazon S3 bucket or a CloudWatch log group.",
       "Type": "String",
     },
-    "logType": Object {
-      "AllowedValues": Array [
+    "logType": {
+      "AllowedValues": [
         "ALERT",
         "FLOW",
         "EnableBoth",
@@ -326,276 +332,314 @@ Object {
       "Type": "String",
     },
   },
-  "Resources": Object {
-    "BuildProject097C5DB7": Object {
-      "Properties": Object {
-        "Artifacts": Object {
+  "Resources": {
+    "BuildProject097C5DB7": {
+      "Properties": {
+        "Artifacts": {
           "Type": "CODEPIPELINE",
         },
-        "EncryptionKey": Object {
-          "Fn::GetAtt": Array [
+        "Cache": {
+          "Type": "NO_CACHE",
+        },
+        "EncryptionKey": {
+          "Fn::GetAtt": [
             "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
             "Arn",
           ],
         },
-        "Environment": Object {
+        "Environment": {
           "ComputeType": "BUILD_GENERAL1_SMALL",
-          "EnvironmentVariables": Array [
-            Object {
+          "EnvironmentVariables": [
+            {
               "Name": "LOG_LEVEL",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::FindInMap": Array [
+              "Value": {
+                "Fn::FindInMap": [
                   "SolutionMapping",
                   "Log",
                   "Level",
                 ],
               },
             },
-            Object {
+            {
               "Name": "VPC_ID",
               "Type": "PLAINTEXT",
-              "Value": Object {
+              "Value": {
                 "Ref": "VPC",
               },
             },
-            Object {
+            {
               "Name": "SUBNET_IDS",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::Join": Array [
+              "Value": {
+                "Fn::Join": [
                   "",
-                  Array [
-                    Object {
+                  [
+                    {
                       "Ref": "NetworkFirewallSubnet1",
                     },
                     ",",
-                    Object {
+                    {
                       "Ref": "NetworkFirewallSubnet2",
                     },
                   ],
                 ],
               },
             },
-            Object {
+            {
               "Name": "LOG_TYPE",
               "Type": "PLAINTEXT",
-              "Value": Object {
+              "Value": {
                 "Ref": "logType",
               },
             },
-            Object {
+            {
               "Name": "LOG_DESTINATION_TYPE",
               "Type": "PLAINTEXT",
-              "Value": Object {
+              "Value": {
                 "Ref": "logDestinationType",
               },
             },
-            Object {
+            {
               "Name": "S3_LOG_BUCKET_NAME",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::If": Array [
+              "Value": {
+                "Fn::If": [
                   "LoggingInS3",
-                  Object {
+                  {
                     "Ref": "Logs6819BB44",
                   },
                   "NotConfigured",
                 ],
               },
             },
-            Object {
+            {
               "Name": "CLOUDWATCH_LOG_GROUP_NAME",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::If": Array [
+              "Value": {
+                "Fn::If": [
                   "LoggingInCloudWatch",
-                  Object {
+                  {
                     "Ref": "CloudWatchLogGroup",
                   },
                   "NotConfigured",
                 ],
               },
             },
-            Object {
+            {
               "Name": "VPC_TGW_ATTACHMENT_AZ_1",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::GetAtt": Array [
+              "Value": {
+                "Fn::GetAtt": [
                   "NetworkFirewallSubnet1",
                   "AvailabilityZone",
                 ],
               },
             },
-            Object {
+            {
               "Name": "VPC_TGW_ATTACHMENT_AZ_2",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::GetAtt": Array [
+              "Value": {
+                "Fn::GetAtt": [
                   "NetworkFirewallSubnet2",
                   "AvailabilityZone",
                 ],
               },
             },
-            Object {
+            {
               "Name": "VPC_TGW_ATTACHMENT_ROUTE_TABLE_ID_1",
               "Type": "PLAINTEXT",
-              "Value": Object {
+              "Value": {
                 "Ref": "VPCTGWRouteTable1",
               },
             },
-            Object {
+            {
               "Name": "VPC_TGW_ATTACHMENT_ROUTE_TABLE_ID_2",
               "Type": "PLAINTEXT",
-              "Value": Object {
+              "Value": {
                 "Ref": "VPCTGWRouteTable2",
               },
             },
-            Object {
+            {
               "Name": "CODE_BUILD_SOURCE_CODE_S3_KEY",
               "Type": "PLAINTEXT",
-              "Value": "network-firewall-automation/v1.0.0",
+              "Value": "network-firewall-automation/v1.0.2",
             },
-            Object {
+            {
               "Name": "STACK_ID",
               "Type": "PLAINTEXT",
-              "Value": Object {
+              "Value": {
                 "Ref": "AWS::StackId",
               },
             },
-            Object {
+            {
               "Name": "SSM_PARAM_FOR_UUID",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::FindInMap": Array [
-                  "Send",
-                  "ParameterKey",
-                  "UniqueId",
+              "Value": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "/",
+                    {
+                      "Fn::FindInMap": [
+                        "Send",
+                        "ParameterKey",
+                        "UniqueId",
+                      ],
+                    },
+                  ],
                 ],
               },
             },
-            Object {
+            {
               "Name": "SEND_ANONYMOUS_METRICS",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::FindInMap": Array [
+              "Value": {
+                "Fn::FindInMap": [
                   "Send",
                   "AnonymousUsage",
                   "Data",
                 ],
               },
             },
-            Object {
+            {
               "Name": "SOLUTION_ID",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::FindInMap": Array [
+              "Value": {
+                "Fn::FindInMap": [
                   "SolutionMapping",
                   "Solution",
                   "Identifier",
                 ],
               },
             },
-            Object {
+            {
               "Name": "METRICS_URL",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::FindInMap": Array [
+              "Value": {
+                "Fn::FindInMap": [
                   "SolutionMapping",
                   "Metrics",
                   "URL",
                 ],
               },
             },
-            Object {
+            {
               "Name": "TRANSIT_GATEWAY_ATTACHMENT_ID",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::If": Array [
+              "Value": {
+                "Fn::If": [
                   "CreateTransitGatewayAttachment",
-                  Object {
+                  {
                     "Ref": "VPCTGWATTACHMENT",
                   },
                   "",
                 ],
               },
             },
-            Object {
+            {
               "Name": "TRANSIT_GATEWAY_ATTACHMENT_APPLIANCE_MODE",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::FindInMap": Array [
+              "Value": {
+                "Fn::FindInMap": [
                   "SolutionMapping",
                   "TransitGatewayAttachment",
                   "ApplianceMode",
                 ],
               },
             },
+            {
+              "Name": "CUSTOM_SDK_USER_AGENT",
+              "Type": "PLAINTEXT",
+              "Value": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "AwsSolution/",
+                    {
+                      "Fn::FindInMap": [
+                        "SolutionMapping",
+                        "Solution",
+                        "Identifier",
+                      ],
+                    },
+                    "/",
+                    {
+                      "Fn::FindInMap": [
+                        "SolutionMapping",
+                        "Solution",
+                        "Version",
+                      ],
+                    },
+                  ],
+                ],
+              },
+            },
           ],
-          "Image": "aws/codebuild/standard:4.0",
+          "Image": "aws/codebuild/standard:6.0",
           "ImagePullCredentialsType": "CODEBUILD",
           "PrivilegedMode": false,
           "Type": "LINUX_CONTAINER",
         },
-        "ServiceRole": Object {
-          "Fn::GetAtt": Array [
+        "ServiceRole": {
+          "Fn::GetAtt": [
             "BuildProjectRoleAA92C755",
             "Arn",
           ],
         },
-        "Source": Object {
-          "BuildSpec": Object {
-            "Fn::Join": Array [
+        "Source": {
+          "BuildSpec": {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "{
-  \\"version\\": \\"0.2\\",
-  \\"phases\\": {
-    \\"install\\": {
-      \\"runtime-versions\\": {
-        \\"nodejs\\": \\"12\\"
+  "version": "0.2",
+  "phases": {
+    "install": {
+      "runtime-versions": {
+        "nodejs": "16"
       },
-      \\"commands\\": [
-        \\"export current=$(pwd)\\",
-        \\"export sourceCodeKey=$CODE_BUILD_SOURCE_CODE_S3_KEY\\"
+      "commands": [
+        "export current=$(pwd)",
+        "export sourceCodeKey=$CODE_BUILD_SOURCE_CODE_S3_KEY"
       ]
     },
-    \\"pre_build\\": {
-      \\"commands\\": [
-        \\"cd $current\\",
-        \\"pwd; ls -ltr\\",
-        \\"echo 'Download Network Firewall Solution Package'\\",
-        \\"aws s3 cp s3://",
-                Object {
+    "pre_build": {
+      "commands": [
+        "cd $current",
+        "pwd; ls -ltr",
+        "echo 'Download Network Firewall Solution Package'",
+        "aws s3 cp s3://",
+                {
                   "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                 },
-                "/$sourceCodeKey/network-firewall-automation.zip $current || true\\",
-        \\"if [ -f $current/network-firewall-automation.zip ];then exit 0;else echo \\\\\\"Copy file to s3 bucket\\\\\\"; aws s3 cp s3://solutions-",
-                Object {
+                "/$sourceCodeKey/network-firewall-automation.zip $current || true",
+        "if [ -f $current/network-firewall-automation.zip ];then exit 0;else echo \\"Copy file to s3 bucket\\"; aws s3 cp s3://solutions-",
+                {
                   "Ref": "AWS::Region",
                 },
                 "/$sourceCodeKey/network-firewall-automation.zip s3://",
-                Object {
+                {
                   "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                 },
-                "/$sourceCodeKey/network-firewall-automation.zip; aws s3 cp s3://",
-                Object {
+                "/$sourceCodeKey/network-firewall-automation.zip --copy-props none; aws s3 cp s3://",
+                {
                   "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                 },
-                "/$sourceCodeKey/network-firewall-automation.zip $current; fi;\\",
-        \\"unzip -o $current/network-firewall-automation.zip -d $current\\",
-        \\"pwd; ls -ltr\\"
+                "/$sourceCodeKey/network-firewall-automation.zip $current; fi;",
+        "unzip -o $current/network-firewall-automation.zip -d $current",
+        "pwd; ls -ltr"
       ]
     },
-    \\"build\\": {
-      \\"commands\\": [
-        \\"echo \\\\\\"Validating the firewall config\\\\\\"\\",
-        \\"node build.js\\"
+    "build": {
+      "commands": [
+        "echo \\"Validating the firewall config\\"",
+        "node build.js"
       ]
     }
   },
-  \\"artifacts\\": {
-    \\"files\\": \\"**/*\\"
+  "artifacts": {
+    "files": "**/*"
   }
 }",
               ],
@@ -606,14 +650,14 @@ Object {
       },
       "Type": "AWS::CodeBuild::Project",
     },
-    "BuildProjectRoleAA92C755": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "BuildProjectRoleAA92C755": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "codebuild.amazonaws.com",
               },
             },
@@ -623,43 +667,43 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "BuildProjectRoleDefaultPolicy3E9F248C": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "BuildProjectRoleDefaultPolicy3E9F248C": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "logs:CreateLogGroup",
                 "logs:CreateLogStream",
                 "logs:PutLogEvents",
               ],
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::Join": Array [
+              "Resource": [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":logs:eu-west-1:1234:log-group:/aws/codebuild/",
-                      Object {
+                      {
                         "Ref": "BuildProject097C5DB7",
                       },
                     ],
                   ],
                 },
-                Object {
-                  "Fn::Join": Array [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":logs:eu-west-1:1234:log-group:/aws/codebuild/",
-                      Object {
+                      {
                         "Ref": "BuildProject097C5DB7",
                       },
                       ":*",
@@ -668,8 +712,8 @@ Object {
                 },
               ],
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "codebuild:CreateReportGroup",
                 "codebuild:CreateReport",
                 "codebuild:UpdateReport",
@@ -677,16 +721,16 @@ Object {
                 "codebuild:BatchPutCodeCoverages",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":codebuild:eu-west-1:1234:report-group/",
-                    Object {
+                    {
                       "Ref": "BuildProject097C5DB7",
                     },
                     "-*",
@@ -694,29 +738,33 @@ Object {
                 ],
               },
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "s3:GetObject*",
                 "s3:GetBucket*",
                 "s3:List*",
                 "s3:DeleteObject*",
-                "s3:PutObject*",
+                "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
                 "s3:Abort*",
               ],
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
                     "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                     "Arn",
                   ],
                 },
-                Object {
-                  "Fn::Join": Array [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
+                    [
+                      {
+                        "Fn::GetAtt": [
                           "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                           "Arn",
                         ],
@@ -727,8 +775,8 @@ Object {
                 },
               ],
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "kms:Decrypt",
                 "kms:DescribeKey",
                 "kms:Encrypt",
@@ -736,23 +784,23 @@ Object {
                 "kms:GenerateDataKey*",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                   "Arn",
                 ],
               },
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "kms:Decrypt",
                 "kms:Encrypt",
                 "kms:ReEncrypt*",
                 "kms:GenerateDataKey*",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                   "Arn",
                 ],
@@ -762,54 +810,56 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "BuildProjectRoleDefaultPolicy3E9F248C",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "BuildProjectRoleAA92C755",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "CloudWatchLogGroup": Object {
+    "CloudWatchLogGroup": {
       "Condition": "LoggingInCloudWatch",
-      "Properties": Object {
-        "KmsKeyId": Object {
-          "Fn::GetAtt": Array [
-            "KMSKeyForNetworkFirewallLogDestinations70A79322",
+      "Properties": {
+        "KmsKeyId": {
+          "Fn::GetAtt": [
+            "KMSKeyForNetworkFirewallBuckets73A57817",
             "Arn",
           ],
         },
-        "RetentionInDays": Object {
+        "RetentionInDays": {
           "Ref": "LogRetentionPeriod",
         },
       },
       "Type": "AWS::Logs::LogGroup",
     },
-    "CloudWatchLogsForNetworkFirewallBucketPolicy611AC31C": Object {
+    "CloudWatchLogsForNetworkFirewallBucketPolicy611AC31C": {
       "Condition": "LoggingInS3",
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "Bucket": Object {
+      "Properties": {
+        "Bucket": {
           "Ref": "Logs6819BB44",
         },
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "s3:GetObject",
-              "Condition": Object {
-                "Bool": Object {
+              "Condition": {
+                "Bool": {
                   "aws:SecureTransport": false,
                 },
               },
               "Effect": "Deny",
-              "Principal": "*",
-              "Resource": Array [
-                Object {
-                  "Fn::Join": Array [
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
+                    [
+                      {
+                        "Fn::GetAtt": [
                           "Logs6819BB44",
                           "Arn",
                         ],
@@ -818,8 +868,8 @@ Object {
                     ],
                   ],
                 },
-                Object {
-                  "Fn::GetAtt": Array [
+                {
+                  "Fn::GetAtt": [
                     "Logs6819BB44",
                     "Arn",
                   ],
@@ -833,36 +883,38 @@ Object {
       "Type": "AWS::S3::BucketPolicy",
       "UpdateReplacePolicy": "Retain",
     },
-    "CodeBuildStageSourceCodeBucketPolicyF19BA2A0": Object {
+    "CodeBuildStageSourceCodeBucketPolicyF19BA2A0": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "Bucket": Object {
+      "Properties": {
+        "Bucket": {
           "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
         },
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "s3:GetObject",
-              "Condition": Object {
-                "Bool": Object {
+              "Condition": {
+                "Bool": {
                   "aws:SecureTransport": false,
                 },
               },
               "Effect": "Deny",
-              "Principal": "*",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
                     "CodeBuildStagesSourceCodeBucketFA98E7C7",
                     "Arn",
                   ],
                 },
-                Object {
-                  "Fn::Join": Array [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
+                    [
+                      {
+                        "Fn::GetAtt": [
                           "CodeBuildStagesSourceCodeBucketFA98E7C7",
                           "Arn",
                         ],
@@ -880,29 +932,29 @@ Object {
       "Type": "AWS::S3::BucketPolicy",
       "UpdateReplacePolicy": "Retain",
     },
-    "CodeBuildStagesSourceCodeBucketFA98E7C7": Object {
+    "CodeBuildStagesSourceCodeBucketFA98E7C7": {
       "DeletionPolicy": "Retain",
-      "Metadata": Object {
-        "cfn_nag": Object {
-          "rules_to_suppress": Array [
-            Object {
+      "Metadata": {
+        "cfn_nag": {
+          "rules_to_suppress": [
+            {
               "id": "W35",
               "reason": "Source Code bucket bucket does not require logging configuration",
             },
-            Object {
+            {
               "id": "W51",
               "reason": "Source Code bucket is private and does not require a bucket policy",
             },
           ],
         },
       },
-      "Properties": Object {
-        "BucketEncryption": Object {
-          "ServerSideEncryptionConfiguration": Array [
-            Object {
-              "ServerSideEncryptionByDefault": Object {
-                "KMSMasterKeyID": Object {
-                  "Fn::GetAtt": Array [
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "KMSMasterKeyID": {
+                  "Fn::GetAtt": [
                     "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                     "Arn",
                   ],
@@ -912,7 +964,7 @@ Object {
             },
           ],
         },
-        "PublicAccessBlockConfiguration": Object {
+        "PublicAccessBlockConfiguration": {
           "BlockPublicAcls": true,
           "BlockPublicPolicy": true,
           "IgnorePublicAcls": true,
@@ -922,345 +974,323 @@ Object {
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
     },
-    "CodePipelineArtifactS3BucketPolicy6FFF9EE9": Object {
-      "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "Bucket": Object {
-          "Ref": "NetworkFirewallCodePipelineArtifactsBucketF2569455",
-        },
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "s3:DeleteBucket",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "cloudformation.amazonaws.com",
-              },
-              "Resource": Object {
-                "Fn::GetAtt": Array [
-                  "NetworkFirewallCodePipelineArtifactsBucketF2569455",
-                  "Arn",
-                ],
-              },
-            },
-            Object {
-              "Action": "s3:GetObject",
-              "Condition": Object {
-                "Bool": Object {
-                  "aws:SecureTransport": false,
-                },
-              },
-              "Effect": "Deny",
-              "Principal": "*",
-              "Resource": Array [
-                Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
-                          "NetworkFirewallCodePipelineArtifactsBucketF2569455",
-                          "Arn",
-                        ],
-                      },
-                      "/*",
-                    ],
-                  ],
-                },
-                Object {
-                  "Fn::GetAtt": Array [
-                    "NetworkFirewallCodePipelineArtifactsBucketF2569455",
-                    "Arn",
-                  ],
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-      },
-      "Type": "AWS::S3::BucketPolicy",
-      "UpdateReplacePolicy": "Retain",
-    },
-    "DefaultRouteSpokeVPCTGWRouteTable": Object {
+    "DefaultRouteSpokeVPCTGWRouteTable": {
       "Condition": "CreateDefaultRouteFirewallRT",
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "DestinationCidrBlock": Object {
-          "Fn::FindInMap": Array [
+      "Properties": {
+        "DestinationCidrBlock": {
+          "Fn::FindInMap": [
             "SolutionMapping",
             "Route",
             "QuadZero",
           ],
         },
-        "TransitGatewayAttachmentId": Object {
+        "TransitGatewayAttachmentId": {
           "Ref": "VPCTGWATTACHMENT",
         },
-        "TransitGatewayRouteTableId": Object {
+        "TransitGatewayRouteTableId": {
           "Ref": "TransitGatewayRTIdForDefaultRoute",
         },
       },
       "Type": "AWS::EC2::TransitGatewayRoute",
     },
-    "DeployProject1CF7CB79": Object {
-      "Properties": Object {
-        "Artifacts": Object {
+    "DeployProject1CF7CB79": {
+      "Properties": {
+        "Artifacts": {
           "Type": "CODEPIPELINE",
         },
-        "EncryptionKey": Object {
-          "Fn::GetAtt": Array [
+        "Cache": {
+          "Type": "NO_CACHE",
+        },
+        "EncryptionKey": {
+          "Fn::GetAtt": [
             "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
             "Arn",
           ],
         },
-        "Environment": Object {
+        "Environment": {
           "ComputeType": "BUILD_GENERAL1_SMALL",
-          "EnvironmentVariables": Array [
-            Object {
+          "EnvironmentVariables": [
+            {
               "Name": "LOG_LEVEL",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::FindInMap": Array [
+              "Value": {
+                "Fn::FindInMap": [
                   "SolutionMapping",
                   "Log",
                   "Level",
                 ],
               },
             },
-            Object {
+            {
               "Name": "VPC_ID",
               "Type": "PLAINTEXT",
-              "Value": Object {
+              "Value": {
                 "Ref": "VPC",
               },
             },
-            Object {
+            {
               "Name": "SUBNET_IDS",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::Join": Array [
+              "Value": {
+                "Fn::Join": [
                   "",
-                  Array [
-                    Object {
+                  [
+                    {
                       "Ref": "NetworkFirewallSubnet1",
                     },
                     ",",
-                    Object {
+                    {
                       "Ref": "NetworkFirewallSubnet2",
                     },
                   ],
                 ],
               },
             },
-            Object {
+            {
               "Name": "LOG_TYPE",
               "Type": "PLAINTEXT",
-              "Value": Object {
+              "Value": {
                 "Ref": "logType",
               },
             },
-            Object {
+            {
               "Name": "LOG_DESTINATION_TYPE",
               "Type": "PLAINTEXT",
-              "Value": Object {
+              "Value": {
                 "Ref": "logDestinationType",
               },
             },
-            Object {
+            {
               "Name": "S3_LOG_BUCKET_NAME",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::If": Array [
+              "Value": {
+                "Fn::If": [
                   "LoggingInS3",
-                  Object {
+                  {
                     "Ref": "Logs6819BB44",
                   },
                   "NotConfigured",
                 ],
               },
             },
-            Object {
+            {
               "Name": "CLOUDWATCH_LOG_GROUP_NAME",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::If": Array [
+              "Value": {
+                "Fn::If": [
                   "LoggingInCloudWatch",
-                  Object {
+                  {
                     "Ref": "CloudWatchLogGroup",
                   },
                   "NotConfigured",
                 ],
               },
             },
-            Object {
+            {
               "Name": "VPC_TGW_ATTACHMENT_AZ_1",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::GetAtt": Array [
+              "Value": {
+                "Fn::GetAtt": [
                   "NetworkFirewallSubnet1",
                   "AvailabilityZone",
                 ],
               },
             },
-            Object {
+            {
               "Name": "VPC_TGW_ATTACHMENT_AZ_2",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::GetAtt": Array [
+              "Value": {
+                "Fn::GetAtt": [
                   "NetworkFirewallSubnet2",
                   "AvailabilityZone",
                 ],
               },
             },
-            Object {
+            {
               "Name": "VPC_TGW_ATTACHMENT_ROUTE_TABLE_ID_1",
               "Type": "PLAINTEXT",
-              "Value": Object {
+              "Value": {
                 "Ref": "VPCTGWRouteTable1",
               },
             },
-            Object {
+            {
               "Name": "VPC_TGW_ATTACHMENT_ROUTE_TABLE_ID_2",
               "Type": "PLAINTEXT",
-              "Value": Object {
+              "Value": {
                 "Ref": "VPCTGWRouteTable2",
               },
             },
-            Object {
+            {
               "Name": "CODE_BUILD_SOURCE_CODE_S3_KEY",
               "Type": "PLAINTEXT",
-              "Value": "network-firewall-automation/v1.0.0",
+              "Value": "network-firewall-automation/v1.0.2",
             },
-            Object {
+            {
               "Name": "STACK_ID",
               "Type": "PLAINTEXT",
-              "Value": Object {
+              "Value": {
                 "Ref": "AWS::StackId",
               },
             },
-            Object {
+            {
               "Name": "SSM_PARAM_FOR_UUID",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::FindInMap": Array [
-                  "Send",
-                  "ParameterKey",
-                  "UniqueId",
+              "Value": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "/",
+                    {
+                      "Fn::FindInMap": [
+                        "Send",
+                        "ParameterKey",
+                        "UniqueId",
+                      ],
+                    },
+                  ],
                 ],
               },
             },
-            Object {
+            {
               "Name": "SEND_ANONYMOUS_METRICS",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::FindInMap": Array [
+              "Value": {
+                "Fn::FindInMap": [
                   "Send",
                   "AnonymousUsage",
                   "Data",
                 ],
               },
             },
-            Object {
+            {
               "Name": "SOLUTION_ID",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::FindInMap": Array [
+              "Value": {
+                "Fn::FindInMap": [
                   "SolutionMapping",
                   "Solution",
                   "Identifier",
                 ],
               },
             },
-            Object {
+            {
               "Name": "METRICS_URL",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::FindInMap": Array [
+              "Value": {
+                "Fn::FindInMap": [
                   "SolutionMapping",
                   "Metrics",
                   "URL",
                 ],
               },
             },
-            Object {
+            {
               "Name": "TRANSIT_GATEWAY_ATTACHMENT_ID",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::If": Array [
+              "Value": {
+                "Fn::If": [
                   "CreateTransitGatewayAttachment",
-                  Object {
+                  {
                     "Ref": "VPCTGWATTACHMENT",
                   },
                   "",
                 ],
               },
             },
-            Object {
+            {
               "Name": "TRANSIT_GATEWAY_ATTACHMENT_APPLIANCE_MODE",
               "Type": "PLAINTEXT",
-              "Value": Object {
-                "Fn::FindInMap": Array [
+              "Value": {
+                "Fn::FindInMap": [
                   "SolutionMapping",
                   "TransitGatewayAttachment",
                   "ApplianceMode",
                 ],
               },
             },
+            {
+              "Name": "CUSTOM_SDK_USER_AGENT",
+              "Type": "PLAINTEXT",
+              "Value": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "AwsSolution/",
+                    {
+                      "Fn::FindInMap": [
+                        "SolutionMapping",
+                        "Solution",
+                        "Identifier",
+                      ],
+                    },
+                    "/",
+                    {
+                      "Fn::FindInMap": [
+                        "SolutionMapping",
+                        "Solution",
+                        "Version",
+                      ],
+                    },
+                  ],
+                ],
+              },
+            },
           ],
-          "Image": "aws/codebuild/standard:4.0",
+          "Image": "aws/codebuild/standard:6.0",
           "ImagePullCredentialsType": "CODEBUILD",
           "PrivilegedMode": false,
           "Type": "LINUX_CONTAINER",
         },
-        "ServiceRole": Object {
-          "Fn::GetAtt": Array [
+        "ServiceRole": {
+          "Fn::GetAtt": [
             "DeployProjectRole588C8C1D",
             "Arn",
           ],
         },
-        "Source": Object {
-          "BuildSpec": Object {
-            "Fn::Join": Array [
+        "Source": {
+          "BuildSpec": {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "{
-  \\"version\\": \\"0.2\\",
-  \\"phases\\": {
-    \\"install\\": {
-      \\"runtime-versions\\": {
-        \\"nodejs\\": \\"12\\"
+  "version": "0.2",
+  "phases": {
+    "install": {
+      "runtime-versions": {
+        "nodejs": "16"
       },
-      \\"commands\\": [
-        \\"export current=$(pwd)\\",
-        \\"export sourceCodeKey=$CODE_BUILD_SOURCE_CODE_S3_KEY\\"
+      "commands": [
+        "export current=$(pwd)",
+        "export sourceCodeKey=$CODE_BUILD_SOURCE_CODE_S3_KEY"
       ]
     },
-    \\"pre_build\\": {
-      \\"commands\\": [
-        \\"cd $current\\",
-        \\"pwd; ls -ltr\\",
-        \\"echo 'Download Network Firewall Solution Package'\\",
-        \\"aws s3 cp s3://",
-                Object {
+    "pre_build": {
+      "commands": [
+        "cd $current",
+        "pwd; ls -ltr",
+        "echo 'Download Network Firewall Solution Package'",
+        "aws s3 cp s3://",
+                {
                   "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                 },
-                "/$sourceCodeKey/network-firewall-automation.zip $current\\",
-        \\"unzip -o $current/network-firewall-automation.zip -d $current\\",
-        \\"pwd; ls -ltr\\"
+                "/$sourceCodeKey/network-firewall-automation.zip $current",
+        "unzip -o $current/network-firewall-automation.zip -d $current",
+        "pwd; ls -ltr"
       ]
     },
-    \\"build\\": {
-      \\"commands\\": [
-        \\"echo \\\\\\"Initiating Network Firewall Automation\\\\\\"\\",
-        \\"node index.js\\"
+    "build": {
+      "commands": [
+        "echo \\"Initiating Network Firewall Automation\\"",
+        "node index.js"
       ]
     },
-    \\"post_build\\": {
-      \\"commands\\": []
+    "post_build": {
+      "commands": []
     }
   },
-  \\"artifacts\\": {
-    \\"files\\": \\"**/*\\"
+  "artifacts": {
+    "files": "**/*"
   }
 }",
               ],
@@ -1271,14 +1301,14 @@ Object {
       },
       "Type": "AWS::CodeBuild::Project",
     },
-    "DeployProjectRole588C8C1D": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "DeployProjectRole588C8C1D": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "codebuild.amazonaws.com",
               },
             },
@@ -1288,43 +1318,43 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "DeployProjectRoleDefaultPolicy52AEA98B": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "DeployProjectRoleDefaultPolicy52AEA98B": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "logs:CreateLogGroup",
                 "logs:CreateLogStream",
                 "logs:PutLogEvents",
               ],
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::Join": Array [
+              "Resource": [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":logs:eu-west-1:1234:log-group:/aws/codebuild/",
-                      Object {
+                      {
                         "Ref": "DeployProject1CF7CB79",
                       },
                     ],
                   ],
                 },
-                Object {
-                  "Fn::Join": Array [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":logs:eu-west-1:1234:log-group:/aws/codebuild/",
-                      Object {
+                      {
                         "Ref": "DeployProject1CF7CB79",
                       },
                       ":*",
@@ -1333,8 +1363,8 @@ Object {
                 },
               ],
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "codebuild:CreateReportGroup",
                 "codebuild:CreateReport",
                 "codebuild:UpdateReport",
@@ -1342,16 +1372,16 @@ Object {
                 "codebuild:BatchPutCodeCoverages",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":codebuild:eu-west-1:1234:report-group/",
-                    Object {
+                    {
                       "Ref": "DeployProject1CF7CB79",
                     },
                     "-*",
@@ -1359,26 +1389,26 @@ Object {
                 ],
               },
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "s3:GetObject*",
                 "s3:GetBucket*",
                 "s3:List*",
               ],
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
                     "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                     "Arn",
                   ],
                 },
-                Object {
-                  "Fn::Join": Array [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
+                    [
+                      {
+                        "Fn::GetAtt": [
                           "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                           "Arn",
                         ],
@@ -1389,29 +1419,29 @@ Object {
                 },
               ],
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "kms:Decrypt",
                 "kms:DescribeKey",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                   "Arn",
                 ],
               },
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "kms:Decrypt",
                 "kms:Encrypt",
                 "kms:ReEncrypt*",
                 "kms:GenerateDataKey*",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                   "Arn",
                 ],
@@ -1421,25 +1451,25 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "DeployProjectRoleDefaultPolicy52AEA98B",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "DeployProjectRole588C8C1D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "FirewallSubnetRouteTable": Object {
+    "FirewallSubnetRouteTable": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
-            "Value": Object {
-              "Fn::Join": Array [
+            "Value": {
+              "Fn::Join": [
                 "",
-                Array [
-                  Object {
+                [
+                  {
                     "Ref": "AWS::StackName",
                   },
                   "-FirewallSubnetRouteTable",
@@ -1448,25 +1478,25 @@ Object {
             },
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::RouteTable",
       "UpdateReplacePolicy": "Retain",
     },
-    "FlowLog": Object {
-      "Properties": Object {
-        "DeliverLogsPermissionArn": Object {
-          "Fn::GetAtt": Array [
+    "FlowLog": {
+      "Properties": {
+        "DeliverLogsPermissionArn": {
+          "Fn::GetAtt": [
             "RoleFlowLogsCA794118",
             "Arn",
           ],
         },
-        "LogGroupName": Object {
+        "LogGroupName": {
           "Ref": "AWS::StackName",
         },
-        "ResourceId": Object {
+        "ResourceId": {
           "Ref": "VPC",
         },
         "ResourceType": "VPC",
@@ -1474,39 +1504,23 @@ Object {
       },
       "Type": "AWS::EC2::FlowLog",
     },
-    "KMSKeyForNetworkFirewallLogDestinations70A79322": Object {
+    "KMSKeyForNetworkFirewallBuckets73A57817": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
+      "Properties": {
         "Description": "This key will be used for encrypting the vpc flow logs and firewall logs.",
         "EnableKeyRotation": true,
-        "KeyPolicy": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "kms:Create*",
-                "kms:Describe*",
-                "kms:Enable*",
-                "kms:List*",
-                "kms:Put*",
-                "kms:Update*",
-                "kms:Revoke*",
-                "kms:Disable*",
-                "kms:Get*",
-                "kms:Delete*",
-                "kms:ScheduleKeyDeletion",
-                "kms:CancelKeyDeletion",
-                "kms:GenerateDataKey",
-                "kms:TagResource",
-                "kms:UntagResource",
-              ],
+        "KeyPolicy": {
+          "Statement": [
+            {
+              "Action": "kms:*",
               "Effect": "Allow",
-              "Principal": Object {
-                "AWS": Object {
-                  "Fn::Join": Array [
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":iam::1234:root",
@@ -1516,16 +1530,16 @@ Object {
               },
               "Resource": "*",
             },
-            Object {
+            {
               "Action": "kms:GenerateDataKey*",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "delivery.logs.amazonaws.com",
               },
               "Resource": "*",
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "kms:Encrypt*",
                 "kms:Decrypt*",
                 "kms:ReEncrypt*",
@@ -1533,13 +1547,13 @@ Object {
                 "kms:Describe*",
               ],
               "Effect": "Allow",
-              "Principal": Object {
-                "Service": Object {
-                  "Fn::Join": Array [
+              "Principal": {
+                "Service": {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "logs.",
-                      Object {
+                      {
                         "Ref": "AWS::Region",
                       },
                       ".amazonaws.com",
@@ -1556,48 +1570,48 @@ Object {
       "Type": "AWS::KMS::Key",
       "UpdateReplacePolicy": "Retain",
     },
-    "LogGroupFlowLogs": Object {
-      "Properties": Object {
-        "KmsKeyId": Object {
-          "Fn::GetAtt": Array [
-            "KMSKeyForNetworkFirewallLogDestinations70A79322",
+    "LogGroupFlowLogs": {
+      "Properties": {
+        "KmsKeyId": {
+          "Fn::GetAtt": [
+            "KMSKeyForNetworkFirewallBuckets73A57817",
             "Arn",
           ],
         },
-        "LogGroupName": Object {
+        "LogGroupName": {
           "Ref": "AWS::StackName",
         },
-        "RetentionInDays": Object {
+        "RetentionInDays": {
           "Ref": "LogRetentionPeriod",
         },
       },
       "Type": "AWS::Logs::LogGroup",
     },
-    "Logs6819BB44": Object {
+    "Logs6819BB44": {
       "Condition": "LoggingInS3",
       "DeletionPolicy": "Retain",
-      "Metadata": Object {
-        "cfn_nag": Object {
-          "rules_to_suppress": Array [
-            Object {
+      "Metadata": {
+        "cfn_nag": {
+          "rules_to_suppress": [
+            {
               "id": "W35",
               "reason": "Logs bucket does not require logging configuration",
             },
-            Object {
+            {
               "id": "W51",
               "reason": "Logs bucket is private and does not require a bucket policy",
             },
           ],
         },
       },
-      "Properties": Object {
-        "BucketEncryption": Object {
-          "ServerSideEncryptionConfiguration": Array [
-            Object {
-              "ServerSideEncryptionByDefault": Object {
-                "KMSMasterKeyID": Object {
-                  "Fn::GetAtt": Array [
-                    "KMSKeyForNetworkFirewallLogDestinations70A79322",
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "KMSMasterKeyID": {
+                  "Fn::GetAtt": [
+                    "KMSKeyForNetworkFirewallBuckets73A57817",
                     "Arn",
                   ],
                 },
@@ -1606,17 +1620,17 @@ Object {
             },
           ],
         },
-        "LifecycleConfiguration": Object {
-          "Rules": Array [
-            Object {
-              "ExpirationInDays": Object {
+        "LifecycleConfiguration": {
+          "Rules": [
+            {
+              "ExpirationInDays": {
                 "Ref": "LogRetentionPeriod",
               },
               "Status": "Enabled",
             },
           ],
         },
-        "PublicAccessBlockConfiguration": Object {
+        "PublicAccessBlockConfiguration": {
           "BlockPublicAcls": true,
           "BlockPublicPolicy": true,
           "IgnorePublicAcls": true,
@@ -1626,61 +1640,61 @@ Object {
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
     },
-    "NetworkFirewallCodePipelineA72E3ADD": Object {
-      "DependsOn": Array [
+    "NetworkFirewallCodePipelineA72E3ADD": {
+      "DependsOn": [
         "NetworkFirewallCodePipelineRoleDefaultPolicyF0142ABD",
         "NetworkFirewallCodePipelineRoleDDD28B15",
       ],
-      "Properties": Object {
-        "ArtifactStore": Object {
-          "EncryptionKey": Object {
-            "Id": Object {
-              "Fn::GetAtt": Array [
+      "Properties": {
+        "ArtifactStore": {
+          "EncryptionKey": {
+            "Id": {
+              "Fn::GetAtt": [
                 "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                 "Arn",
               ],
             },
             "Type": "KMS",
           },
-          "Location": Object {
+          "Location": {
             "Ref": "NetworkFirewallCodePipelineArtifactsBucketF2569455",
           },
           "Type": "S3",
         },
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
+        "RoleArn": {
+          "Fn::GetAtt": [
             "NetworkFirewallCodePipelineRoleDDD28B15",
             "Arn",
           ],
         },
-        "Stages": Array [
-          Object {
-            "Actions": Array [
-              Object {
-                "ActionTypeId": Object {
+        "Stages": [
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
                   "Category": "Source",
                   "Owner": "AWS",
                   "Provider": "CodeCommit",
                   "Version": "1",
                 },
-                "Configuration": Object {
+                "Configuration": {
                   "BranchName": "main",
                   "PollForSourceChanges": false,
-                  "RepositoryName": Object {
-                    "Fn::GetAtt": Array [
+                  "RepositoryName": {
+                    "Fn::GetAtt": [
                       "NetworkFirewallCodeRepositoryF7BA0495",
                       "Name",
                     ],
                   },
                 },
                 "Name": "Source",
-                "OutputArtifacts": Array [
-                  Object {
+                "OutputArtifacts": [
+                  {
                     "Name": "SourceArtifact",
                   },
                 ],
-                "RoleArn": Object {
-                  "Fn::GetAtt": Array [
+                "RoleArn": {
+                  "Fn::GetAtt": [
                     "NetworkFirewallCodePipelineSourceCodePipelineActionRole67C89750",
                     "Arn",
                   ],
@@ -1690,33 +1704,33 @@ Object {
             ],
             "Name": "Source",
           },
-          Object {
-            "Actions": Array [
-              Object {
-                "ActionTypeId": Object {
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
                   "Category": "Build",
                   "Owner": "AWS",
                   "Provider": "CodeBuild",
                   "Version": "1",
                 },
-                "Configuration": Object {
-                  "ProjectName": Object {
+                "Configuration": {
+                  "ProjectName": {
                     "Ref": "BuildProject097C5DB7",
                   },
                 },
-                "InputArtifacts": Array [
-                  Object {
+                "InputArtifacts": [
+                  {
                     "Name": "SourceArtifact",
                   },
                 ],
                 "Name": "CodeBuild",
-                "OutputArtifacts": Array [
-                  Object {
+                "OutputArtifacts": [
+                  {
                     "Name": "BuildArtifact",
                   },
                 ],
-                "RoleArn": Object {
-                  "Fn::GetAtt": Array [
+                "RoleArn": {
+                  "Fn::GetAtt": [
                     "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRole2A3E8726",
                     "Arn",
                   ],
@@ -1726,28 +1740,28 @@ Object {
             ],
             "Name": "Validation",
           },
-          Object {
-            "Actions": Array [
-              Object {
-                "ActionTypeId": Object {
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
                   "Category": "Build",
                   "Owner": "AWS",
                   "Provider": "CodeBuild",
                   "Version": "1",
                 },
-                "Configuration": Object {
-                  "ProjectName": Object {
+                "Configuration": {
+                  "ProjectName": {
                     "Ref": "DeployProject1CF7CB79",
                   },
                 },
-                "InputArtifacts": Array [
-                  Object {
+                "InputArtifacts": [
+                  {
                     "Name": "BuildArtifact",
                   },
                 ],
                 "Name": "CodeDeploy",
-                "RoleArn": Object {
-                  "Fn::GetAtt": Array [
+                "RoleArn": {
+                  "Fn::GetAtt": [
                     "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRole6EA7639D",
                     "Arn",
                   ],
@@ -1761,151 +1775,26 @@ Object {
       },
       "Type": "AWS::CodePipeline::Pipeline",
     },
-    "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060": Object {
+    "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060": {
       "DeletionPolicy": "Delete",
-      "Properties": Object {
+      "Properties": {
         "EnableKeyRotation": true,
-        "KeyPolicy": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "kms:Create*",
-                "kms:Describe*",
-                "kms:Enable*",
-                "kms:List*",
-                "kms:Put*",
-                "kms:Update*",
-                "kms:Revoke*",
-                "kms:Disable*",
-                "kms:Get*",
-                "kms:Delete*",
-                "kms:ScheduleKeyDeletion",
-                "kms:CancelKeyDeletion",
-                "kms:GenerateDataKey",
-                "kms:TagResource",
-                "kms:UntagResource",
-              ],
+        "KeyPolicy": {
+          "Statement": [
+            {
+              "Action": "kms:*",
               "Effect": "Allow",
-              "Principal": Object {
-                "AWS": Object {
-                  "Fn::Join": Array [
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":iam::1234:root",
                     ],
-                  ],
-                },
-              },
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "kms:Decrypt",
-                "kms:DescribeKey",
-                "kms:Encrypt",
-                "kms:ReEncrypt*",
-                "kms:GenerateDataKey*",
-              ],
-              "Effect": "Allow",
-              "Principal": Object {
-                "AWS": Object {
-                  "Fn::GetAtt": Array [
-                    "NetworkFirewallCodePipelineRoleDDD28B15",
-                    "Arn",
-                  ],
-                },
-              },
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "kms:Decrypt",
-                "kms:DescribeKey",
-                "kms:Encrypt",
-                "kms:ReEncrypt*",
-                "kms:GenerateDataKey*",
-              ],
-              "Effect": "Allow",
-              "Principal": Object {
-                "AWS": Object {
-                  "Fn::GetAtt": Array [
-                    "NetworkFirewallCodePipelineSourceCodePipelineActionRole67C89750",
-                    "Arn",
-                  ],
-                },
-              },
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "kms:Decrypt",
-                "kms:DescribeKey",
-                "kms:Encrypt",
-                "kms:ReEncrypt*",
-                "kms:GenerateDataKey*",
-              ],
-              "Effect": "Allow",
-              "Principal": Object {
-                "AWS": Object {
-                  "Fn::GetAtt": Array [
-                    "BuildProjectRoleAA92C755",
-                    "Arn",
-                  ],
-                },
-              },
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "kms:Decrypt",
-                "kms:Encrypt",
-                "kms:ReEncrypt*",
-                "kms:GenerateDataKey*",
-              ],
-              "Effect": "Allow",
-              "Principal": Object {
-                "AWS": Object {
-                  "Fn::GetAtt": Array [
-                    "BuildProjectRoleAA92C755",
-                    "Arn",
-                  ],
-                },
-              },
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "kms:Decrypt",
-                "kms:DescribeKey",
-              ],
-              "Effect": "Allow",
-              "Principal": Object {
-                "AWS": Object {
-                  "Fn::GetAtt": Array [
-                    "DeployProjectRole588C8C1D",
-                    "Arn",
-                  ],
-                },
-              },
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "kms:Decrypt",
-                "kms:Encrypt",
-                "kms:ReEncrypt*",
-                "kms:GenerateDataKey*",
-              ],
-              "Effect": "Allow",
-              "Principal": Object {
-                "AWS": Object {
-                  "Fn::GetAtt": Array [
-                    "DeployProjectRole588C8C1D",
-                    "Arn",
                   ],
                 },
               },
@@ -1918,23 +1807,23 @@ Object {
       "Type": "AWS::KMS::Key",
       "UpdateReplacePolicy": "Delete",
     },
-    "NetworkFirewallCodePipelineArtifactsBucketEncryptionKeyAlias1704A536": Object {
+    "NetworkFirewallCodePipelineArtifactsBucketEncryptionKeyAlias1704A536": {
       "DeletionPolicy": "Delete",
-      "Properties": Object {
-        "AliasName": Object {
-          "Fn::Join": Array [
+      "Properties": {
+        "AliasName": {
+          "Fn::Join": [
             "",
-            Array [
+            [
               "alias/",
-              Object {
+              {
                 "Ref": "AWS::StackName",
               },
               "-artifactBucket-EncryptionKeyAlias",
             ],
           ],
         },
-        "TargetKeyId": Object {
-          "Fn::GetAtt": Array [
+        "TargetKeyId": {
+          "Fn::GetAtt": [
             "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
             "Arn",
           ],
@@ -1943,25 +1832,25 @@ Object {
       "Type": "AWS::KMS::Alias",
       "UpdateReplacePolicy": "Delete",
     },
-    "NetworkFirewallCodePipelineArtifactsBucketF2569455": Object {
+    "NetworkFirewallCodePipelineArtifactsBucketF2569455": {
       "DeletionPolicy": "Retain",
-      "Metadata": Object {
-        "cfn_nag": Object {
-          "rules_to_suppress": Array [
-            Object {
+      "Metadata": {
+        "cfn_nag": {
+          "rules_to_suppress": [
+            {
               "id": "W35",
               "reason": "This S3 bucket is used as the destination for 'NetworkFirewallCodePipelineArtifactsBucket'",
             },
           ],
         },
       },
-      "Properties": Object {
-        "BucketEncryption": Object {
-          "ServerSideEncryptionConfiguration": Array [
-            Object {
-              "ServerSideEncryptionByDefault": Object {
-                "KMSMasterKeyID": Object {
-                  "Fn::GetAtt": Array [
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "KMSMasterKeyID": {
+                  "Fn::GetAtt": [
                     "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                     "Arn",
                   ],
@@ -1971,7 +1860,7 @@ Object {
             },
           ],
         },
-        "PublicAccessBlockConfiguration": Object {
+        "PublicAccessBlockConfiguration": {
           "BlockPublicAcls": true,
           "BlockPublicPolicy": true,
           "IgnorePublicAcls": true,
@@ -1981,20 +1870,67 @@ Object {
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
     },
-    "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRole6EA7639D": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "NetworkFirewallCodePipelineArtifactsBucketPolicyA1DE12F9": {
+      "Properties": {
+        "Bucket": {
+          "Ref": "NetworkFirewallCodePipelineArtifactsBucketF2569455",
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "NetworkFirewallCodePipelineArtifactsBucketF2569455",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "NetworkFirewallCodePipelineArtifactsBucketF2569455",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::S3::BucketPolicy",
+    },
+    "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRole6EA7639D": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
-                "AWS": Object {
-                  "Fn::Join": Array [
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":iam::1234:root",
@@ -2009,19 +1945,19 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRoleDefaultPolicyAB6FC4F9": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRoleDefaultPolicyAB6FC4F9": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "codebuild:BatchGetBuilds",
                 "codebuild:StartBuild",
                 "codebuild:StopBuild",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "DeployProject1CF7CB79",
                   "Arn",
                 ],
@@ -2031,22 +1967,22 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRoleDefaultPolicyAB6FC4F9",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRole6EA7639D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "NetworkFirewallCodePipelineEventsRole94323A48": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "NetworkFirewallCodePipelineEventsRole94323A48": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "events.amazonaws.com",
               },
             },
@@ -2056,23 +1992,23 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "NetworkFirewallCodePipelineEventsRoleDefaultPolicy5835E037": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "NetworkFirewallCodePipelineEventsRoleDefaultPolicy5835E037": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "codepipeline:StartPipelineExecution",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":codepipeline:eu-west-1:1234:",
-                    Object {
+                    {
                       "Ref": "NetworkFirewallCodePipelineA72E3ADD",
                     },
                   ],
@@ -2083,22 +2019,22 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "NetworkFirewallCodePipelineEventsRoleDefaultPolicy5835E037",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "NetworkFirewallCodePipelineEventsRole94323A48",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "NetworkFirewallCodePipelineRoleDDD28B15": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "NetworkFirewallCodePipelineRoleDDD28B15": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "codepipeline.amazonaws.com",
               },
             },
@@ -2108,33 +2044,37 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "NetworkFirewallCodePipelineRoleDefaultPolicyF0142ABD": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "NetworkFirewallCodePipelineRoleDefaultPolicyF0142ABD": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "s3:GetObject*",
                 "s3:GetBucket*",
                 "s3:List*",
                 "s3:DeleteObject*",
-                "s3:PutObject*",
+                "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
                 "s3:Abort*",
               ],
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
                     "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                     "Arn",
                   ],
                 },
-                Object {
-                  "Fn::Join": Array [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
+                    [
+                      {
+                        "Fn::GetAtt": [
                           "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                           "Arn",
                         ],
@@ -2145,8 +2085,8 @@ Object {
                 },
               ],
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "kms:Decrypt",
                 "kms:DescribeKey",
                 "kms:Encrypt",
@@ -2154,38 +2094,38 @@ Object {
                 "kms:GenerateDataKey*",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                   "Arn",
                 ],
               },
             },
-            Object {
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "NetworkFirewallCodePipelineSourceCodePipelineActionRole67C89750",
                   "Arn",
                 ],
               },
             },
-            Object {
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRole2A3E8726",
                   "Arn",
                 ],
               },
             },
-            Object {
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "NetworkFirewallCodePipelineDeploymentCodeDeployCodePipelineActionRole6EA7639D",
                   "Arn",
                 ],
@@ -2195,28 +2135,28 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "NetworkFirewallCodePipelineRoleDefaultPolicyF0142ABD",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "NetworkFirewallCodePipelineRoleDDD28B15",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "NetworkFirewallCodePipelineSourceCodePipelineActionRole67C89750": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "NetworkFirewallCodePipelineSourceCodePipelineActionRole67C89750": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
-                "AWS": Object {
-                  "Fn::Join": Array [
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":iam::1234:root",
@@ -2231,33 +2171,37 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "NetworkFirewallCodePipelineSourceCodePipelineActionRoleDefaultPolicyB01603D9": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "NetworkFirewallCodePipelineSourceCodePipelineActionRoleDefaultPolicyB01603D9": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "s3:GetObject*",
                 "s3:GetBucket*",
                 "s3:List*",
                 "s3:DeleteObject*",
-                "s3:PutObject*",
+                "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
                 "s3:Abort*",
               ],
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
                     "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                     "Arn",
                   ],
                 },
-                Object {
-                  "Fn::Join": Array [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
+                    [
+                      {
+                        "Fn::GetAtt": [
                           "NetworkFirewallCodePipelineArtifactsBucketF2569455",
                           "Arn",
                         ],
@@ -2268,8 +2212,8 @@ Object {
                 },
               ],
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "kms:Decrypt",
                 "kms:DescribeKey",
                 "kms:Encrypt",
@@ -2277,15 +2221,15 @@ Object {
                 "kms:GenerateDataKey*",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "NetworkFirewallCodePipelineArtifactsBucketEncryptionKey086ED060",
                   "Arn",
                 ],
               },
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "codecommit:GetBranch",
                 "codecommit:GetCommit",
                 "codecommit:UploadArchive",
@@ -2293,8 +2237,8 @@ Object {
                 "codecommit:CancelUploadArchive",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "NetworkFirewallCodeRepositoryF7BA0495",
                   "Arn",
                 ],
@@ -2304,28 +2248,28 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "NetworkFirewallCodePipelineSourceCodePipelineActionRoleDefaultPolicyB01603D9",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "NetworkFirewallCodePipelineSourceCodePipelineActionRole67C89750",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRole2A3E8726": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRole2A3E8726": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
-                "AWS": Object {
-                  "Fn::Join": Array [
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":iam::1234:root",
@@ -2340,19 +2284,19 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRoleDefaultPolicyA4A71A44": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRoleDefaultPolicyA4A71A44": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "codebuild:BatchGetBuilds",
                 "codebuild:StartBuild",
                 "codebuild:StopBuild",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "BuildProject097C5DB7",
                   "Arn",
                 ],
@@ -2362,27 +2306,27 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRoleDefaultPolicyA4A71A44",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "NetworkFirewallCodePipelineValidationCodeBuildCodePipelineActionRole2A3E8726",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "NetworkFirewallCodeRepositoryF7BA0495": Object {
+    "NetworkFirewallCodeRepositoryF7BA0495": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "Code": Object {
-          "S3": Object {
+      "Properties": {
+        "Code": {
+          "S3": {
             "Bucket": "solutions-eu-west-1",
-            "Key": Object {
-              "Fn::Join": Array [
+            "Key": {
+              "Fn::Join": [
                 "",
-                Array [
+                [
                   "network-firewall-automation/",
-                  Object {
-                    "Fn::FindInMap": Array [
+                  {
+                    "Fn::FindInMap": [
                       "SolutionMapping",
                       "Version",
                       "Latest",
@@ -2395,18 +2339,18 @@ Object {
           },
         },
         "RepositoryDescription": "This repository is created by the AWS Network Firewall solution for AWS Transit Gateway, to store and trigger changes to the network firewall rules and configurations.",
-        "RepositoryName": Object {
-          "Fn::Join": Array [
+        "RepositoryName": {
+          "Fn::Join": [
             "",
-            Array [
-              Object {
-                "Fn::FindInMap": Array [
+            [
+              {
+                "Fn::FindInMap": [
                   "SolutionMapping",
                   "CodeCommitRepo",
                   "Name",
                 ],
               },
-              Object {
+              {
                 "Ref": "AWS::StackName",
               },
             ],
@@ -2416,54 +2360,54 @@ Object {
       "Type": "AWS::CodeCommit::Repository",
       "UpdateReplacePolicy": "Retain",
     },
-    "NetworkFirewallCodeRepositoryMyTestStackNetworkFirewallCodePipelineD8BFDC90mainEventRule334BD2D0": Object {
-      "Properties": Object {
-        "EventPattern": Object {
-          "detail": Object {
-            "event": Array [
+    "NetworkFirewallCodeRepositoryMyTestStackNetworkFirewallCodePipelineD8BFDC90mainEventRule334BD2D0": {
+      "Properties": {
+        "EventPattern": {
+          "detail": {
+            "event": [
               "referenceCreated",
               "referenceUpdated",
             ],
-            "referenceName": Array [
+            "referenceName": [
               "main",
             ],
           },
-          "detail-type": Array [
+          "detail-type": [
             "CodeCommit Repository State Change",
           ],
-          "resources": Array [
-            Object {
-              "Fn::GetAtt": Array [
+          "resources": [
+            {
+              "Fn::GetAtt": [
                 "NetworkFirewallCodeRepositoryF7BA0495",
                 "Arn",
               ],
             },
           ],
-          "source": Array [
+          "source": [
             "aws.codecommit",
           ],
         },
         "State": "ENABLED",
-        "Targets": Array [
-          Object {
-            "Arn": Object {
-              "Fn::Join": Array [
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::Join": [
                 "",
-                Array [
+                [
                   "arn:",
-                  Object {
+                  {
                     "Ref": "AWS::Partition",
                   },
                   ":codepipeline:eu-west-1:1234:",
-                  Object {
+                  {
                     "Ref": "NetworkFirewallCodePipelineA72E3ADD",
                   },
                 ],
               ],
             },
             "Id": "Target0",
-            "RoleArn": Object {
-              "Fn::GetAtt": Array [
+            "RoleArn": {
+              "Fn::GetAtt": [
                 "NetworkFirewallCodePipelineEventsRole94323A48",
                 "Arn",
               ],
@@ -2473,24 +2417,24 @@ Object {
       },
       "Type": "AWS::Events::Rule",
     },
-    "NetworkFirewallSubnet1": Object {
+    "NetworkFirewallSubnet1": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             "0",
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
-        "CidrBlock": Object {
-          "Fn::Select": Array [
+        "CidrBlock": {
+          "Fn::Select": [
             0,
-            Object {
-              "Fn::Cidr": Array [
-                Object {
-                  "Fn::GetAtt": Array [
+            {
+              "Fn::Cidr": [
+                {
+                  "Fn::GetAtt": [
                     "VPC",
                     "CidrBlock",
                   ],
@@ -2501,14 +2445,14 @@ Object {
             },
           ],
         },
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
-            "Value": Object {
-              "Fn::Join": Array [
+            "Value": {
+              "Fn::Join": [
                 "",
-                Array [
-                  Object {
+                [
+                  {
                     "Ref": "AWS::StackName",
                   },
                   "-FirewallSubnet1",
@@ -2517,44 +2461,44 @@ Object {
             },
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::Subnet",
       "UpdateReplacePolicy": "Retain",
     },
-    "NetworkFirewallSubnet1RouteTableAssociation": Object {
+    "NetworkFirewallSubnet1RouteTableAssociation": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "RouteTableId": Object {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "FirewallSubnetRouteTable",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "NetworkFirewallSubnet1",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
       "UpdateReplacePolicy": "Retain",
     },
-    "NetworkFirewallSubnet2": Object {
+    "NetworkFirewallSubnet2": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             "1",
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
-        "CidrBlock": Object {
-          "Fn::Select": Array [
+        "CidrBlock": {
+          "Fn::Select": [
             1,
-            Object {
-              "Fn::Cidr": Array [
-                Object {
-                  "Fn::GetAtt": Array [
+            {
+              "Fn::Cidr": [
+                {
+                  "Fn::GetAtt": [
                     "VPC",
                     "CidrBlock",
                   ],
@@ -2565,14 +2509,14 @@ Object {
             },
           ],
         },
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
-            "Value": Object {
-              "Fn::Join": Array [
+            "Value": {
+              "Fn::Join": [
                 "",
-                Array [
-                  Object {
+                [
+                  {
                     "Ref": "AWS::StackName",
                   },
                   "-FirewallSubnet2",
@@ -2581,34 +2525,34 @@ Object {
             },
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::Subnet",
       "UpdateReplacePolicy": "Retain",
     },
-    "NetworkFirewallSubnet2RouteTableAssociation": Object {
+    "NetworkFirewallSubnet2RouteTableAssociation": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "RouteTableId": Object {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "FirewallSubnetRouteTable",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "NetworkFirewallSubnet2",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
       "UpdateReplacePolicy": "Retain",
     },
-    "RoleFlowLogsCA794118": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "RoleFlowLogsCA794118": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "vpc-flow-logs.amazonaws.com",
               },
             },
@@ -2618,12 +2562,12 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "RoleFlowLogsDefaultPolicyD1F03EF4": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "RoleFlowLogsDefaultPolicyD1F03EF4": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "logs:CreateLogStream",
                 "logs:DescribeLogStreams",
                 "logs:PutLogEvents",
@@ -2631,8 +2575,8 @@ Object {
                 "logs:DescribeLogGroups",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "LogGroupFlowLogs",
                   "Arn",
                 ],
@@ -2642,54 +2586,54 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "RoleFlowLogsDefaultPolicyD1F03EF4",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "RoleFlowLogsCA794118",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "TGWRoute": Object {
+    "TGWRoute": {
       "Condition": "CreateTransitGatewayAttachment",
-      "DependsOn": Array [
+      "DependsOn": [
         "VPCTGWATTACHMENT",
       ],
-      "Properties": Object {
-        "DestinationCidrBlock": Object {
-          "Fn::FindInMap": Array [
+      "Properties": {
+        "DestinationCidrBlock": {
+          "Fn::FindInMap": [
             "SolutionMapping",
             "Route",
             "QuadZero",
           ],
         },
-        "RouteTableId": Object {
+        "RouteTableId": {
           "Ref": "FirewallSubnetRouteTable",
         },
-        "TransitGatewayId": Object {
+        "TransitGatewayId": {
           "Ref": "ExistingTransitGateway",
         },
       },
       "Type": "AWS::EC2::Route",
     },
-    "VPC": Object {
+    "VPC": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "CidrBlock": Object {
+      "Properties": {
+        "CidrBlock": {
           "Ref": "cidrBlock",
         },
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "created-by",
             "Value": "network-firewall-automation",
           },
-          Object {
+          {
             "Key": "Name",
-            "Value": Object {
-              "Fn::Join": Array [
+            "Value": {
+              "Fn::Join": [
                 "",
-                Array [
-                  Object {
+                [
+                  {
                     "Ref": "AWS::StackName",
                   },
                   "-Inspection-VPC",
@@ -2702,26 +2646,26 @@ Object {
       "Type": "AWS::EC2::VPC",
       "UpdateReplacePolicy": "Retain",
     },
-    "VPCTGWATTACHMENT": Object {
+    "VPCTGWATTACHMENT": {
       "Condition": "CreateTransitGatewayAttachment",
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "SubnetIds": Array [
-          Object {
+      "Properties": {
+        "SubnetIds": [
+          {
             "Ref": "VPCTGWSubnet1",
           },
-          Object {
+          {
             "Ref": "VPCTGWSubnet2",
           },
         ],
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
-            "Value": Object {
-              "Fn::Join": Array [
+            "Value": {
+              "Fn::Join": [
                 "",
-                Array [
-                  Object {
+                [
+                  {
                     "Ref": "AWS::StackName",
                   },
                   "-Inspection-VPC-Attachment",
@@ -2730,26 +2674,26 @@ Object {
             },
           },
         ],
-        "TransitGatewayId": Object {
+        "TransitGatewayId": {
           "Ref": "ExistingTransitGateway",
         },
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::TransitGatewayAttachment",
     },
-    "VPCTGWRouteTable1": Object {
+    "VPCTGWRouteTable1": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
-            "Value": Object {
-              "Fn::Join": Array [
+            "Value": {
+              "Fn::Join": [
                 "",
-                Array [
-                  Object {
+                [
+                  {
                     "Ref": "AWS::StackName",
                   },
                   "-TGWSubnetRouteTable1",
@@ -2758,24 +2702,24 @@ Object {
             },
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::RouteTable",
       "UpdateReplacePolicy": "Retain",
     },
-    "VPCTGWRouteTable2": Object {
+    "VPCTGWRouteTable2": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
-            "Value": Object {
-              "Fn::Join": Array [
+            "Value": {
+              "Fn::Join": [
                 "",
-                Array [
-                  Object {
+                [
+                  {
                     "Ref": "AWS::StackName",
                   },
                   "-TGWSubnetRouteTable2",
@@ -2784,44 +2728,44 @@ Object {
             },
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::RouteTable",
       "UpdateReplacePolicy": "Retain",
     },
-    "VPCTGWRouteTableAssociation": Object {
+    "VPCTGWRouteTableAssociation": {
       "Condition": "CreateTransitGatewayRTAssociation",
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "TransitGatewayAttachmentId": Object {
+      "Properties": {
+        "TransitGatewayAttachmentId": {
           "Ref": "VPCTGWATTACHMENT",
         },
-        "TransitGatewayRouteTableId": Object {
+        "TransitGatewayRouteTableId": {
           "Ref": "TransitGatewayRouteTableIdForAssociation",
         },
       },
       "Type": "AWS::EC2::TransitGatewayRouteTableAssociation",
     },
-    "VPCTGWSubnet1": Object {
+    "VPCTGWSubnet1": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             "0",
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
-        "CidrBlock": Object {
-          "Fn::Select": Array [
+        "CidrBlock": {
+          "Fn::Select": [
             2,
-            Object {
-              "Fn::Cidr": Array [
-                Object {
-                  "Fn::GetAtt": Array [
+            {
+              "Fn::Cidr": [
+                {
+                  "Fn::GetAtt": [
                     "VPC",
                     "CidrBlock",
                   ],
@@ -2832,14 +2776,14 @@ Object {
             },
           ],
         },
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
-            "Value": Object {
-              "Fn::Join": Array [
+            "Value": {
+              "Fn::Join": [
                 "",
-                Array [
-                  Object {
+                [
+                  {
                     "Ref": "AWS::StackName",
                   },
                   "-VPCTGWSubnet1",
@@ -2848,44 +2792,44 @@ Object {
             },
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::Subnet",
       "UpdateReplacePolicy": "Retain",
     },
-    "VPCTGWSubnet1RouteTableAssociation": Object {
+    "VPCTGWSubnet1RouteTableAssociation": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "RouteTableId": Object {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "VPCTGWRouteTable1",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "VPCTGWSubnet1",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
       "UpdateReplacePolicy": "Retain",
     },
-    "VPCTGWSubnet2": Object {
+    "VPCTGWSubnet2": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             "1",
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
-        "CidrBlock": Object {
-          "Fn::Select": Array [
+        "CidrBlock": {
+          "Fn::Select": [
             3,
-            Object {
-              "Fn::Cidr": Array [
-                Object {
-                  "Fn::GetAtt": Array [
+            {
+              "Fn::Cidr": [
+                {
+                  "Fn::GetAtt": [
                     "VPC",
                     "CidrBlock",
                   ],
@@ -2896,14 +2840,14 @@ Object {
             },
           ],
         },
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
-            "Value": Object {
-              "Fn::Join": Array [
+            "Value": {
+              "Fn::Join": [
                 "",
-                Array [
-                  Object {
+                [
+                  {
                     "Ref": "AWS::StackName",
                   },
                   "-VPCTGWSubnet2",
@@ -2912,71 +2856,71 @@ Object {
             },
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "VPC",
         },
       },
       "Type": "AWS::EC2::Subnet",
       "UpdateReplacePolicy": "Retain",
     },
-    "VPCTGWSubnet2RouteTableAssociation": Object {
+    "VPCTGWSubnet2RouteTableAssociation": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "RouteTableId": Object {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "VPCTGWRouteTable2",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "VPCTGWSubnet2",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
       "UpdateReplacePolicy": "Retain",
     },
-    "buildStageIAMPolicyB31D4B98": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "buildStageIAMPolicyB31D4B98": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "network-firewall:CreateFirewallPolicy",
                 "network-firewall:CreateRuleGroup",
               ],
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
+              "Resource": [
+                {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:stateful-rulegroup/*",
                 },
-                Object {
+                {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:firewall-policy/*",
                 },
-                Object {
+                {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:stateless-rulegroup/*",
                 },
               ],
             },
-            Object {
+            {
               "Action": "s3:GetObject",
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::Sub": Array [
+              "Resource": [
+                {
+                  "Fn::Sub": [
                     "arn:\${AWS::Partition}:s3:::\${CodeBucketName}/\${KeyName}/*",
-                    Object {
+                    {
                       "CodeBucketName": "solutions-eu-west-1",
                       "KeyName": "network-firewall-automation",
                     },
                   ],
                 },
-                Object {
-                  "Fn::Join": Array [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":s3:::",
-                      Object {
+                      {
                         "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                       },
                       "/*",
@@ -2985,19 +2929,19 @@ Object {
                 },
               ],
             },
-            Object {
+            {
               "Action": "s3:PutObject",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":s3:::",
-                    Object {
+                    {
                       "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                     },
                     "/*",
@@ -3005,18 +2949,18 @@ Object {
                 ],
               },
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "ssm:PutParameter",
                 "ssm:GetParameter",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Sub": Array [
-                  "arn:\${AWS::Partition}:ssm:\${AWS::Region}:\${AWS::AccountId}:parameter/\${ParameterKey}",
-                  Object {
-                    "ParameterKey": Object {
-                      "Fn::FindInMap": Array [
+              "Resource": {
+                "Fn::Sub": [
+                  "arn:\${AWS::Partition}:ssm:\${AWS::Region}:\${AWS::AccountId}:parameter/\${ParameterKey}-*",
+                  {
+                    "ParameterKey": {
+                      "Fn::FindInMap": [
                         "Send",
                         "ParameterKey",
                         "UniqueId",
@@ -3030,41 +2974,41 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "buildStageIAMPolicyB31D4B98",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "BuildProjectRoleAA92C755",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "deployStageFirewallLoggingCWPolicyD4098456": Object {
+    "deployStageFirewallLoggingCWPolicyD4098456": {
       "Condition": "LoggingInCloudWatch",
-      "Metadata": Object {
-        "cfn_nag": Object {
-          "rules_to_suppress": Array [
-            Object {
+      "Metadata": {
+        "cfn_nag": {
+          "rules_to_suppress": [
+            {
               "id": "W12",
               "reason": "Resource * is required for describe APIs",
             },
           ],
         },
       },
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "logs:PutResourcePolicy",
                 "logs:DescribeResourcePolicies",
               ],
               "Effect": "Allow",
               "Resource": "*",
             },
-            Object {
+            {
               "Action": "logs:DescribeLogGroups",
               "Effect": "Allow",
-              "Resource": Object {
+              "Resource": {
                 "Fn::Sub": "arn:\${AWS::Partition}:logs:*:\${AWS::AccountId}:log-group:*",
               },
             },
@@ -3072,31 +3016,31 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "deployStageFirewallLoggingCWPolicyD4098456",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "DeployProjectRole588C8C1D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "deployStageFirewallLoggingPolicy15AD5CD5": Object {
+    "deployStageFirewallLoggingPolicy15AD5CD5": {
       "Condition": "NotLoggingConfigureManually",
-      "Metadata": Object {
-        "cfn_nag": Object {
-          "rules_to_suppress": Array [
-            Object {
+      "Metadata": {
+        "cfn_nag": {
+          "rules_to_suppress": [
+            {
               "id": "W12",
               "reason": "Resource * is required for these actions.",
             },
           ],
         },
       },
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "logs:CreateLogDelivery",
                 "logs:GetLogDelivery",
                 "logs:UpdateLogDelivery",
@@ -3110,27 +3054,27 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "deployStageFirewallLoggingPolicy15AD5CD5",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "DeployProjectRole588C8C1D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "deployStageFirewallLoggingS3Policy8F79BDD2": Object {
+    "deployStageFirewallLoggingS3Policy8F79BDD2": {
       "Condition": "LoggingInS3",
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "s3:PutBucketPolicy",
                 "s3:GetBucketPolicy",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "Logs6819BB44",
                   "Arn",
                 ],
@@ -3140,30 +3084,30 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "deployStageFirewallLoggingS3Policy8F79BDD2",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "DeployProjectRole588C8C1D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "deployStageFirewallPolicy72BE60BE": Object {
-      "Metadata": Object {
-        "cfn_nag": Object {
-          "rules_to_suppress": Array [
-            Object {
+    "deployStageFirewallPolicy72BE60BE": {
+      "Metadata": {
+        "cfn_nag": {
+          "rules_to_suppress": [
+            {
               "id": "W12",
               "reason": "Resource * is required for describe APIs",
             },
           ],
         },
       },
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "network-firewall:CreateFirewall",
                 "network-firewall:UpdateFirewallDeleteProtection",
                 "network-firewall:DeleteRuleGroup",
@@ -3186,44 +3130,44 @@ Object {
                 "network-firewall:TagResource",
               ],
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
+              "Resource": [
+                {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:stateful-rulegroup/*",
                 },
-                Object {
+                {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:firewall-policy/*",
                 },
-                Object {
+                {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:firewall/*",
                 },
-                Object {
+                {
                   "Fn::Sub": "arn:\${AWS::Partition}:network-firewall:\${AWS::Region}:\${AWS::AccountId}:stateless-rulegroup/*",
                 },
               ],
             },
-            Object {
+            {
               "Action": "s3:GetObject",
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::Sub": Array [
+              "Resource": [
+                {
+                  "Fn::Sub": [
                     "arn:\${AWS::Partition}:s3:::\${CodeBucketName}/\${KeyName}/*",
-                    Object {
+                    {
                       "CodeBucketName": "solutions-eu-west-1",
                       "KeyName": "network-firewall-automation",
                     },
                   ],
                 },
-                Object {
-                  "Fn::Join": Array [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":s3:::",
-                      Object {
+                      {
                         "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
                       },
                       "/*",
@@ -3232,8 +3176,8 @@ Object {
                 },
               ],
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "ec2:DescribeVpcs",
                 "ec2:DescribeSubnets",
                 "ec2:DescribeRouteTables",
@@ -3241,54 +3185,54 @@ Object {
               "Effect": "Allow",
               "Resource": "*",
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "ec2:CreateRoute",
                 "ec2:DeleteRoute",
               ],
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::Join": Array [
+              "Resource": [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":ec2:",
-                      Object {
+                      {
                         "Ref": "AWS::Region",
                       },
                       ":",
-                      Object {
+                      {
                         "Ref": "AWS::AccountId",
                       },
                       ":route-table/",
-                      Object {
+                      {
                         "Ref": "VPCTGWRouteTable1",
                       },
                     ],
                   ],
                 },
-                Object {
-                  "Fn::Join": Array [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":ec2:",
-                      Object {
+                      {
                         "Ref": "AWS::Region",
                       },
                       ":",
-                      Object {
+                      {
                         "Ref": "AWS::AccountId",
                       },
                       ":route-table/",
-                      Object {
+                      {
                         "Ref": "VPCTGWRouteTable2",
                       },
                     ],
@@ -3296,10 +3240,10 @@ Object {
                 },
               ],
             },
-            Object {
+            {
               "Action": "iam:CreateServiceLinkedRole",
               "Effect": "Allow",
-              "Resource": Object {
+              "Resource": {
                 "Fn::Sub": "arn:aws:iam::\${AWS::AccountId}:role/aws-service-role/network-firewall.amazonaws.com/AWSServiceRoleForNetworkFirewall",
               },
             },
@@ -3307,40 +3251,40 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "deployStageFirewallPolicy72BE60BE",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "DeployProjectRole588C8C1D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "deployStageModifyTransitGatewayAttachmentPolicy993566C2": Object {
+    "deployStageModifyTransitGatewayAttachmentPolicy993566C2": {
       "Condition": "CreateTransitGatewayAttachment",
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "ec2:ModifyTransitGatewayVpcAttachment",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":ec2:",
-                    Object {
+                    {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    Object {
+                    {
                       "Ref": "AWS::AccountId",
                     },
                     ":transit-gateway-attachment/",
-                    Object {
+                    {
                       "Ref": "VPCTGWATTACHMENT",
                     },
                   ],
@@ -3351,13 +3295,40 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "deployStageModifyTransitGatewayAttachmentPolicy993566C2",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "DeployProjectRole588C8C1D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
     },
   },
 }

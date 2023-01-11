@@ -1,0 +1,16 @@
+{
+  "RuleGroupName": "StatefulRulesExample1",
+  "Rules": "__tests__/firewall-test-configuration/ruleGroups/drop.rules",
+  "RuleGroup": {
+    "RulesSource": {
+      "RulesSourceList": {
+        "Targets": ["test.example.com"],
+        "TargetTypes": ["HTTP_HOST", "TLS_SNI"],
+        "GeneratedRulesType": "DENYLIST"
+      }
+    }
+  },
+  "Type": "STATEFUL",
+  "Description": "Stateful Rule3",
+  "Capacity": 100
+}

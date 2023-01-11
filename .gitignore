@@ -91,6 +91,7 @@ ENV/
 *cdk.out*
 *.d.ts
 *.js
+!jest.config.js
 
 #ignore these in the deployment folder
 *regional-s3-assets*
