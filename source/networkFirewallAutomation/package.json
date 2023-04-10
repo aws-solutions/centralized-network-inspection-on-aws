@@ -7,7 +7,7 @@
   "author": "@aws-solutions",
   "license": "Apache-2.0",
   "dependencies": {
-    "aws-sdk": "^2.804.0",
+    "aws-sdk": "^2.1354.0",
     "axios": "^0.21.1",
     "moment": "^2.27.0",
     "uuid": "^8.3.2"
