@@ -19,7 +19,7 @@ function getTestStack(): Stack {
     solutionName: 'network-firewall-automation',
     solutionProvider: 'AWS Solutions Builders',
     solutionTradeMarkName: 'network-firewall-automation',
-    solutionVersion: 'v1.0.2',
+    solutionVersion: 'v1.0.3',
   };
   return new NetworkFirewallAutomationStack(app, 'MyTestStack', props);
 }

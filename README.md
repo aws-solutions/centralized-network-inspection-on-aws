@@ -54,8 +54,9 @@ chmod +x ./build-s3-dist.sh
 Run the unit tests 
 
 ```
-cd source/
-chmod +x ./run-all-tests.sh
+cd <rootDir>/deployment
+chmod +x ./run-unit-tests.sh
+./run-unit-tests.sh
 ```
 
 <a name="deploy"></a>
