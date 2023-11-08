@@ -62,7 +62,7 @@ export class NetworkFirewallAutomationStack extends Stack {
 
     const cidrBlock = new CfnParameter(this, 'cidrBlock', {
       type: 'String',
-      default: '192.168.1.0/26',
+      default: '192.168.1.0/26', //NOSONAR
       description: 'CIDR Block for VPC. Must be /26 or larger CIDR block.',
       allowedPattern: '^(?:[0-9]{1,3}.){3}[0-9]{1,3}[/]([0-9]?[0-6]?|[1][7-9])$',
     });
@@ -295,7 +295,10 @@ export class NetworkFirewallAutomationStack extends Stack {
 
     cloudWatchLogGroup.cfnOptions.condition = isLoggingInCloudWatch;
 
-    const logsBucket = new Bucket(this, 'Logs', {
+    // enforceSSL cannot be set to true for this resource, as the bucket is conditional and that condition is not passed to the created policy.
+    // we add a manual policy to enforce SSL later in the stack
+    // prettier-ignore
+    const logsBucket = new Bucket(this, 'Logs', { //NOSONAR
       encryption: BucketEncryption.KMS,
       encryptionKey: KMSKeyForNetworkFirewallBuckets,
       publicReadAccess: false,
@@ -544,7 +547,10 @@ export class NetworkFirewallAutomationStack extends Stack {
     codeCommitRepo_cfn_ref.addOverride('DeletionPolicy', 'Retain');
     codeCommitRepo_cfn_ref.addOverride('UpdateReplacePolicy', 'Retain');
 
-    const codeBuildStagesSourceCodeBucket = new Bucket(this, 'CodeBuildStagesSourceCodeBucket', {
+    // enforceSSL cannot be set to true for this resource, it will create deploy time errors.
+    // we add a manual policy to enforce SSL later in the stack
+    // prettier-ignore
+    const codeBuildStagesSourceCodeBucket = new Bucket(this, 'CodeBuildStagesSourceCodeBucket', { //NOSONAR
       publicReadAccess: false,
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
     });
@@ -646,7 +652,7 @@ export class NetworkFirewallAutomationStack extends Stack {
         phases: {
           install: {
             'runtime-versions': {
-              nodejs: '16',
+              nodejs: '18',
             },
             commands: [`export current=$(pwd)`, `export sourceCodeKey=$CODE_BUILD_SOURCE_CODE_S3_KEY`],
           },
@@ -670,7 +676,7 @@ export class NetworkFirewallAutomationStack extends Stack {
         },
       }),
       environment: {
-        buildImage: LinuxBuildImage.STANDARD_6_0,
+        buildImage: LinuxBuildImage.STANDARD_7_0,
       },
       environmentVariables: codeBuildEnvVariables,
     });
@@ -905,7 +911,7 @@ export class NetworkFirewallAutomationStack extends Stack {
         phases: {
           install: {
             'runtime-versions': {
-              nodejs: '16',
+              nodejs: '18',
             },
             commands: [`export current=$(pwd)`, `export sourceCodeKey=$CODE_BUILD_SOURCE_CODE_S3_KEY`],
           },
@@ -931,7 +937,7 @@ export class NetworkFirewallAutomationStack extends Stack {
         },
       }),
       environment: {
-        buildImage: LinuxBuildImage.STANDARD_6_0,
+        buildImage: LinuxBuildImage.STANDARD_7_0,
       },
       environmentVariables: codeBuildEnvVariables,
     });

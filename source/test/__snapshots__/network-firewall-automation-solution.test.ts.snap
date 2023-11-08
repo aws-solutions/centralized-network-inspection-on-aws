@@ -107,7 +107,7 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
       },
       "Solution": {
         "Identifier": "SO0108",
-        "Version": "v1.0.2",
+        "Version": "v1.0.3",
       },
       "TransitGatewayAttachment": {
         "ApplianceMode": "enable",
@@ -463,7 +463,7 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             {
               "Name": "CODE_BUILD_SOURCE_CODE_S3_KEY",
               "Type": "PLAINTEXT",
-              "Value": "network-firewall-automation/v1.0.2",
+              "Value": "network-firewall-automation/v1.0.3",
             },
             {
               "Name": "STACK_ID",
@@ -1124,7 +1124,7 @@ exports[`Firewall Automation for Network Traffic on AWS NetworkFirewallAutomatio
             {
               "Name": "CODE_BUILD_SOURCE_CODE_S3_KEY",
               "Type": "PLAINTEXT",
-              "Value": "network-firewall-automation/v1.0.2",
+              "Value": "network-firewall-automation/v1.0.3",
             },
             {
               "Name": "STACK_ID",
