@@ -652,7 +652,7 @@ export class NetworkFirewallAutomationStack extends Stack {
         phases: {
           install: {
             'runtime-versions': {
-              nodejs: '16',
+              nodejs: '18',
             },
             commands: [`export current=$(pwd)`, `export sourceCodeKey=$CODE_BUILD_SOURCE_CODE_S3_KEY`],
           },
@@ -676,7 +676,7 @@ export class NetworkFirewallAutomationStack extends Stack {
         },
       }),
       environment: {
-        buildImage: LinuxBuildImage.STANDARD_6_0,
+        buildImage: LinuxBuildImage.STANDARD_7_0,
       },
       environmentVariables: codeBuildEnvVariables,
     });
@@ -911,7 +911,7 @@ export class NetworkFirewallAutomationStack extends Stack {
         phases: {
           install: {
             'runtime-versions': {
-              nodejs: '16',
+              nodejs: '18',
             },
             commands: [`export current=$(pwd)`, `export sourceCodeKey=$CODE_BUILD_SOURCE_CODE_S3_KEY`],
           },
@@ -937,7 +937,7 @@ export class NetworkFirewallAutomationStack extends Stack {
         },
       }),
       environment: {
-        buildImage: LinuxBuildImage.STANDARD_6_0,
+        buildImage: LinuxBuildImage.STANDARD_7_0,
       },
       environmentVariables: codeBuildEnvVariables,
     });
