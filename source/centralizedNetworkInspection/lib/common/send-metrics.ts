@@ -23,15 +23,15 @@ export class MetricsManager {
   static async sendMetrics(data: NetworkFirewallMetrics) {
     const ssmParameterForUUID = process.env.SSM_PARAM_FOR_UUID
       ? process.env.SSM_PARAM_FOR_UUID
-      : 'network-firewall-solution-uuid';
+      : 'centralized-network-inspection-solution-uuid';
     const stackId = process.env.STACK_ID ? process.env.STACK_ID.slice(process.env.STACK_ID.length - 36) : '';
-    const sendAnonymousMetrics = process.env.SEND_ANONYMOUS_METRICS ? process.env.SEND_ANONYMOUS_METRICS : 'No';
+    const sendAnonymizedMetrics = process.env.SEND_ANONYMIZED_METRICS ? process.env.SEND_ANONYMIZED_METRICS : 'No';
     let uuid = '';
     Logger.log(LOG_LEVEL.DEBUG, `ssm parameter uuid key prefix ${ssmParameterForUUID}`)
     const ssmUUIDKey = `${ssmParameterForUUID}-${stackId}`;
     Logger.log(LOG_LEVEL.DEBUG, `ssm parameter uuid key ${ssmUUIDKey}`)
     try {
-      if (sendAnonymousMetrics.toUpperCase() === 'YES') {
+      if (sendAnonymizedMetrics.toUpperCase() === 'YES') {
         let ssmInstance = new SSM({
           customUserAgent: process.env.CUSTOM_SDK_USER_AGENT,
         });

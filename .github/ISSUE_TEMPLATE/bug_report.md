@@ -19,7 +19,7 @@ A clear and concise description of what you expected to happen.
 
 - [ ] Version: [e.g. v1.0.0]
 
-To get the version of the solution, you can look at the description of the created CloudFormation stack. For example, "_(SO0108) - Firewall Automation for Network Traffic on AWS. Version **v1.0.0**_".
+To get the version of the solution, you can look at the description of the created CloudFormation stack. For example, "_(SO0108) - Centralized Network Inspection on AWS. Version **v1.0.0**_".
 
 - [ ] Region: [e.g. us-east-1]
 - [ ] Was the solution modified from the version published on this repository?

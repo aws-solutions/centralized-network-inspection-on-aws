@@ -69,7 +69,7 @@ source_dir="$(cd $PWD/../source; pwd -P)"
 coverage_reports_top_path=$source_dir/test/coverage-reports
 
 #Run the npm install for the lambda projects
-run_javascript_test $source_dir/networkFirewallAutomation networkFirewallAutomation
+run_javascript_test $source_dir/centralizedNetworkInspection centralizedNetworkInspection
 
 run_cdk_project_test $source_dir
 

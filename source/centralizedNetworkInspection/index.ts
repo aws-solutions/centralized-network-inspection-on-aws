@@ -5,7 +5,7 @@
 
 /**
  * @description
- * Firewall Automation for Network Traffic on AWS
+ * Centralized Network Inspection on AWS
  * @author aws-solutions
  */
 

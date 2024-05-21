@@ -6,9 +6,9 @@
 
 import { App, DefaultStackSynthesizer } from 'aws-cdk-lib';
 import {
-  NetworkFirewallAutomationStack,
-  NetworkFirewallAutomationStackProps
-} from '../lib/network-firewall-automation-solution-stack';
+  CentralizedNetworkInspectionStack,
+  CentralizedNetworkInspectionStackProps
+} from '../lib/centralized-network-inspection.stack';
 
 const SOLUTION_VERSION = process.env['DIST_VERSION'];
 const SOLUTION_NAME = process.env['SOLUTION_NAME'];
@@ -19,7 +19,7 @@ const SOLUTION_PROVIDER = 'AWS Solution Development';
 
 const app = new App();
 
-let NetworkFirewallAutomationStackProperties: NetworkFirewallAutomationStackProps = {
+let centralizedNetworkInspectionStackProps: CentralizedNetworkInspectionStackProps = {
   synthesizer: new DefaultStackSynthesizer({
     generateBootstrapVersionRule: false
   }),
@@ -32,8 +32,8 @@ let NetworkFirewallAutomationStackProperties: NetworkFirewallAutomationStackProp
   description: `(${SOLUTION_ID}) - The AWS CloudFormation template for deployment of the ${SOLUTION_NAME}, Version: ${SOLUTION_VERSION}`
 };
 
-new NetworkFirewallAutomationStack(
+new CentralizedNetworkInspectionStack(
   app,
-  'firewall-automation-for-network-traffic-on-aws',
-  NetworkFirewallAutomationStackProperties
+  'centralized-network-inspection-on-aws',
+  centralizedNetworkInspectionStackProps
 );

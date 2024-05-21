@@ -1,4 +1,4 @@
-**[Firewall Automation for Network Traffic on AWS](https://aws.amazon.com/solutions/implementations/firewall-automation-for-network-traffic-on-aws)** | **[🚧 Feature request](https://github.com/aws-solutions/firewall-automation-for-network-traffic-on-aws/issues/new?assignees=&labels=feature-request%2C+enhancement&template=feature_request.md&title=)** | **[🐛 Bug Report](https://github.com/aws-solutions/firewall-automation-for-network-traffic-on-aws/issues/new?assignees=&labels=bug%2C+triage&template=bug_report.md&title=)**
+**[Centralized Network Inspection on AWS](https://aws.amazon.com/solutions/implementations/centralized-network-inspection-on-aws)** | **[🚧 Feature request](https://github.com/aws-solutions/centralized-network-inspection-on-aws/issues/new?assignees=&labels=feature-request%2C+enhancement&template=feature_request.md&title=)** | **[🐛 Bug Report](https://github.com/aws-solutions/centralized-network-inspection-on-aws/issues/new?assignees=&labels=bug%2C+triage&template=bug_report.md&title=)**
 
 Note: If you want to use the solution without building from source, navigate to Solution Landing Page
 
@@ -17,7 +17,7 @@ Note: If you want to use the solution without building from source, navigate to 
 
 <a name="solution-overview"></a>
 # Solution Overview
-Solution for Firewall Automation for Network Traffic on AWS.
+Solution for Centralized Network Inspection on AWS.
 
 <a name="architecture-diagram"></a>
 # Architecture Diagram
@@ -35,9 +35,9 @@ cd source/
 npm run build
 ```
 
-Build the Network Firewall Solution CodeBuild source code
+Build the Centralized Network Inspection Solution CodeBuild source code
 ```
-cd source/networkfirewallAutomation
+cd source/centralizedNetworkInspection
 tsc 
 ```
 
@@ -46,7 +46,7 @@ Build the templates for custom deployments
 ```
 cd deployments/
 chmod +x ./build-s3-dist.sh
-./build-s3-dist.sh [SOLUTION_DIST_BUCKET] network-firewall-automation [VERSION_ID]
+./build-s3-dist.sh [SOLUTION_DIST_BUCKET] centralized-network-inspection [VERSION_ID]
 ```
 
 <a name="unit-test"></a>
@@ -64,18 +64,18 @@ chmod +x ./run-unit-tests.sh
 Follow the steps for deploying your custom version of the solution.
 * Create an S3 bucket with the bucket appended with the region in which the deployment is to be made. example, if the deployment is to be made in us-east-1 create a bucket name as [BUCKET_NAME]-us-east-1.
 * Create the distribution files using the script provided in the build section above.
-* Create the S3 Key in the bucket network-firewall-automation/[VERSION_ID]/
-* Create the S3 Key in the bucket network-firewall-automation/latest/
-* Copy the file ./deployment/regional-s3-assets/network-firewall-automation.zip to the location s3://[BUCKET_NAME]-[REGION]/network-firewall-automation/[VERSION_ID]/
-* Copy the file ./deployment/regional-s3-assets/network-firewall-configuration.zip to the location s3://[BUCKET_NAME]-[REGION]/network-firewall-automation/latest/
+* Create the S3 Key in the bucket centralized-network-inspection/[VERSION_ID]/
+* Create the S3 Key in the bucket centralized-network-inspection/latest/
+* Copy the file ./deployment/regional-s3-assets/centralized-network-inspection.zip to the location s3://[BUCKET_NAME]-[REGION]/centralized-network-inspection/[VERSION_ID]/
+* Copy the file ./deployment/regional-s3-assets/centralized-network-inspection-configuration.zip to the location s3://[BUCKET_NAME]-[REGION]/centralized-network-inspection/latest/
 
-Once the above steps are completed, use the file ./deployment/global-s3-assets/firewall-automation-for-network-traffic-on-aws.template to create a stack in CloudFormation.
+Once the above steps are completed, use the file ./deployment/global-s3-assets/centralized-network-inspection-on-aws.template to create a stack in CloudFormation.
 
 
 <a name="file-structure"></a>
 # File structure
 
-firewall-automation-for-network-traffic-on-aws consists of:
+centralized-network-inspection-on-aws consists of:
 
 - CDK constructs to generate necessary resources
 - Microservices used in the solution
@@ -87,14 +87,14 @@ File Structure
   |build-s3-dist.sh/                     [ Build script for create the distribution for the solution.]
 |-source/
   |-bin/
-    |-network-firewall-auto-solution.ts  [ entry point for CDK app ]
+    |-centralized-network-inspection-solution.ts  [ entry point for CDK app ]
   |-test/                  [ unit tests for CDK constructs ] 
-    |-network-firewall-automation-solution.test.ts [CDK construct for the solution.]
+    |-centralized-network-inspection-solution.test.ts [CDK construct for the solution.]
     |-__snapshots__
-      |-network-firewall-automation-solution.test.ts.snap [CDK construct template snapshot of unit testing.]
+      |-centralized-network-inspection-solution.test.ts.snap [CDK construct template snapshot of unit testing.]
   |-lib/
-    |-network-firewall-automation-solution-stack.ts [ CDK construct for the solution. ]
-  |-networkFirewallAutomation
+    |-centralized-network-inspection.stack.ts [ CDK construct for the solution. ]
+  |-centralizedNetworkInspection
     |-__tests__
       |-firewall-test-configuration
         |-firewalls
@@ -166,9 +166,9 @@ File Structure
 Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 SPDX-License-Identifier: Apache-2.0
 
-See [LICENSE](https://github.com/aws-solutions/firewall-automation-for-network-traffic-on-aws/blob/master/LICENSE.txt) 
+See [LICENSE](https://github.com/aws-solutions/centralized-network-inspection-on-aws/blob/master/LICENSE.txt) 
 
 ## Collection of operational metrics
 
-This solution collects anonymous operational metrics to help AWS improve the quality and features of the solution. For more information, including how to disable this capability, please see the [implementation guide](https://docs.aws.amazon.com/solutions/latest/network-firewall-deployment-automations-for-aws-transit-gateway/collection-of-operational-metrics.html).
+This solution collects anonymized operational metrics to help AWS improve the quality and features of the solution. For more information, including how to disable this capability, please see the [implementation guide](https://docs.aws.amazon.com/solutions/latest/centralized-network-inspection-on-aws/reference.html).
 

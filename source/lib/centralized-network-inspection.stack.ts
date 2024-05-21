@@ -43,7 +43,7 @@ import {
 } from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
 
-export interface NetworkFirewallAutomationStackProps extends StackProps {
+export interface CentralizedNetworkInspectionStackProps extends StackProps {
   solutionId: string;
   solutionTradeMarkName: string | undefined;
   solutionProvider: string | undefined;
@@ -52,8 +52,8 @@ export interface NetworkFirewallAutomationStackProps extends StackProps {
   solutionVersion: string | undefined;
 }
 
-export class NetworkFirewallAutomationStack extends Stack {
-  constructor(scope: Construct, id: string, props: NetworkFirewallAutomationStackProps) {
+export class CentralizedNetworkInspectionStack extends Stack {
+  constructor(scope: Construct, id: string, props: CentralizedNetworkInspectionStackProps) {
     super(scope, id, props);
 
     /**
@@ -188,18 +188,17 @@ export class NetworkFirewallAutomationStack extends Stack {
      * Mappings - define fixed values
      */
     const mappings = new CfnMapping(this, 'SolutionMapping');
-    mappings.setValue('Version', 'Latest', 'latest');
     mappings.setValue('Route', 'QuadZero', '0.0.0.0/0');
     mappings.setValue('Log', 'Level', 'info');
-    mappings.setValue('CodeCommitRepo', 'Name', 'network-firewall-config-repo-');
+    mappings.setValue('CodeCommitRepo', 'Name', 'centralized-network-inspection-config-repo-');
     mappings.setValue('Metrics', 'URL', 'https://metrics.awssolutionsbuilder.com/generic');
     mappings.setValue('Solution', 'Identifier', props.solutionId);
     mappings.setValue('Solution', 'Version', props.solutionVersion);
     mappings.setValue('TransitGatewayAttachment', 'ApplianceMode', 'enable');
+    mappings.setValue('ParameterKey', 'UniqueId', `Solutions/${props.solutionName}/UUID`);
 
-    const send = new CfnMapping(this, 'Send');
-    send.setValue('AnonymousUsage', 'Data', 'Yes');
-    send.setValue('ParameterKey', 'UniqueId', `Solutions/${props.solutionName}/UUID`);
+    const sendAnonymizedData = new CfnMapping(this, 'AnonymizedData');
+    sendAnonymizedData.setValue('SendAnonymizedData', 'Data', 'Yes');
 
     /**
      * Conditions - control whether certain resources are created or whether
@@ -542,7 +541,7 @@ export class NetworkFirewallAutomationStack extends Stack {
     codeCommitRepo_cfn_ref.addOverride('Properties.Code.S3.Bucket', `${props.solutionBucket}-${this.region}`);
     codeCommitRepo_cfn_ref.addOverride(
       'Properties.Code.S3.Key',
-      `${props.solutionName}/${mappings.findInMap('Version', 'Latest')}/network-firewall-configuration.zip`
+      `${props.solutionName}/%%VERSION%%/centralized-network-inspection-configuration.zip`
     );
     codeCommitRepo_cfn_ref.addOverride('DeletionPolicy', 'Retain');
     codeCommitRepo_cfn_ref.addOverride('UpdateReplacePolicy', 'Retain');
@@ -613,11 +612,11 @@ export class NetworkFirewallAutomationStack extends Stack {
         type: BuildEnvironmentVariableType.PLAINTEXT,
       },
       ['SSM_PARAM_FOR_UUID']: {
-        value: `/${send.findInMap('ParameterKey', 'UniqueId')}`,
+        value: `/${mappings.findInMap('ParameterKey', 'UniqueId')}`,
         type: BuildEnvironmentVariableType.PLAINTEXT,
       },
-      ['SEND_ANONYMOUS_METRICS']: {
-        value: `${send.findInMap('AnonymousUsage', 'Data')}`,
+      ['SEND_ANONYMIZED_METRICS']: {
+        value: `${sendAnonymizedData.findInMap('SendAnonymizedData', 'Data')}`,
         type: BuildEnvironmentVariableType.PLAINTEXT,
       },
       ['SOLUTION_ID']: {
@@ -660,10 +659,10 @@ export class NetworkFirewallAutomationStack extends Stack {
             commands: [
               `cd $current`,
               `pwd; ls -ltr`,
-              `echo 'Download Network Firewall Solution Package'`,
-              `aws s3 cp s3://${codeBuildStagesSourceCodeBucket.bucketName}/$sourceCodeKey/network-firewall-automation.zip $current || true`,
-              `if [ -f $current/network-firewall-automation.zip ];then exit 0;else echo \"Copy file to s3 bucket\"; aws s3 cp s3://${props.solutionBucket}-${Aws.REGION}/$sourceCodeKey/network-firewall-automation.zip s3://${codeBuildStagesSourceCodeBucket.bucketName}/$sourceCodeKey/network-firewall-automation.zip --copy-props none; aws s3 cp s3://${codeBuildStagesSourceCodeBucket.bucketName}/$sourceCodeKey/network-firewall-automation.zip $current; fi;`,
-              `unzip -o $current/network-firewall-automation.zip -d $current`,
+              `echo 'Download Centralized Network Inspection Solution Package'`,
+              `aws s3 cp s3://${codeBuildStagesSourceCodeBucket.bucketName}/$sourceCodeKey/centralized-network-inspection.zip $current || true`,
+              `if [ -f $current/centralized-network-inspection.zip ];then exit 0;else echo \"Copy file to s3 bucket\"; aws s3 cp s3://${props.solutionBucket}-${Aws.REGION}/$sourceCodeKey/centralized-network-inspection.zip s3://${codeBuildStagesSourceCodeBucket.bucketName}/$sourceCodeKey/centralized-network-inspection.zip --copy-props none; aws s3 cp s3://${codeBuildStagesSourceCodeBucket.bucketName}/$sourceCodeKey/centralized-network-inspection.zip $current; fi;`,
+              `unzip -o $current/centralized-network-inspection.zip -d $current`,
               `pwd; ls -ltr`,
             ],
           },
@@ -712,7 +711,7 @@ export class NetworkFirewallAutomationStack extends Stack {
           effect: Effect.ALLOW,
           resources: [
             Fn.sub('arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${ParameterKey}-*', {
-              ParameterKey: `${send.findInMap('ParameterKey', 'UniqueId')}`,
+              ParameterKey: `${mappings.findInMap('ParameterKey', 'UniqueId')}`,
             }),
           ],
         }),
@@ -919,9 +918,9 @@ export class NetworkFirewallAutomationStack extends Stack {
             commands: [
               `cd $current`,
               `pwd; ls -ltr`,
-              `echo 'Download Network Firewall Solution Package'`,
-              `aws s3 cp s3://${codeBuildStagesSourceCodeBucket.bucketName}/$sourceCodeKey/network-firewall-automation.zip $current`,
-              `unzip -o $current/network-firewall-automation.zip -d $current`,
+              `echo 'Download Centralized Network Inspection Solution Package'`,
+              `aws s3 cp s3://${codeBuildStagesSourceCodeBucket.bucketName}/$sourceCodeKey/centralized-network-inspection.zip $current`,
+              `unzip -o $current/centralized-network-inspection.zip -d $current`,
               `pwd; ls -ltr`,
             ],
           },
@@ -949,7 +948,7 @@ export class NetworkFirewallAutomationStack extends Stack {
     deployProject.role?.attachInlinePolicy(deployStageFirewallLoggingCWPolicy);
     deployProject.role?.attachInlinePolicy(deployStageModifyTransitGatewayAttachmentPolicy);
 
-    const codePipeline = new Pipeline(this, `NetworkFirewallCodePipeline`, {
+    const codePipeline = new Pipeline(this, `CentralizedNetworkInspectionCodePipeline`, {
       stages: [
         {
           stageName: 'Source',
@@ -993,7 +992,7 @@ export class NetworkFirewallAutomationStack extends Stack {
     const stack = Stack.of(this);
 
     const codePipelineArtifactBucketKmsKeyAlias = stack.node
-      .findChild('NetworkFirewallCodePipeline')
+      .findChild('CentralizedNetworkInspectionCodePipeline')
       .node.findChild('ArtifactsBucketEncryptionKeyAlias').node.defaultChild as CfnAlias;
     codePipelineArtifactBucketKmsKeyAlias.addPropertyOverride('AliasName', {
       'Fn::Join': [
@@ -1081,7 +1080,7 @@ export class NetworkFirewallAutomationStack extends Stack {
       rules_to_suppress: [
         {
           id: 'W35',
-          reason: "This S3 bucket is used as the destination for 'NetworkFirewallCodePipelineArtifactsBucket'",
+          reason: "This S3 bucket is used as the destination for 'CentralizedNetworkInspectionCodePipelineArtifactsBucket'",
         },
       ],
     };

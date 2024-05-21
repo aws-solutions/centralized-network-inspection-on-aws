@@ -314,7 +314,7 @@ jest.mock(
                   LogType: 'ALERT',
                   LogDestinationType: 'CloudWatchLogs',
                   LogDestination: {
-                    logGroup: 'network-firewall-automation-solution',
+                    logGroup: 'centralized-network-inspection-solution',
                     prefix: 'alerts',
                   },
                 },
@@ -643,7 +643,7 @@ test('Update logging configuration', async () => {
       {
         LogType: 'ALERT',
         LogDestination: {
-          bucketName: 'network-firewall-automation-solution',
+          bucketName: 'centralized-network-inspection-solution',
           prefix: 'alerts',
         },
         LogDestinationType: 'S3',
@@ -655,7 +655,7 @@ test('Update logging configuration', async () => {
       LogDestinationConfigs: [
         {
           LogType: 'ALERT',
-          LogDestination: { bucketName: 'network-firewall-automation-solution', prefix: 'alerts' },
+          LogDestination: { bucketName: 'centralized-network-inspection-solution', prefix: 'alerts' },
           LogDestinationType: 'S3',
         },
       ],
