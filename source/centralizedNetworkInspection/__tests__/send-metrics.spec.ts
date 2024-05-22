@@ -11,8 +11,8 @@ jest.mock(
       __esModule: true,
       SSM: jest.fn().mockReturnValue({
         getParameter: jest.fn().mockImplementation(data => {
-          expect(data).toStrictEqual({ Name: 'network-firewall-solution-uuid-asds' });
-          if ('network-firewall-solution-uuid-asds' === data['Name']) {
+          expect(data).toStrictEqual({ Name: 'centralized-network-inspection-solution-uuid-asds' });
+          if ('centralized-network-inspection-solution-uuid-asds' === data['Name']) {
             return {
               promise: jest.fn().mockReturnValue({
                 Parameter: {
@@ -62,7 +62,7 @@ jest.mock(
 
 test('test sending the metrics when the uuid is already in the parameter store.', async () => {
   process.env.STACK_ID = 'asds';
-  process.env.SEND_ANONYMOUS_METRICS = 'Yes';
+  process.env.SEND_ANONYMIZED_METRICS = 'Yes';
   await MetricsManager.sendMetrics({
     numberOfFirewalls: 1,
     numberOfPolicies: 1,

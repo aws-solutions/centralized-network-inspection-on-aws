@@ -87,6 +87,11 @@ for f in $template_dist_dir/*.template.json; do
     mv -- "$f" "${f%.template.json}.template"
 done
 
+# Replace references to version
+replace="s/%%VERSION%%/$DIST_VERSION/g"
+echo "sed -i $replace $template_dist_dir/*.template"
+sed -i -e $replace $template_dist_dir/*.template
+
 echo "------------------------------------------------------------------------------"
 echo "[Packing] Source code artifacts"
 echo "------------------------------------------------------------------------------"
@@ -98,9 +103,9 @@ echo "find $staging_dist_dir -iname "package-lock.json" -type f -exec rm -f "{}"
 find $staging_dist_dir -iname "package-lock.json" -type f -exec rm -f "{}" \; 2> /dev/null
 
 echo "------------------------------------------------------------------------------" 
-echo "Package Firewall Automation for Network Traffic on AWS node project for Code Build/Deploy stage " 
+echo "Package Centralized Network Inspection on AWS node project for Code Build/Deploy stage "
 echo "------------------------------------------------------------------------------" 
-cd $source_dir/networkFirewallAutomation/
+cd $source_dir/centralizedNetworkInspection/
 npm install
 npm run build
 npm run zip
@@ -109,23 +114,23 @@ if [ "$?" = "1" ]; then
 	exit 1
 fi
 echo "Copy package zip to dist directory"
-echo "cp ./dist/network-firewall-automation.zip $build_dist_dir/network-firewall-automation.zip"
-cp ./dist/network-firewall-automation.zip $build_dist_dir/network-firewall-automation.zip
+echo "cp ./dist/centralized-network-inspection.zip $build_dist_dir/centralized-network-inspection.zip"
+cp ./dist/centralized-network-inspection.zip $build_dist_dir/centralized-network-inspection.zip
 
 # build regional rule groups zip files for each region
 echo "Copying network firewall configurations to deployment folder"
 cd $template_dir
-cp -pr $source_dir/networkFirewallAutomation/config/* ./
+cp -pr $source_dir/centralizedNetworkInspection/config/* ./
 echo -e "\n Creating a zip file with network firewall configurations"
 echo -e "\n Building network firewall configuration"
-zip -Xr "$build_dist_dir"/network-firewall-configuration.zip ./firewalls ./ruleGroups ./firewallPolicies ./examples
+zip -Xr "$build_dist_dir"/centralized-network-inspection-configuration.zip ./firewalls ./ruleGroups ./firewallPolicies ./examples
 
 echo "------------------------------------------------------------------------------"
 echo "[Cleanup] Remove temporary files"
 echo "------------------------------------------------------------------------------"
 
 # cleanup generated files
-cd $source_dir/networkFirewallAutomation/
+cd $source_dir/centralizedNetworkInspection/
 npm run cleanup:tsc
 npm run cleanup:dist
 

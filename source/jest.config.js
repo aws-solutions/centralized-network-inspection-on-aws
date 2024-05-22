@@ -16,7 +16,7 @@ const config = {
   // The glob patterns Jest uses to detect test files
   testMatch: ['**/?(*.)+(spec|test).[t]s?(x)'],
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-  testPathIgnorePatterns: ['/node_modules/', '/networkFirewallAutomation/'],
+  testPathIgnorePatterns: ['/node_modules/', '/centralizedNetworkInspection/'],
   // A map from regular expressions to paths to transformers
   transform: {
     '^.+\\.(t)sx?$': 'ts-jest',

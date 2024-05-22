@@ -28,7 +28,7 @@ const config = {
     '**/*.ts',
     '!**/*.d.ts',
     '!**/*.spec.ts',
-    '!./bin/network-firewall-auto-solution.ts',
+    '!./bin/centralized-network-inspection-solution.ts',
     '!./build.ts',
     '!./index.ts',
   ],
