@@ -1,6 +1,6 @@
 {
   "name": "centralized-network-inspection-solution",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Centralized Network Inspection on AWS",
   "bin": {
     "centralized-network-inspection-solution": "bin/centralized-network-inspection-solution.js"

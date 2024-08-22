@@ -1,6 +1,6 @@
 {
   "name": "centralized-network-inspection",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Centralized Network Inspection on AWS",
   "main": "index.js",
   "types": "index.d.ts",
@@ -11,7 +11,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "aws-sdk": "^2.1482.0",
-    "axios": "^1.6.0",
+    "axios": "^1.7.4",
     "moment": "^2.27.0",
     "uuid": "^9.0.1"
   },
