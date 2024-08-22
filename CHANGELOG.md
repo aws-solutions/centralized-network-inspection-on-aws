@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Library updates to address [axios 1.7.4 allows SSRF via unexpected behavior where requests for path relative URLs get processed as protocol relative URLs.](https://avd.aquasec.com/nvd/cve-2024-39338)
+- Library updates to address [axios 1.7.2 allows SSRF via unexpected behavior where requests for path relative URLs get processed as protocol relative URLs.](https://avd.aquasec.com/nvd/cve-2024-39338)
 
 ## [1.0.6] - 2024-07
 
