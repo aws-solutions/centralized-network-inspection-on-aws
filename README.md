@@ -1,3 +1,5 @@
+⚠️ __Important: This solution requires the use of AWS CodeCommit, which is no longer available to new customers. Existing customers of AWS CodeCommit can continue using and deploying this AWS Solution as normal.__ ⚠️
+
 **[Centralized Network Inspection on AWS](https://aws.amazon.com/solutions/implementations/centralized-network-inspection-on-aws)** | **[🚧 Feature request](https://github.com/aws-solutions/centralized-network-inspection-on-aws/issues/new?assignees=&labels=feature-request%2C+enhancement&template=feature_request.md&title=)** | **[🐛 Bug Report](https://github.com/aws-solutions/centralized-network-inspection-on-aws/issues/new?assignees=&labels=bug%2C+triage&template=bug_report.md&title=)**
 
 Note: If you want to use the solution without building from source, navigate to Solution Landing Page
