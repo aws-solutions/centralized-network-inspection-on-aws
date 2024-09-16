@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.8] - 2024-09
+
+### Changed
+
+- Library updates to address [path-to-regexp outputs backtracking regular expressions](https://avd.aquasec.com/nvd/cve-2024-45296)
+- Library updates to address [AWS CDK RestApi not generating authorizationScope correctly in resultant CFN template](https://avd.aquasec.com/nvd/cve-2024-45037)
+- Library updates to address [micromatch: vulnerable to Regular Expression Denial of Service](https://avd.aquasec.com/nvd/cve-2024-4067)
+
 ## [1.0.7] - 2024-08
 
 ### Changed
