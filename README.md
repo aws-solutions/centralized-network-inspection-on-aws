@@ -1,5 +1,3 @@
-⚠️ __Important: This solution requires the use of AWS CodeCommit, which is no longer available to new customers. Existing customers of AWS CodeCommit can continue using and deploying this AWS Solution as normal.__ ⚠️
-
 **[Centralized Network Inspection on AWS](https://aws.amazon.com/solutions/implementations/centralized-network-inspection-on-aws)** | **[🚧 Feature request](https://github.com/aws-solutions/centralized-network-inspection-on-aws/issues/new?assignees=&labels=feature-request%2C+enhancement&template=feature_request.md&title=)** | **[🐛 Bug Report](https://github.com/aws-solutions/centralized-network-inspection-on-aws/issues/new?assignees=&labels=bug%2C+triage&template=bug_report.md&title=)**
 
 Note: If you want to use the solution without building from source, navigate to Solution Landing Page
@@ -18,26 +16,36 @@ Note: If you want to use the solution without building from source, navigate to 
 - [License](#license)
 
 <a name="solution-overview"></a>
+
 # Solution Overview
+
 Solution for Centralized Network Inspection on AWS.
 
 <a name="architecture-diagram"></a>
+
 # Architecture Diagram
+
 ![Architecture Diagram](./source/architecture.png)
 
 <a name="prerequisites-for-customization"></a>
+
 ## Prerequisites for Customization
+
 * Node.js>16
 
 <a name="build"></a>
+
 ## Build
+
 Build the CDK code
+
 ```
 cd source/
 npm run build
 ```
 
 Build the Centralized Network Inspection Solution CodeBuild source code
+
 ```
 cd source/centralizedNetworkInspection
 tsc 
@@ -52,8 +60,10 @@ chmod +x ./build-s3-dist.sh
 ```
 
 <a name="unit-test"></a>
+
 ## Unit Test
-Run the unit tests 
+
+Run the unit tests
 
 ```
 cd <rootDir>/deployment
@@ -62,19 +72,21 @@ chmod +x ./run-unit-tests.sh
 ```
 
 <a name="deploy"></a>
+
 ## Deploy
+
 Follow the steps for deploying your custom version of the solution.
-* Create an S3 bucket with the bucket appended with the region in which the deployment is to be made. example, if the deployment is to be made in us-east-1 create a bucket name as [BUCKET_NAME]-us-east-1.
-* Create the distribution files using the script provided in the build section above.
-* Create the S3 Key in the bucket centralized-network-inspection/[VERSION_ID]/
-* Create the S3 Key in the bucket centralized-network-inspection/latest/
-* Copy the file ./deployment/regional-s3-assets/centralized-network-inspection.zip to the location s3://[BUCKET_NAME]-[REGION]/centralized-network-inspection/[VERSION_ID]/
-* Copy the file ./deployment/regional-s3-assets/centralized-network-inspection-configuration.zip to the location s3://[BUCKET_NAME]-[REGION]/centralized-network-inspection/latest/
+- Create an S3 bucket with the bucket appended with the region in which the deployment is to be made. example, if the deployment is to be made in us-east-1 create a bucket name as [BUCKET_NAME]-us-east-1.
+- Create the distribution files using the script provided in the build section above.
+- Create the S3 Key in the bucket centralized-network-inspection/[VERSION_ID]/
+- Create the S3 Key in the bucket centralized-network-inspection/latest/
+- Copy the file ./deployment/regional-s3-assets/centralized-network-inspection.zip to the location s3://[BUCKET_NAME]-[REGION]/centralized-network-inspection/[VERSION_ID]/
+- Copy the file ./deployment/regional-s3-assets/centralized-network-inspection-configuration.zip to the location s3://[BUCKET_NAME]-[REGION]/centralized-network-inspection/latest/
 
 Once the above steps are completed, use the file ./deployment/global-s3-assets/centralized-network-inspection-on-aws.template to create a stack in CloudFormation.
 
-
 <a name="file-structure"></a>
+
 # File structure
 
 centralized-network-inspection-on-aws consists of:
@@ -90,7 +102,7 @@ File Structure
 |-source/
   |-bin/
     |-centralized-network-inspection-solution.ts  [ entry point for CDK app ]
-  |-test/                  [ unit tests for CDK constructs ] 
+  |-test/                  [ unit tests for CDK constructs ]
     |-centralized-network-inspection-solution.test.ts [CDK construct for the solution.]
     |-__snapshots__
       |-centralized-network-inspection-solution.test.ts.snap [CDK construct template snapshot of unit testing.]
@@ -168,9 +180,8 @@ File Structure
 Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 SPDX-License-Identifier: Apache-2.0
 
-See [LICENSE](https://github.com/aws-solutions/centralized-network-inspection-on-aws/blob/master/LICENSE.txt) 
+See [LICENSE](https://github.com/aws-solutions/centralized-network-inspection-on-aws/blob/master/LICENSE.txt)
 
 ## Collection of operational metrics
 
 This solution collects anonymized operational metrics to help AWS improve the quality and features of the solution. For more information, including how to disable this capability, please see the [implementation guide](https://docs.aws.amazon.com/solutions/latest/centralized-network-inspection-on-aws/reference.html).
-

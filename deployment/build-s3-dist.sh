@@ -62,7 +62,7 @@ npm ci
 cd "$source_dir"
 echo "npm run cdk -- synth --output=$staging_dist_dir"
 npm run build
-npm run cdk -- synth --output=$staging_dist_dir
+npm run cdk -- synth --quiet --asset-metadata false --path-metadata --output=$staging_dist_dir
 
 # Remove unnecessary output files
 echo "cd $staging_dist_dir"
@@ -136,6 +136,11 @@ npm run cleanup:dist
 
 cd $source_dir/
 npm run cleanup:tsc
+
+# custom lambda for copying configuration file into s3.
+echo "[Package] Generate public assets for custom resource lambda"
+cd "$template_dir"/cdk-solution-helper/asset-packager && npm ci
+npx ts-node ./index "$staging_dist_dir" "$build_dist_dir"
 
 # Delete the temporary /staging folder
 echo "rm -rf $staging_dist_dir"

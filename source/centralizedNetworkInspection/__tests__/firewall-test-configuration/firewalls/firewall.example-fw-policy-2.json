@@ -1,6 +1,6 @@
 {
   "FirewallName": "VpcFirewall-1",
-  "FirewallPolicyArn": "__tests__/firewall-test-configuration/firewallPolicies/firewall-policy.example.json",
+  "FirewallPolicyArn": "__tests__/firewall-test-configuration/firewallPolicies/firewall-policy-2.json",
   "Description": "Network Firewall created by AWS Solutions",
   "DeleteProtection": true,
   "FirewallPolicyChangeProtection": true,

@@ -90,9 +90,6 @@ exports[`Centralized Network Inspection on AWS centralizedNetworkInspectionStack
       },
     },
     "SolutionMapping": {
-      "CodeCommitRepo": {
-        "Name": "centralized-network-inspection-config-repo-",
-      },
       "Log": {
         "Level": "info",
       },
@@ -106,6 +103,8 @@ exports[`Centralized Network Inspection on AWS centralizedNetworkInspectionStack
         "QuadZero": "0.0.0.0/0",
       },
       "Solution": {
+        "ConfigurationFileName": "centralized-network-inspection-configuration.zip",
+        "ConfigurationS3KeyPrefix": "configuration",
         "Identifier": "SO0108",
         "Version": "v1.0.3",
       },
@@ -190,8 +189,8 @@ exports[`Centralized Network Inspection on AWS centralizedNetworkInspectionStack
         ],
       },
     },
-    "CodeBuildsourcecodebucket": {
-      "Description": "Code Build source code bucket",
+    "CodeBuildsourcecodeandfirewallconfigurationbucket": {
+      "Description": "Code Build source code and firewall configuration bucket",
       "Value": {
         "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
       },
@@ -330,6 +329,58 @@ exports[`Centralized Network Inspection on AWS centralizedNetworkInspectionStack
     },
   },
   "Resources": {
+    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+      "DependsOn": [
+        "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-1234-eu-west-1",
+          "S3Key": "ce2f3595a340d6c519a65888ef97e3b9b64f053f83608e32cc28162e22d7d99a.zip",
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs20.x",
+        "Timeout": 120,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
     "BuildProject097C5DB7": {
       "Properties": {
         "Artifacts": {
@@ -819,6 +870,7 @@ exports[`Centralized Network Inspection on AWS centralizedNetworkInspectionStack
       "DependsOn": [
         "CentralizedNetworkInspectionCodePipelineRoleDefaultPolicyBA0503B1",
         "CentralizedNetworkInspectionCodePipelineRoleAB1E4DBC",
+        "CopyCentralizedNetworkInspectionConfig1198A6D4",
       ],
       "Properties": {
         "ArtifactStore": {
@@ -849,16 +901,35 @@ exports[`Centralized Network Inspection on AWS centralizedNetworkInspectionStack
                 "ActionTypeId": {
                   "Category": "Source",
                   "Owner": "AWS",
-                  "Provider": "CodeCommit",
+                  "Provider": "S3",
                   "Version": "1",
                 },
                 "Configuration": {
-                  "BranchName": "main",
                   "PollForSourceChanges": false,
-                  "RepositoryName": {
-                    "Fn::GetAtt": [
-                      "NetworkFirewallCodeRepositoryF7BA0495",
-                      "Name",
+                  "S3Bucket": {
+                    "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
+                  },
+                  "S3ObjectKey": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "centralized-network-inspection/",
+                        {
+                          "Fn::FindInMap": [
+                            "SolutionMapping",
+                            "Solution",
+                            "ConfigurationS3KeyPrefix",
+                          ],
+                        },
+                        "/",
+                        {
+                          "Fn::FindInMap": [
+                            "SolutionMapping",
+                            "Solution",
+                            "ConfigurationFileName",
+                          ],
+                        },
+                      ],
                     ],
                   },
                 },
@@ -1150,58 +1221,6 @@ exports[`Centralized Network Inspection on AWS centralizedNetworkInspectionStack
       },
       "Type": "AWS::IAM::Policy",
     },
-    "CentralizedNetworkInspectionCodePipelineEventsRoleDefaultPolicy4012CA2D": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "codepipeline:StartPipelineExecution",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":codepipeline:eu-west-1:1234:",
-                    {
-                      "Ref": "CentralizedNetworkInspectionCodePipeline757F698C",
-                    },
-                  ],
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "CentralizedNetworkInspectionCodePipelineEventsRoleDefaultPolicy4012CA2D",
-        "Roles": [
-          {
-            "Ref": "CentralizedNetworkInspectionCodePipelineEventsRoleEAF3D937",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "CentralizedNetworkInspectionCodePipelineEventsRoleEAF3D937": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "events.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-      },
-      "Type": "AWS::IAM::Role",
-    },
     "CentralizedNetworkInspectionCodePipelineRoleAB1E4DBC": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -1355,6 +1374,48 @@ exports[`Centralized Network Inspection on AWS centralizedNetworkInspectionStack
                 "s3:GetObject*",
                 "s3:GetBucket*",
                 "s3:List*",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "CodeBuildStagesSourceCodeBucketFA98E7C7",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "CodeBuildStagesSourceCodeBucketFA98E7C7",
+                          "Arn",
+                        ],
+                      },
+                      "/centralized-network-inspection/",
+                      {
+                        "Fn::FindInMap": [
+                          "SolutionMapping",
+                          "Solution",
+                          "ConfigurationS3KeyPrefix",
+                        ],
+                      },
+                      "/",
+                      {
+                        "Fn::FindInMap": [
+                          "SolutionMapping",
+                          "Solution",
+                          "ConfigurationFileName",
+                        ],
+                      },
+                    ],
+                  ],
+                },
+              ],
+            },
+            {
+              "Action": [
                 "s3:DeleteObject*",
                 "s3:PutObject",
                 "s3:PutObjectLegalHold",
@@ -1389,32 +1450,15 @@ exports[`Centralized Network Inspection on AWS centralizedNetworkInspectionStack
             },
             {
               "Action": [
-                "kms:Decrypt",
-                "kms:DescribeKey",
                 "kms:Encrypt",
                 "kms:ReEncrypt*",
                 "kms:GenerateDataKey*",
+                "kms:Decrypt",
               ],
               "Effect": "Allow",
               "Resource": {
                 "Fn::GetAtt": [
                   "CentralizedNetworkInspectionCodePipelineArtifactsBucketEncryptionKey03CCD69F",
-                  "Arn",
-                ],
-              },
-            },
-            {
-              "Action": [
-                "codecommit:GetBranch",
-                "codecommit:GetCommit",
-                "codecommit:UploadArchive",
-                "codecommit:GetUploadArchiveStatus",
-                "codecommit:CancelUploadArchive",
-              ],
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "NetworkFirewallCodeRepositoryF7BA0495",
                   "Arn",
                 ],
               },
@@ -1624,13 +1668,7 @@ exports[`Centralized Network Inspection on AWS centralizedNetworkInspectionStack
           "ServerSideEncryptionConfiguration": [
             {
               "ServerSideEncryptionByDefault": {
-                "KMSMasterKeyID": {
-                  "Fn::GetAtt": [
-                    "CentralizedNetworkInspectionCodePipelineArtifactsBucketEncryptionKey03CCD69F",
-                    "Arn",
-                  ],
-                },
-                "SSEAlgorithm": "aws:kms",
+                "SSEAlgorithm": "AES256",
               },
             },
           ],
@@ -1641,9 +1679,121 @@ exports[`Centralized Network Inspection on AWS centralizedNetworkInspectionStack
           "IgnorePublicAcls": true,
           "RestrictPublicBuckets": true,
         },
+        "VersioningConfiguration": {
+          "Status": "Enabled",
+        },
       },
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
+    },
+    "CopyCentralizedNetworkInspectionConfig1198A6D4": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "CopyCentralizedNetworkInspectionConfigCustomResourcePolicy1AFB3C1C",
+      ],
+      "Properties": {
+        "Create": {
+          "Fn::Join": [
+            "",
+            [
+              "{"service":"S3","action":"copyObject","parameters":{"Bucket":"",
+              {
+                "Ref": "CodeBuildStagesSourceCodeBucketFA98E7C7",
+              },
+              "","CopySource":"solutions-",
+              {
+                "Ref": "AWS::Region",
+              },
+              "/centralized-network-inspection/v1.0.3/",
+              {
+                "Fn::FindInMap": [
+                  "SolutionMapping",
+                  "Solution",
+                  "ConfigurationFileName",
+                ],
+              },
+              "","Key":"centralized-network-inspection/",
+              {
+                "Fn::FindInMap": [
+                  "SolutionMapping",
+                  "Solution",
+                  "ConfigurationS3KeyPrefix",
+                ],
+              },
+              "/",
+              {
+                "Fn::FindInMap": [
+                  "SolutionMapping",
+                  "Solution",
+                  "ConfigurationFileName",
+                ],
+              },
+              ""},"physicalResourceId":{"id":"0"}}",
+            ],
+          ],
+        },
+        "InstallLatestAwsSdk": false,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWS",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "CopyCentralizedNetworkInspectionConfigCustomResourcePolicy1AFB3C1C": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:GetObject",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:s3:::solutions-",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    "/*",
+                  ],
+                ],
+              },
+              "Sid": "S3Get",
+            },
+            {
+              "Action": "s3:PutObject",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    {
+                      "Fn::GetAtt": [
+                        "CodeBuildStagesSourceCodeBucketFA98E7C7",
+                        "Arn",
+                      ],
+                    },
+                    "/*",
+                  ],
+                ],
+              },
+              "Sid": "S3Put",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "CopyCentralizedNetworkInspectionConfigCustomResourcePolicy1AFB3C1C",
+        "Roles": [
+          {
+            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
     },
     "DefaultRouteSpokeVPCTGWRouteTable": {
       "Condition": "CreateDefaultRouteFirewallRT",
@@ -2310,94 +2460,6 @@ exports[`Centralized Network Inspection on AWS centralizedNetworkInspectionStack
       },
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
-    },
-    "NetworkFirewallCodeRepositoryF7BA0495": {
-      "DeletionPolicy": "Retain",
-      "Properties": {
-        "Code": {
-          "S3": {
-            "Bucket": "solutions-eu-west-1",
-            "Key": "centralized-network-inspection/%%VERSION%%/centralized-network-inspection-configuration.zip",
-          },
-        },
-        "RepositoryDescription": "This repository is created by the AWS Network Firewall solution for AWS Transit Gateway, to store and trigger changes to the network firewall rules and configurations.",
-        "RepositoryName": {
-          "Fn::Join": [
-            "",
-            [
-              {
-                "Fn::FindInMap": [
-                  "SolutionMapping",
-                  "CodeCommitRepo",
-                  "Name",
-                ],
-              },
-              {
-                "Ref": "AWS::StackName",
-              },
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::CodeCommit::Repository",
-      "UpdateReplacePolicy": "Retain",
-    },
-    "NetworkFirewallCodeRepositoryMyTestStackCentralizedNetworkInspectionCodePipeline34E33763mainEventRuleA7DDE336": {
-      "Properties": {
-        "EventPattern": {
-          "detail": {
-            "event": [
-              "referenceCreated",
-              "referenceUpdated",
-            ],
-            "referenceName": [
-              "main",
-            ],
-          },
-          "detail-type": [
-            "CodeCommit Repository State Change",
-          ],
-          "resources": [
-            {
-              "Fn::GetAtt": [
-                "NetworkFirewallCodeRepositoryF7BA0495",
-                "Arn",
-              ],
-            },
-          ],
-          "source": [
-            "aws.codecommit",
-          ],
-        },
-        "State": "ENABLED",
-        "Targets": [
-          {
-            "Arn": {
-              "Fn::Join": [
-                "",
-                [
-                  "arn:",
-                  {
-                    "Ref": "AWS::Partition",
-                  },
-                  ":codepipeline:eu-west-1:1234:",
-                  {
-                    "Ref": "CentralizedNetworkInspectionCodePipeline757F698C",
-                  },
-                ],
-              ],
-            },
-            "Id": "Target0",
-            "RoleArn": {
-              "Fn::GetAtt": [
-                "CentralizedNetworkInspectionCodePipelineEventsRoleEAF3D937",
-                "Arn",
-              ],
-            },
-          },
-        ],
-      },
-      "Type": "AWS::Events::Rule",
     },
     "NetworkFirewallSubnet1": {
       "DeletionPolicy": "Retain",

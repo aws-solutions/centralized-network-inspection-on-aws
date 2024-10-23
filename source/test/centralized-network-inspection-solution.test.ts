@@ -27,10 +27,24 @@ function getTestStack(): Stack {
 describe('Centralized Network Inspection on AWS', () => {
   const stack = getTestStack();
   const template = Template.fromStack(stack);
-  /*
+
+  const templateJson = template.toJSON();
+
+  /**
+   * iterate templateJson and for any attribute called PhysicalResourceId, replace the value for that attribute with "0",
+   * this is so that the snapshot can be saved and will not change because the hash has been regenerated
+   */
+  Object.keys(templateJson.Resources).forEach((key) => {
+    if (templateJson.Resources[key].Properties?.Create?.['Fn::Join'][1][10]) {
+      templateJson.Resources[key].Properties.Create['Fn::Join'][1][10] = "\"},\"physicalResourceId\":{\"id\":\"0\"}}"
+    }
+  });
+
+  expect.assertions(1);
+    /*
    * Snapshot test
    */
   test('centralizedNetworkInspectionStack Snapshot test', () => {
-    expect(template.toJSON()).toMatchSnapshot();
+    expect(templateJson).toMatchSnapshot();
   });
 });
