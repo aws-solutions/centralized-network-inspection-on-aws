@@ -19,10 +19,20 @@ const SOLUTION_PROVIDER = 'AWS Solution Development';
 
 const app = new App();
 
+let synthesizer = new DefaultStackSynthesizer({
+  generateBootstrapVersionRule: false,
+});
+
+if (SOLUTION_BUCKET && SOLUTION_NAME && SOLUTION_VERSION) {
+  synthesizer = new DefaultStackSynthesizer({
+    generateBootstrapVersionRule: false,
+    fileAssetsBucketName: `${SOLUTION_BUCKET}-\${AWS::Region}`,
+    bucketPrefix: `${SOLUTION_NAME}/${SOLUTION_VERSION}/`,
+  });
+}
+
 let centralizedNetworkInspectionStackProps: CentralizedNetworkInspectionStackProps = {
-  synthesizer: new DefaultStackSynthesizer({
-    generateBootstrapVersionRule: false
-  }),
+  synthesizer: synthesizer,
   solutionId: SOLUTION_ID,
   solutionTradeMarkName: SOLUTION_TMN,
   solutionProvider: SOLUTION_PROVIDER,

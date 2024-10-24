@@ -270,12 +270,12 @@ jest.mock(
           };
         }),
         describeFirewallPolicy: jest.fn().mockImplementation(data => {
-          if (data && data === 'Firewall-Policy-2') {
+          if (data && data === 'Firewall-Policy-2-5081d0136786') {
             return Promise.resolve({
               UpdateToken: 'aaa',
               FirewallPolicyResponse: {
                 FirewallPolicyName: 'Firewall-Policy-2',
-                FirewallPolicyArn: 'arn:aws',
+                FirewallPolicyArn: 'arn:aws:network-firewall:us-east-1:1234:firewall-policy/Firewall-Policy-2',
                 FirewallPolicyId: 100,
               },
             });
@@ -393,6 +393,10 @@ jest.mock(
         updateFirewallDescription: jest.fn().mockImplementation(data => {
           expect(data['Description']).toBe('Network Firewall created by AWS Solutions');
         }),
+        tagResource: jest.fn().mockImplementation(data => {
+          expect(data['Tags'][0]['Key']).toBe('env');
+          expect(data['Tags'][0]['Value']).toBe('mock-test');
+        })
       }),
     };
   },
@@ -534,7 +538,7 @@ test('test the method firewallExist.', async () => {
 test('firewall policy already exists', async () => {
   const fileHandler = new ConfigReader();
   let firewallObject = fileHandler.convertFileToObject(
-    '__tests__/firewall-test-configuration/firewalls/firewall.example.json'
+    '__tests__/firewall-test-configuration/firewalls/firewall.example-fw-policy-2.json'
   );
   const managerInstance = new NetworkFirewallManager(
     {
@@ -553,7 +557,7 @@ test('firewall policy already exists', async () => {
   const response = await managerInstance.firewallPolicyOperations(
     '__tests__/firewall-test-configuration/firewallPolicies/firewall-policy-2.json'
   );
-  expect(response).toBe('arn:aws:network-firewall:us-east-1:1234:firewall-policy/Firewall-Policy-1');
+  expect(response).toBe('arn:aws:network-firewall:us-east-1:1234:firewall-policy/Firewall-Policy-2');
 });
 
 test('test the logging configuration object creation from environment variables', async () => {
@@ -781,7 +785,7 @@ test('Update firewall properties', async () => {
         DeleteProtection: false,
         Description: '',
         FirewallName: 'VpcFirewall-1',
-        FirewallArn: '',
+        FirewallArn: 'arn:aws:network-firewall:us-east-1:1234:firewall/VpcFirewall-1',
         FirewallPolicyChangeProtection: false,
         SubnetChangeProtection: false,
       },

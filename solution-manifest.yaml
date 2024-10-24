@@ -1,7 +1,7 @@
 ---
 id: SO0108 # Solution Id
 name: centralized-network-inspection-on-aws # trademarked name
-version: v1.0.8 # current version of the solution. Used to verify template headers
+version: v1.1.0 # current version of the solution. Used to verify template headers
 cloudformation_templates: # This list should match with AWS CloudFormation templates section of IG
   - template: centralized-network-inspection-on-aws.template
     main_template: true

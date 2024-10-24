@@ -6,6 +6,7 @@
 import {
   Aws,
   CfnCondition,
+  CfnCustomResource,
   CfnMapping,
   CfnOutput,
   CfnParameter,
@@ -16,9 +17,8 @@ import {
   StackProps,
 } from 'aws-cdk-lib';
 import { BuildEnvironmentVariableType, BuildSpec, LinuxBuildImage, PipelineProject } from 'aws-cdk-lib/aws-codebuild';
-import { CfnRepository, Repository } from 'aws-cdk-lib/aws-codecommit';
-import { Artifact, Pipeline } from 'aws-cdk-lib/aws-codepipeline';
-import { CodeBuildAction, CodeCommitSourceAction } from 'aws-cdk-lib/aws-codepipeline-actions';
+import { Artifact, Pipeline, CfnPipeline } from 'aws-cdk-lib/aws-codepipeline';
+import { CodeBuildAction, S3SourceAction, S3Trigger } from 'aws-cdk-lib/aws-codepipeline-actions';
 import {
   CfnFlowLog,
   CfnRoute,
@@ -41,6 +41,11 @@ import {
   CfnBucket,
   CfnBucketPolicy,
 } from 'aws-cdk-lib/aws-s3';
+import {
+  AwsCustomResource,
+  AwsCustomResourcePolicy,
+  PhysicalResourceId,
+} from "aws-cdk-lib/custom-resources";
 import { Construct } from 'constructs';
 
 export interface CentralizedNetworkInspectionStackProps extends StackProps {
@@ -190,12 +195,13 @@ export class CentralizedNetworkInspectionStack extends Stack {
     const mappings = new CfnMapping(this, 'SolutionMapping');
     mappings.setValue('Route', 'QuadZero', '0.0.0.0/0');
     mappings.setValue('Log', 'Level', 'info');
-    mappings.setValue('CodeCommitRepo', 'Name', 'centralized-network-inspection-config-repo-');
     mappings.setValue('Metrics', 'URL', 'https://metrics.awssolutionsbuilder.com/generic');
     mappings.setValue('Solution', 'Identifier', props.solutionId);
     mappings.setValue('Solution', 'Version', props.solutionVersion);
     mappings.setValue('TransitGatewayAttachment', 'ApplianceMode', 'enable');
     mappings.setValue('ParameterKey', 'UniqueId', `Solutions/${props.solutionName}/UUID`);
+    mappings.setValue('Solution', 'ConfigurationFileName', `centralized-network-inspection-configuration.zip`);
+    mappings.setValue('Solution', 'ConfigurationS3KeyPrefix', `configuration`);
 
     const sendAnonymizedData = new CfnMapping(this, 'AnonymizedData');
     sendAnonymizedData.setValue('SendAnonymizedData', 'Data', 'Yes');
@@ -503,7 +509,7 @@ export class CentralizedNetworkInspectionStack extends Stack {
       transitGatewayId: existingTransitGatewayId.valueAsString,
     });
     defaultTransitGatewayRoute.cfnOptions.condition = createTransitGatewayAttachment;
-    defaultTransitGatewayRoute.addDependsOn(vpcTGWAttachment);
+    defaultTransitGatewayRoute.addDependency(vpcTGWAttachment);
 
     //Transit Gateway association with the TGW route table id provided by the user.
     const tgwRouteTableAssociation = new CfnTransitGatewayRouteTableAssociation(this, 'VPCTGWRouteTableAssociation', {
@@ -528,31 +534,15 @@ export class CentralizedNetworkInspectionStack extends Stack {
 
     //End: Transit gateway changes.
 
-    //CodeCommit Repo and Code Pipeline with default policy created.
-    const codeCommitRepo = new Repository(this, 'NetworkFirewallCodeRepository', {
-      repositoryName: mappings.findInMap('CodeCommitRepo', 'Name') + Aws.STACK_NAME,
-      description:
-        'This repository is created by the AWS Network Firewall' +
-        ' solution for AWS Transit Gateway, to store and trigger changes to' +
-        ' the network firewall rules and configurations.',
-    });
-
-    const codeCommitRepo_cfn_ref = codeCommitRepo.node.defaultChild as CfnRepository;
-    codeCommitRepo_cfn_ref.addOverride('Properties.Code.S3.Bucket', `${props.solutionBucket}-${this.region}`);
-    codeCommitRepo_cfn_ref.addOverride(
-      'Properties.Code.S3.Key',
-      `${props.solutionName}/%%VERSION%%/centralized-network-inspection-configuration.zip`
-    );
-    codeCommitRepo_cfn_ref.addOverride('DeletionPolicy', 'Retain');
-    codeCommitRepo_cfn_ref.addOverride('UpdateReplacePolicy', 'Retain');
-
     // enforceSSL cannot be set to true for this resource, it will create deploy time errors.
     // we add a manual policy to enforce SSL later in the stack
     // prettier-ignore
     const codeBuildStagesSourceCodeBucket = new Bucket(this, 'CodeBuildStagesSourceCodeBucket', { //NOSONAR
       publicReadAccess: false,
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
+      versioned: true,
     });
+
 
     const sourceOutputArtifact = new Artifact('SourceArtifact');
     const buildOutputArtifact = new Artifact('BuildArtifact');
@@ -953,11 +943,12 @@ export class CentralizedNetworkInspectionStack extends Stack {
         {
           stageName: 'Source',
           actions: [
-            new CodeCommitSourceAction({
+            new S3SourceAction({
               actionName: 'Source',
-              repository: codeCommitRepo,
-              branch: 'main',
+              bucket: codeBuildStagesSourceCodeBucket,
+              bucketKey: `${props.solutionName}/${mappings.findInMap('Solution', 'ConfigurationS3KeyPrefix')}/${mappings.findInMap('Solution', 'ConfigurationFileName')}`,
               output: sourceOutputArtifact,
+              trigger: S3Trigger.NONE,
             }),
           ],
         },
@@ -1012,8 +1003,7 @@ export class CentralizedNetworkInspectionStack extends Stack {
       serverSideEncryptionConfiguration: [
         {
           serverSideEncryptionByDefault: {
-            kmsMasterKeyId: codePipeline.artifactBucket.encryptionKey?.keyArn,
-            sseAlgorithm: 'aws:kms',
+            sseAlgorithm: 'AES256',
           },
         },
       ],
@@ -1075,6 +1065,40 @@ export class CentralizedNetworkInspectionStack extends Stack {
       })
     );
 
+    const customResourceToCopyConfig = new AwsCustomResource(this, "CopyCentralizedNetworkInspectionConfig", {
+      onCreate: {
+        service: "S3",
+        action: "copyObject",
+        parameters: {
+          Bucket: codeBuildStagesSourceCodeBucket.bucketName,
+          CopySource: `${props.solutionBucket}-${Aws.REGION}/${props.solutionName}/${props.solutionVersion}/${mappings.findInMap('Solution', 'ConfigurationFileName')}`,
+          Key: `${props.solutionName}/${mappings.findInMap('Solution','ConfigurationS3KeyPrefix')}/${mappings.findInMap('Solution', 'ConfigurationFileName')}`,
+        },
+        physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
+      },
+      installLatestAwsSdk: false,
+      policy: AwsCustomResourcePolicy.fromStatements([
+        new PolicyStatement({
+          effect: Effect.ALLOW,
+          sid: "S3Get",
+          actions: ["s3:GetObject"],
+          resources: [
+            `arn:aws:s3:::${props.solutionBucket}-${Aws.REGION}/*`,
+          ],
+        }),
+        new PolicyStatement({
+          effect: Effect.ALLOW,
+          sid: "S3Put",
+          actions: ["s3:PutObject"],
+          resources: [`${codeBuildStagesSourceCodeBucket.bucketArn}/*`],
+        }),
+      ]),
+    });
+    const codePipeline_cfn_ref = codePipeline.node.defaultChild as CfnPipeline 
+    const customResourceToCopyConfig_cfn_ref = customResourceToCopyConfig.node.defaultChild as CfnCustomResource
+    // This is needed so that the pipeline does not start before the configuration file is copied to the source code s3 bucket.
+    codePipeline_cfn_ref.node.addDependency(customResourceToCopyConfig_cfn_ref) 
+
     //disable W35 for the artifact bucket as it only store the artifact files.
     const w35Rule = {
       rules_to_suppress: [
@@ -1133,9 +1157,9 @@ export class CentralizedNetworkInspectionStack extends Stack {
       description: 'Artifact bucket name configured for the CodePipeline.',
     });
 
-    new CfnOutput(this, 'Code Build source code bucket', {
+    new CfnOutput(this, 'Code Build source code and firewall configuration bucket', {
       value: codeBuildStagesSourceCodeBucket.bucketName,
-      description: 'Code Build source code bucket',
+      description: 'Code Build source code and firewall configuration bucket',
     });
 
     new CfnOutput(this, 'S3 Bucket for Firewall Logs', {
