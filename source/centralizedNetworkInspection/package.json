@@ -1,6 +1,6 @@
 {
   "name": "centralized-network-inspection",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Centralized Network Inspection on AWS",
   "main": "index.js",
   "types": "index.d.ts",
