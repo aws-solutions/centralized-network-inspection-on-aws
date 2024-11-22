@@ -24,6 +24,8 @@ aws-sdk-client-mock under the Massachusetts Institute of Technology (MIT) licens
 constructs under Apache License 2.0
 ts-jest under the Massachusetts Institute of Technology (MIT) license
 ts-node under the Massachusetts Institute of Technology (MIT) license
+adm-zip under the Massachusetts Institute of Technology (MIT) license
 typescript under Apache License 2.0
 @types/moment under the Massachusetts Institute of Technology (MIT) license
 @types/uuid under the Massachusetts Institute of Technology (MIT) license
+@types/adm-zip under the Massachusetts Institute of Technology (MIT) license
