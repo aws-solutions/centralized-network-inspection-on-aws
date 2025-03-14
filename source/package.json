@@ -1,6 +1,6 @@
 {
   "name": "centralized-network-inspection-solution",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Centralized Network Inspection on AWS",
   "bin": {
     "centralized-network-inspection-solution": "bin/centralized-network-inspection-solution.js"
@@ -23,7 +23,7 @@
   "devDependencies": {
     "@types/jest": "~29.5.12",
     "@types/node": "^20.12.12",
-    "aws-cdk": "^2.159.1",
+    "aws-cdk": "^2.1003.0",
     "aws-cdk-lib": "^2.159.1",
     "constructs": "^10.3.0",
     "jest": "~29.7.0",
